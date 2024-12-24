@@ -1,0 +1,374 @@
+2024-12-25 00:57:24,958 - INFO - ConversationOrchestrator initialized
+2024-12-25 00:57:24,958 - INFO - NEW CHAT
+
+
+2024-12-25 00:57:24,958 - INFO - Starting conversation with order_id: 676bc8f4a26f49c79e37816a
+2024-12-25 00:57:24,958 - DEBUG - Initial conversation context: {'ordered_items': [], 'current_item': None, 'pending_questions': [], 'last_agent_message': None, 'order_goal': [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}], 'conversation_style': {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}}
+2024-12-25 00:57:24,958 - INFO - 
+
+NEW CHAT
+2024-12-25 00:57:25,964 - DEBUG - Current state: GREET
+2024-12-25 00:57:25,964 - DEBUG - Using conversation style: {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}
+2024-12-25 00:57:25,964 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant. You are NOT the restaurant staff.
+        Current conversation state: GREET
+        Emotion: chill
+        Tone: quiet
+        Brevity: short
+        
+        Conversation Context:
+        - Items you still need to order: [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}]
+        - Current item to order: None
+        - Items already ordered: []
+        - Pending questions from staff: []
+        - Last staff message: None
+        
+        IMPORTANT: You are the CUSTOMER. Respond as a customer would to the restaurant staff.
+        You are trying to order specific items but should act natural and spontaneous.
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        Never pretend to be the restaurant staff.
+        
+Generate a natural greeting.
+2024-12-25 00:57:25,964 - DEBUG - User prompt: Continue the conversation naturally
+2024-12-25 00:57:25,964 - DEBUG - Sending request to GPT-4
+2024-12-25 00:57:26,834 - INFO - GPT-4 response: Hey, how's it going?
+2024-12-25 00:57:26,834 - INFO - Generated customer message: Hey, how's it going?
+2024-12-25 00:57:28,705 - DEBUG - Received response: {'orderId': '676bc8f4a26f49c79e37816a', 'order': [], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': "Hey, how's it going?"}, {'role': 'assistant', 'content': "Hey there! It's going great, thanks for asking. What can I get for you today?"}]}
+2024-12-25 00:57:28,705 - DEBUG - Updating context with agent message: Hey there! It's going great, thanks for asking. What can I get for you today?
+2024-12-25 00:57:28,705 - DEBUG - Added pending question
+2024-12-25 00:57:29,321 - DEBUG - GPT order confirmation analysis: false
+2024-12-25 00:57:29,321 - DEBUG - New Context: {'ordered_items': [], 'current_item': None, 'pending_questions': ["Hey there! It's going great, thanks for asking. What can I get for you today?"], 'last_agent_message': "Hey there! It's going great, thanks for asking. What can I get for you today?", 'order_goal': [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}], 'conversation_style': {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}}
+2024-12-25 00:57:29,833 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 00:57:29,833 - DEBUG - Updated conversation context: {'ordered_items': [], 'current_item': None, 'pending_questions': ["Hey there! It's going great, thanks for asking. What can I get for you today?"], 'last_agent_message': "Hey there! It's going great, thanks for asking. What can I get for you today?", 'order_goal': [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}], 'conversation_style': {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}}
+2024-12-25 00:57:29,833 - DEBUG - Next state: ANSWER
+2024-12-25 00:57:29,833 - INFO - 
+
+NEW CHAT
+2024-12-25 00:57:30,838 - DEBUG - Current state: ANSWER
+2024-12-25 00:57:30,839 - DEBUG - Using conversation style: {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}
+2024-12-25 00:57:30,839 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant. You are NOT the restaurant staff.
+        Current conversation state: ANSWER
+        Emotion: chill
+        Tone: quiet
+        Brevity: short
+        
+        Conversation Context:
+        - Items you still need to order: [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}]
+        - Current item to order: None
+        - Items already ordered: []
+        - Pending questions from staff: ["Hey there! It's going great, thanks for asking. What can I get for you today?"]
+        - Last staff message: Hey there! It's going great, thanks for asking. What can I get for you today?
+        
+        IMPORTANT: You are the CUSTOMER. Respond as a customer would to the restaurant staff.
+        You are trying to order specific items but should act natural and spontaneous.
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        Never pretend to be the restaurant staff.
+        
+
+2024-12-25 00:57:30,839 - DEBUG - User prompt: Continue the conversation naturally
+2024-12-25 00:57:30,839 - DEBUG - Sending request to GPT-4
+2024-12-25 00:57:31,882 - INFO - GPT-4 response: I'll have a 2 shot espresso to start, please.
+2024-12-25 00:57:31,883 - INFO - Generated customer message: I'll have a 2 shot espresso to start, please.
+2024-12-25 00:57:32,344 - DEBUG - GPT question-answer analysis: True
+2024-12-25 00:57:32,344 - DEBUG - Removed answered question: Hey there! It's going great, thanks for asking. What can I get for you today?
+2024-12-25 00:57:34,643 - DEBUG - Received response: {'orderId': '676bc8f4a26f49c79e37816a', 'order': [], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': "Hey, how's it going?"}, {'role': 'assistant', 'content': "Hey there! It's going great, thanks for asking. What can I get for you today?"}, {'role': 'user', 'content': "I'll have a 2 shot espresso to start, please."}, {'role': 'assistant', 'content': 'hold on'}, {'role': 'assistant', 'content': 'Medium okay?'}]}
+2024-12-25 00:57:34,644 - DEBUG - Updating context with agent message: Medium okay?
+2024-12-25 00:57:34,644 - DEBUG - Added pending question
+2024-12-25 00:57:35,259 - DEBUG - GPT order confirmation analysis: false
+2024-12-25 00:57:35,259 - DEBUG - New Context: {'ordered_items': [], 'current_item': None, 'pending_questions': ['Medium okay?'], 'last_agent_message': 'Medium okay?', 'order_goal': [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}], 'conversation_style': {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}}
+2024-12-25 00:57:35,874 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 00:57:35,875 - DEBUG - Updated conversation context: {'ordered_items': [], 'current_item': None, 'pending_questions': ['Medium okay?'], 'last_agent_message': 'Medium okay?', 'order_goal': [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}], 'conversation_style': {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}}
+2024-12-25 00:57:35,875 - DEBUG - Next state: ANSWER
+2024-12-25 00:57:35,875 - INFO - 
+
+NEW CHAT
+2024-12-25 00:57:36,879 - DEBUG - Current state: ANSWER
+2024-12-25 00:57:36,879 - DEBUG - Using conversation style: {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}
+2024-12-25 00:57:36,879 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant. You are NOT the restaurant staff.
+        Current conversation state: ANSWER
+        Emotion: chill
+        Tone: quiet
+        Brevity: short
+        
+        Conversation Context:
+        - Items you still need to order: [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}]
+        - Current item to order: None
+        - Items already ordered: []
+        - Pending questions from staff: ['Medium okay?']
+        - Last staff message: Medium okay?
+        
+        IMPORTANT: You are the CUSTOMER. Respond as a customer would to the restaurant staff.
+        You are trying to order specific items but should act natural and spontaneous.
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        Never pretend to be the restaurant staff.
+        
+
+2024-12-25 00:57:36,880 - DEBUG - User prompt: Continue the conversation naturally
+2024-12-25 00:57:36,880 - DEBUG - Sending request to GPT-4
+2024-12-25 00:57:37,820 - INFO - GPT-4 response: Yeah, medium is fine.
+2024-12-25 00:57:37,821 - INFO - Generated customer message: Yeah, medium is fine.
+2024-12-25 00:57:38,433 - DEBUG - GPT question-answer analysis: True
+2024-12-25 00:57:38,434 - DEBUG - Removed answered question: Medium okay?
+2024-12-25 00:57:40,992 - DEBUG - Received response: {'orderId': '676bc8f4a26f49c79e37816a', 'order': [{'itemName': 'Espresso', 'price': 2.5, 'optionKeys': ['size'], 'optionValues': [['2 shots']], 'id': 'W8DE'}], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': "Hey, how's it going?"}, {'role': 'assistant', 'content': "Hey there! It's going great, thanks for asking. What can I get for you today?"}, {'role': 'user', 'content': "I'll have a 2 shot espresso to start, please."}, {'role': 'assistant', 'content': 'hold on'}, {'role': 'assistant', 'content': 'Medium okay?'}, {'role': 'user', 'content': 'Yeah, medium is fine.'}, {'role': 'assistant', 'content': 'hold on'}, {'role': 'assistant', 'content': 'Added your medium espresso. Anything else?'}]}
+2024-12-25 00:57:40,992 - DEBUG - Updating context with agent message: Added your medium espresso. Anything else?
+2024-12-25 00:57:40,993 - DEBUG - Added pending question
+2024-12-25 00:57:41,457 - DEBUG - GPT order confirmation analysis: true
+2024-12-25 00:57:41,457 - DEBUG - Updated current item to: {'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}
+2024-12-25 00:57:41,457 - DEBUG - New Context: {'ordered_items': [], 'current_item': {'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, 'pending_questions': ['Added your medium espresso. Anything else?'], 'last_agent_message': 'Added your medium espresso. Anything else?', 'order_goal': [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}], 'conversation_style': {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}}
+2024-12-25 00:57:42,018 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 00:57:42,018 - DEBUG - Updated conversation context: {'ordered_items': [], 'current_item': {'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, 'pending_questions': ['Added your medium espresso. Anything else?'], 'last_agent_message': 'Added your medium espresso. Anything else?', 'order_goal': [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}], 'conversation_style': {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}}
+2024-12-25 00:57:42,018 - DEBUG - Next state: ANSWER
+2024-12-25 00:57:42,019 - INFO - 
+
+NEW CHAT
+2024-12-25 00:57:43,024 - DEBUG - Current state: ANSWER
+2024-12-25 00:57:43,024 - DEBUG - Using conversation style: {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}
+2024-12-25 00:57:43,024 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant. You are NOT the restaurant staff.
+        Current conversation state: ANSWER
+        Emotion: chill
+        Tone: quiet
+        Brevity: short
+        
+        Conversation Context:
+        - Items you still need to order: [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}]
+        - Current item to order: {'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}
+        - Items already ordered: []
+        - Pending questions from staff: ['Added your medium espresso. Anything else?']
+        - Last staff message: Added your medium espresso. Anything else?
+        
+        IMPORTANT: You are the CUSTOMER. Respond as a customer would to the restaurant staff.
+        You are trying to order specific items but should act natural and spontaneous.
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        Never pretend to be the restaurant staff.
+        
+
+2024-12-25 00:57:43,025 - DEBUG - User prompt: Continue the conversation naturally
+2024-12-25 00:57:43,025 - DEBUG - Sending request to GPT-4
+2024-12-25 00:57:43,759 - INFO - GPT-4 response: Yeah, can I also get a Rockstar?
+2024-12-25 00:57:43,760 - INFO - Generated customer message: Yeah, can I also get a Rockstar?
+2024-12-25 00:57:44,372 - DEBUG - GPT question-answer analysis: True
+2024-12-25 00:57:44,373 - DEBUG - Removed answered question: Added your medium espresso. Anything else?
+2024-12-25 00:57:47,341 - DEBUG - Received response: {'orderId': '676bc8f4a26f49c79e37816a', 'order': [{'itemName': 'Espresso', 'price': 2.5, 'optionKeys': ['size'], 'optionValues': [['2 shots']], 'id': 'W8DE'}, {'itemName': 'Rockstar', 'price': 3.82, 'optionKeys': [], 'optionValues': [], 'id': '0U73'}], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': "Hey, how's it going?"}, {'role': 'assistant', 'content': "Hey there! It's going great, thanks for asking. What can I get for you today?"}, {'role': 'user', 'content': "I'll have a 2 shot espresso to start, please."}, {'role': 'assistant', 'content': 'hold on'}, {'role': 'assistant', 'content': 'Medium okay?'}, {'role': 'user', 'content': 'Yeah, medium is fine.'}, {'role': 'assistant', 'content': 'hold on'}, {'role': 'assistant', 'content': 'Added your medium espresso. Anything else?'}, {'role': 'user', 'content': 'Yeah, can I also get a Rockstar?'}, {'role': 'assistant', 'content': 'Added your Rockstar. Anything else?'}]}
+2024-12-25 00:57:47,341 - DEBUG - Updating context with agent message: Added your Rockstar. Anything else?
+2024-12-25 00:57:47,341 - DEBUG - Added pending question
+2024-12-25 00:57:47,958 - DEBUG - GPT order confirmation analysis: true
+2024-12-25 00:57:47,958 - DEBUG - Removed ordered item from goal and cleared current item
+2024-12-25 00:57:47,958 - DEBUG - Updated current item to: {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}
+2024-12-25 00:57:47,958 - DEBUG - New Context: {'ordered_items': [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}], 'current_item': {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, 'pending_questions': ['Added your Rockstar. Anything else?'], 'last_agent_message': 'Added your Rockstar. Anything else?', 'order_goal': [{'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}], 'conversation_style': {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}}
+2024-12-25 00:57:48,469 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 00:57:48,470 - DEBUG - Updated conversation context: {'ordered_items': [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}], 'current_item': {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, 'pending_questions': ['Added your Rockstar. Anything else?'], 'last_agent_message': 'Added your Rockstar. Anything else?', 'order_goal': [{'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}], 'conversation_style': {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}}
+2024-12-25 00:57:48,470 - DEBUG - Next state: ANSWER
+2024-12-25 00:57:48,470 - INFO - 
+
+NEW CHAT
+2024-12-25 00:57:49,475 - DEBUG - Current state: ANSWER
+2024-12-25 00:57:49,476 - DEBUG - Using conversation style: {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}
+2024-12-25 00:57:49,476 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant. You are NOT the restaurant staff.
+        Current conversation state: ANSWER
+        Emotion: chill
+        Tone: quiet
+        Brevity: short
+        
+        Conversation Context:
+        - Items you still need to order: [{'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}]
+        - Current item to order: {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}
+        - Items already ordered: [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}]
+        - Pending questions from staff: ['Added your Rockstar. Anything else?']
+        - Last staff message: Added your Rockstar. Anything else?
+        
+        IMPORTANT: You are the CUSTOMER. Respond as a customer would to the restaurant staff.
+        You are trying to order specific items but should act natural and spontaneous.
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        Never pretend to be the restaurant staff.
+        
+
+2024-12-25 00:57:49,476 - DEBUG - User prompt: Continue the conversation naturally
+2024-12-25 00:57:49,476 - DEBUG - Sending request to GPT-4
+2024-12-25 00:57:50,619 - INFO - GPT-4 response: Yeah, I'd like a medium Neapolitan Shake too.
+2024-12-25 00:57:50,619 - INFO - Generated customer message: Yeah, I'd like a medium Neapolitan Shake too.
+2024-12-25 00:57:51,438 - DEBUG - GPT question-answer analysis: True
+2024-12-25 00:57:51,438 - DEBUG - Removed answered question: Added your Rockstar. Anything else?
+2024-12-25 00:57:55,328 - DEBUG - Received response: {'orderId': '676bc8f4a26f49c79e37816a', 'order': [{'itemName': 'Espresso', 'price': 2.5, 'optionKeys': ['size'], 'optionValues': [['2 shots']], 'id': 'W8DE'}, {'itemName': 'Rockstar', 'price': 3.82, 'optionKeys': [], 'optionValues': [], 'id': '0U73'}, {'itemName': 'Neapolitan Shake', 'price': 7.26, 'optionKeys': ['size'], 'optionValues': [['medium']], 'id': 'QNYB'}], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': "Hey, how's it going?"}, {'role': 'assistant', 'content': "Hey there! It's going great, thanks for asking. What can I get for you today?"}, {'role': 'user', 'content': "I'll have a 2 shot espresso to start, please."}, {'role': 'assistant', 'content': 'hold on'}, {'role': 'assistant', 'content': 'Medium okay?'}, {'role': 'user', 'content': 'Yeah, medium is fine.'}, {'role': 'assistant', 'content': 'hold on'}, {'role': 'assistant', 'content': 'Added your medium espresso. Anything else?'}, {'role': 'user', 'content': 'Yeah, can I also get a Rockstar?'}, {'role': 'assistant', 'content': 'Added your Rockstar. Anything else?'}, {'role': 'user', 'content': "Yeah, I'd like a medium Neapolitan Shake too."}, {'role': 'assistant', 'content': 'Added your medium Neapolitan Shake. Anything else?'}]}
+2024-12-25 00:57:55,328 - DEBUG - Updating context with agent message: Added your medium Neapolitan Shake. Anything else?
+2024-12-25 00:57:55,329 - DEBUG - Added pending question
+2024-12-25 00:57:55,943 - DEBUG - GPT order confirmation analysis: true
+2024-12-25 00:57:55,943 - DEBUG - Removed ordered item from goal and cleared current item
+2024-12-25 00:57:55,943 - DEBUG - Updated current item to: {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}
+2024-12-25 00:57:55,943 - DEBUG - New Context: {'ordered_items': [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}], 'current_item': {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, 'pending_questions': ['Added your medium Neapolitan Shake. Anything else?'], 'last_agent_message': 'Added your medium Neapolitan Shake. Anything else?', 'order_goal': [{'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}], 'conversation_style': {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}}
+2024-12-25 00:57:56,456 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 00:57:56,456 - DEBUG - Updated conversation context: {'ordered_items': [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}], 'current_item': {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, 'pending_questions': ['Added your medium Neapolitan Shake. Anything else?'], 'last_agent_message': 'Added your medium Neapolitan Shake. Anything else?', 'order_goal': [{'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}], 'conversation_style': {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}}
+2024-12-25 00:57:56,456 - DEBUG - Next state: ANSWER
+2024-12-25 00:57:56,456 - INFO - 
+
+NEW CHAT
+2024-12-25 00:57:57,462 - DEBUG - Current state: ANSWER
+2024-12-25 00:57:57,462 - DEBUG - Using conversation style: {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}
+2024-12-25 00:57:57,462 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant. You are NOT the restaurant staff.
+        Current conversation state: ANSWER
+        Emotion: chill
+        Tone: quiet
+        Brevity: short
+        
+        Conversation Context:
+        - Items you still need to order: [{'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}]
+        - Current item to order: {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}
+        - Items already ordered: [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}]
+        - Pending questions from staff: ['Added your medium Neapolitan Shake. Anything else?']
+        - Last staff message: Added your medium Neapolitan Shake. Anything else?
+        
+        IMPORTANT: You are the CUSTOMER. Respond as a customer would to the restaurant staff.
+        You are trying to order specific items but should act natural and spontaneous.
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        Never pretend to be the restaurant staff.
+        
+
+2024-12-25 00:57:57,462 - DEBUG - User prompt: Continue the conversation naturally
+2024-12-25 00:57:57,463 - DEBUG - Sending request to GPT-4
+2024-12-25 00:57:58,812 - INFO - GPT-4 response: Yes, I'd also like a single Chocolate Blue Bunny Ice Cream in a waffle cone.
+2024-12-25 00:57:58,813 - INFO - Generated customer message: Yes, I'd also like a single Chocolate Blue Bunny Ice Cream in a waffle cone.
+2024-12-25 00:57:59,528 - DEBUG - GPT question-answer analysis: True
+2024-12-25 00:57:59,528 - DEBUG - Removed answered question: Added your medium Neapolitan Shake. Anything else?
+2024-12-25 00:58:02,459 - DEBUG - Received response: {'orderId': '676bc8f4a26f49c79e37816a', 'order': [{'itemName': 'Espresso', 'price': 2.5, 'optionKeys': ['size'], 'optionValues': [['2 shots']], 'id': 'W8DE'}, {'itemName': 'Rockstar', 'price': 3.82, 'optionKeys': [], 'optionValues': [], 'id': '0U73'}, {'itemName': 'Neapolitan Shake', 'price': 7.26, 'optionKeys': ['size'], 'optionValues': [['medium']], 'id': 'QNYB'}, {'itemName': 'Blue Bunny Ice Cream', 'price': 6.1, 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']], 'id': 'RZCG'}], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': "Hey, how's it going?"}, {'role': 'assistant', 'content': "Hey there! It's going great, thanks for asking. What can I get for you today?"}, {'role': 'user', 'content': "I'll have a 2 shot espresso to start, please."}, {'role': 'assistant', 'content': 'hold on'}, {'role': 'assistant', 'content': 'Medium okay?'}, {'role': 'user', 'content': 'Yeah, medium is fine.'}, {'role': 'assistant', 'content': 'hold on'}, {'role': 'assistant', 'content': 'Added your medium espresso. Anything else?'}, {'role': 'user', 'content': 'Yeah, can I also get a Rockstar?'}, {'role': 'assistant', 'content': 'Added your Rockstar. Anything else?'}, {'role': 'user', 'content': "Yeah, I'd like a medium Neapolitan Shake too."}, {'role': 'assistant', 'content': 'Added your medium Neapolitan Shake. Anything else?'}, {'role': 'user', 'content': "Yes, I'd also like a single Chocolate Blue Bunny Ice Cream in a waffle cone."}, {'role': 'assistant', 'content': 'Added your Chocolate Blue Bunny Ice Cream in a waffle cone. Anything else?'}]}
+2024-12-25 00:58:02,460 - DEBUG - Updating context with agent message: Added your Chocolate Blue Bunny Ice Cream in a waffle cone. Anything else?
+2024-12-25 00:58:02,460 - DEBUG - Added pending question
+2024-12-25 00:58:03,110 - DEBUG - GPT order confirmation analysis: true
+2024-12-25 00:58:03,110 - DEBUG - Removed ordered item from goal and cleared current item
+2024-12-25 00:58:03,110 - DEBUG - Updated current item to: {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}
+2024-12-25 00:58:03,110 - DEBUG - New Context: {'ordered_items': [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}], 'current_item': {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, 'pending_questions': ['Added your Chocolate Blue Bunny Ice Cream in a waffle cone. Anything else?'], 'last_agent_message': 'Added your Chocolate Blue Bunny Ice Cream in a waffle cone. Anything else?', 'order_goal': [{'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}], 'conversation_style': {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}}
+2024-12-25 00:58:03,827 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 00:58:03,828 - DEBUG - Updated conversation context: {'ordered_items': [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}], 'current_item': {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, 'pending_questions': ['Added your Chocolate Blue Bunny Ice Cream in a waffle cone. Anything else?'], 'last_agent_message': 'Added your Chocolate Blue Bunny Ice Cream in a waffle cone. Anything else?', 'order_goal': [{'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}], 'conversation_style': {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}}
+2024-12-25 00:58:03,828 - DEBUG - Next state: ANSWER
+2024-12-25 00:58:03,828 - INFO - 
+
+NEW CHAT
+2024-12-25 00:58:04,832 - DEBUG - Current state: ANSWER
+2024-12-25 00:58:04,833 - DEBUG - Using conversation style: {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}
+2024-12-25 00:58:04,833 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant. You are NOT the restaurant staff.
+        Current conversation state: ANSWER
+        Emotion: chill
+        Tone: quiet
+        Brevity: short
+        
+        Conversation Context:
+        - Items you still need to order: [{'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}]
+        - Current item to order: {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}
+        - Items already ordered: [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}]
+        - Pending questions from staff: ['Added your Chocolate Blue Bunny Ice Cream in a waffle cone. Anything else?']
+        - Last staff message: Added your Chocolate Blue Bunny Ice Cream in a waffle cone. Anything else?
+        
+        IMPORTANT: You are the CUSTOMER. Respond as a customer would to the restaurant staff.
+        You are trying to order specific items but should act natural and spontaneous.
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        Never pretend to be the restaurant staff.
+        
+
+2024-12-25 00:58:04,833 - DEBUG - User prompt: Continue the conversation naturally
+2024-12-25 00:58:04,833 - DEBUG - Sending request to GPT-4
+2024-12-25 00:58:06,081 - INFO - GPT-4 response: Yeah, I'd also like some Chili Fries, please.
+2024-12-25 00:58:06,081 - INFO - Generated customer message: Yeah, I'd also like some Chili Fries, please.
+2024-12-25 00:58:06,564 - DEBUG - GPT question-answer analysis: True
+2024-12-25 00:58:06,565 - DEBUG - Removed answered question: Added your Chocolate Blue Bunny Ice Cream in a waffle cone. Anything else?
+2024-12-25 00:58:08,559 - DEBUG - Received response: {'orderId': '676bc8f4a26f49c79e37816a', 'order': [{'itemName': 'Espresso', 'price': 2.5, 'optionKeys': ['size'], 'optionValues': [['2 shots']], 'id': 'W8DE'}, {'itemName': 'Rockstar', 'price': 3.82, 'optionKeys': [], 'optionValues': [], 'id': '0U73'}, {'itemName': 'Neapolitan Shake', 'price': 7.26, 'optionKeys': ['size'], 'optionValues': [['medium']], 'id': 'QNYB'}, {'itemName': 'Blue Bunny Ice Cream', 'price': 6.1, 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']], 'id': 'RZCG'}], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': "Hey, how's it going?"}, {'role': 'assistant', 'content': "Hey there! It's going great, thanks for asking. What can I get for you today?"}, {'role': 'user', 'content': "I'll have a 2 shot espresso to start, please."}, {'role': 'assistant', 'content': 'hold on'}, {'role': 'assistant', 'content': 'Medium okay?'}, {'role': 'user', 'content': 'Yeah, medium is fine.'}, {'role': 'assistant', 'content': 'hold on'}, {'role': 'assistant', 'content': 'Added your medium espresso. Anything else?'}, {'role': 'user', 'content': 'Yeah, can I also get a Rockstar?'}, {'role': 'assistant', 'content': 'Added your Rockstar. Anything else?'}, {'role': 'user', 'content': "Yeah, I'd like a medium Neapolitan Shake too."}, {'role': 'assistant', 'content': 'Added your medium Neapolitan Shake. Anything else?'}, {'role': 'user', 'content': "Yes, I'd also like a single Chocolate Blue Bunny Ice Cream in a waffle cone."}, {'role': 'assistant', 'content': 'Added your Chocolate Blue Bunny Ice Cream in a waffle cone. Anything else?'}, {'role': 'user', 'content': "Yeah, I'd also like some Chili Fries, please."}, {'role': 'assistant', 'content': 'With cheese and onions?'}]}
+2024-12-25 00:58:08,560 - DEBUG - Updating context with agent message: With cheese and onions?
+2024-12-25 00:58:08,560 - DEBUG - Added pending question
+2024-12-25 00:58:09,325 - DEBUG - GPT order confirmation analysis: false
+2024-12-25 00:58:09,326 - DEBUG - New Context: {'ordered_items': [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}], 'current_item': {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, 'pending_questions': ['With cheese and onions?'], 'last_agent_message': 'With cheese and onions?', 'order_goal': [{'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}], 'conversation_style': {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}}
+2024-12-25 00:58:09,999 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 00:58:09,999 - DEBUG - Updated conversation context: {'ordered_items': [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}], 'current_item': {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, 'pending_questions': ['With cheese and onions?'], 'last_agent_message': 'With cheese and onions?', 'order_goal': [{'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}], 'conversation_style': {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}}
+2024-12-25 00:58:09,999 - DEBUG - Next state: ANSWER
+2024-12-25 00:58:09,999 - INFO - 
+
+NEW CHAT
+2024-12-25 00:58:11,004 - DEBUG - Current state: ANSWER
+2024-12-25 00:58:11,004 - DEBUG - Using conversation style: {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}
+2024-12-25 00:58:11,005 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant. You are NOT the restaurant staff.
+        Current conversation state: ANSWER
+        Emotion: chill
+        Tone: quiet
+        Brevity: short
+        
+        Conversation Context:
+        - Items you still need to order: [{'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}]
+        - Current item to order: {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}
+        - Items already ordered: [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}]
+        - Pending questions from staff: ['With cheese and onions?']
+        - Last staff message: With cheese and onions?
+        
+        IMPORTANT: You are the CUSTOMER. Respond as a customer would to the restaurant staff.
+        You are trying to order specific items but should act natural and spontaneous.
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        Never pretend to be the restaurant staff.
+        
+
+2024-12-25 00:58:11,005 - DEBUG - User prompt: Continue the conversation naturally
+2024-12-25 00:58:11,005 - DEBUG - Sending request to GPT-4
+2024-12-25 00:58:11,830 - INFO - GPT-4 response: Sure, add cheese and onions.
+2024-12-25 00:58:11,830 - INFO - Generated customer message: Sure, add cheese and onions.
+2024-12-25 00:58:12,411 - DEBUG - GPT question-answer analysis: True
+2024-12-25 00:58:12,411 - DEBUG - Removed answered question: With cheese and onions?
+2024-12-25 00:58:15,397 - DEBUG - Received response: {'orderId': '676bc8f4a26f49c79e37816a', 'order': [{'itemName': 'Espresso', 'price': 2.5, 'optionKeys': ['size'], 'optionValues': [['2 shots']], 'id': 'W8DE'}, {'itemName': 'Rockstar', 'price': 3.82, 'optionKeys': [], 'optionValues': [], 'id': '0U73'}, {'itemName': 'Neapolitan Shake', 'price': 7.26, 'optionKeys': ['size'], 'optionValues': [['medium']], 'id': 'QNYB'}, {'itemName': 'Blue Bunny Ice Cream', 'price': 6.1, 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']], 'id': 'RZCG'}, {'itemName': 'Chili Fries', 'price': 6.460000000000001, 'optionKeys': ['toppings'], 'optionValues': [['cheese', 'onions']], 'id': 'N41H'}], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': "Hey, how's it going?"}, {'role': 'assistant', 'content': "Hey there! It's going great, thanks for asking. What can I get for you today?"}, {'role': 'user', 'content': "I'll have a 2 shot espresso to start, please."}, {'role': 'assistant', 'content': 'hold on'}, {'role': 'assistant', 'content': 'Medium okay?'}, {'role': 'user', 'content': 'Yeah, medium is fine.'}, {'role': 'assistant', 'content': 'hold on'}, {'role': 'assistant', 'content': 'Added your medium espresso. Anything else?'}, {'role': 'user', 'content': 'Yeah, can I also get a Rockstar?'}, {'role': 'assistant', 'content': 'Added your Rockstar. Anything else?'}, {'role': 'user', 'content': "Yeah, I'd like a medium Neapolitan Shake too."}, {'role': 'assistant', 'content': 'Added your medium Neapolitan Shake. Anything else?'}, {'role': 'user', 'content': "Yes, I'd also like a single Chocolate Blue Bunny Ice Cream in a waffle cone."}, {'role': 'assistant', 'content': 'Added your Chocolate Blue Bunny Ice Cream in a waffle cone. Anything else?'}, {'role': 'user', 'content': "Yeah, I'd also like some Chili Fries, please."}, {'role': 'assistant', 'content': 'With cheese and onions?'}, {'role': 'user', 'content': 'Sure, add cheese and onions.'}, {'role': 'assistant', 'content': 'Added your Chili Fries with cheese and onions. Anything else?'}]}
+2024-12-25 00:58:15,397 - DEBUG - Updating context with agent message: Added your Chili Fries with cheese and onions. Anything else?
+2024-12-25 00:58:15,397 - DEBUG - Added pending question
+2024-12-25 00:58:16,016 - DEBUG - GPT order confirmation analysis: true
+2024-12-25 00:58:16,017 - DEBUG - Removed ordered item from goal and cleared current item
+2024-12-25 00:58:16,017 - DEBUG - Updated current item to: {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}
+2024-12-25 00:58:16,017 - DEBUG - New Context: {'ordered_items': [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}], 'current_item': {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}, 'pending_questions': ['Added your Chili Fries with cheese and onions. Anything else?'], 'last_agent_message': 'Added your Chili Fries with cheese and onions. Anything else?', 'order_goal': [{'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}], 'conversation_style': {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}}
+2024-12-25 00:58:16,631 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 00:58:16,632 - DEBUG - Updated conversation context: {'ordered_items': [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}], 'current_item': {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}, 'pending_questions': ['Added your Chili Fries with cheese and onions. Anything else?'], 'last_agent_message': 'Added your Chili Fries with cheese and onions. Anything else?', 'order_goal': [{'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}], 'conversation_style': {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}}
+2024-12-25 00:58:16,632 - DEBUG - Next state: ANSWER
+2024-12-25 00:58:16,632 - INFO - 
+
+NEW CHAT
+2024-12-25 00:58:17,637 - DEBUG - Current state: ANSWER
+2024-12-25 00:58:17,637 - DEBUG - Using conversation style: {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}
+2024-12-25 00:58:17,638 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant. You are NOT the restaurant staff.
+        Current conversation state: ANSWER
+        Emotion: chill
+        Tone: quiet
+        Brevity: short
+        
+        Conversation Context:
+        - Items you still need to order: [{'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}]
+        - Current item to order: {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}
+        - Items already ordered: [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}]
+        - Pending questions from staff: ['Added your Chili Fries with cheese and onions. Anything else?']
+        - Last staff message: Added your Chili Fries with cheese and onions. Anything else?
+        
+        IMPORTANT: You are the CUSTOMER. Respond as a customer would to the restaurant staff.
+        You are trying to order specific items but should act natural and spontaneous.
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        Never pretend to be the restaurant staff.
+        
+
+2024-12-25 00:58:17,638 - DEBUG - User prompt: Continue the conversation naturally
+2024-12-25 00:58:17,638 - DEBUG - Sending request to GPT-4
+2024-12-25 00:58:18,680 - INFO - GPT-4 response: Nah, that's all. Thanks.
+2024-12-25 00:58:18,680 - INFO - Generated customer message: Nah, that's all. Thanks.
+2024-12-25 00:58:19,598 - DEBUG - GPT question-answer analysis: True
+2024-12-25 00:58:19,599 - DEBUG - Removed answered question: Added your Chili Fries with cheese and onions. Anything else?
+2024-12-25 00:58:22,259 - DEBUG - Received response: {'orderId': '676bc8f4a26f49c79e37816a', 'order': [{'itemName': 'Espresso', 'price': 2.5, 'optionKeys': ['size'], 'optionValues': [['2 shots']], 'id': 'W8DE'}, {'itemName': 'Rockstar', 'price': 3.82, 'optionKeys': [], 'optionValues': [], 'id': '0U73'}, {'itemName': 'Neapolitan Shake', 'price': 7.26, 'optionKeys': ['size'], 'optionValues': [['medium']], 'id': 'QNYB'}, {'itemName': 'Blue Bunny Ice Cream', 'price': 6.1, 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']], 'id': 'RZCG'}, {'itemName': 'Chili Fries', 'price': 6.460000000000001, 'optionKeys': ['toppings'], 'optionValues': [['cheese', 'onions']], 'id': 'N41H'}], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': "Hey, how's it going?"}, {'role': 'assistant', 'content': "Hey there! It's going great, thanks for asking. What can I get for you today?"}, {'role': 'user', 'content': "I'll have a 2 shot espresso to start, please."}, {'role': 'assistant', 'content': 'hold on'}, {'role': 'assistant', 'content': 'Medium okay?'}, {'role': 'user', 'content': 'Yeah, medium is fine.'}, {'role': 'assistant', 'content': 'hold on'}, {'role': 'assistant', 'content': 'Added your medium espresso. Anything else?'}, {'role': 'user', 'content': 'Yeah, can I also get a Rockstar?'}, {'role': 'assistant', 'content': 'Added your Rockstar. Anything else?'}, {'role': 'user', 'content': "Yeah, I'd like a medium Neapolitan Shake too."}, {'role': 'assistant', 'content': 'Added your medium Neapolitan Shake. Anything else?'}, {'role': 'user', 'content': "Yes, I'd also like a single Chocolate Blue Bunny Ice Cream in a waffle cone."}, {'role': 'assistant', 'content': 'Added your Chocolate Blue Bunny Ice Cream in a waffle cone. Anything else?'}, {'role': 'user', 'content': "Yeah, I'd also like some Chili Fries, please."}, {'role': 'assistant', 'content': 'With cheese and onions?'}, {'role': 'user', 'content': 'Sure, add cheese and onions.'}, {'role': 'assistant', 'content': 'Added your Chili Fries with cheese and onions. Anything else?'}, {'role': 'user', 'content': "Nah, that's all. Thanks."}, {'role': 'assistant', 'content': 'Great! Your total is twenty-eight dollars and seventy-two cents. Please pull forward. Have a great day!'}]}
+2024-12-25 00:58:22,260 - DEBUG - Updating context with agent message: Great! Your total is twenty-eight dollars and seventy-two cents. Please pull forward. Have a great day!
+2024-12-25 00:58:23,182 - DEBUG - GPT order confirmation analysis: true
+2024-12-25 00:58:23,182 - DEBUG - Removed ordered item from goal and cleared current item
+2024-12-25 00:58:23,182 - DEBUG - New Context: {'ordered_items': [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}], 'current_item': None, 'pending_questions': [], 'last_agent_message': 'Great! Your total is twenty-eight dollars and seventy-two cents. Please pull forward. Have a great day!', 'order_goal': [], 'conversation_style': {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}}
+2024-12-25 00:58:24,205 - DEBUG - GPT conversation ending analysis: true
+2024-12-25 00:58:24,205 - DEBUG - Updated conversation context: {'ordered_items': [{'itemName': 'Espresso', 'optionKeys': ['size'], 'optionValues': [['2 shots']]}, {'itemName': 'Rockstar', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Neapolitan Shake', 'optionKeys': ['size'], 'optionValues': [['medium']]}, {'itemName': 'Blue Bunny Ice Cream', 'optionKeys': ['size', 'flavor', 'cone type'], 'optionValues': [['single'], ['Chocolate'], ['waffle cone']]}, {'itemName': 'Chili Fries', 'optionKeys': ['toppings'], 'optionValues': [[]]}], 'current_item': None, 'pending_questions': [], 'last_agent_message': 'Great! Your total is twenty-eight dollars and seventy-two cents. Please pull forward. Have a great day!', 'order_goal': [], 'conversation_style': {'emotion': 'chill', 'tone': 'quiet', 'brevity': 'short'}}
+2024-12-25 00:58:24,205 - DEBUG - Next state: DONE
+2024-12-25 00:58:24,205 - INFO - Conversation completed

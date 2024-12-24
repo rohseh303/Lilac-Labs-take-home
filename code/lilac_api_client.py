@@ -1,11 +1,26 @@
 import requests
 from constants import API_BASE_URL, API_TOKEN
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+import time
 
 class LilacApiClient:
     def __init__(self, location="ben-franks"):
         self.api_token = API_TOKEN
         self.base_url = API_BASE_URL
         self.location = location
+
+        # Configure retry strategy
+        retry_strategy = Retry(
+            total=3,  # number of retries
+            backoff_factor=1,  # wait 1, 2, 4 seconds between retries
+            status_forcelist=[500, 502, 503, 504]
+        )
+        
+        # Create session with retry strategy
+        self.session = requests.Session()
+        adapter = HTTPAdapter(max_retries=retry_strategy)
+        self.session.mount("https://", adapter)
 
     def start_order(self):
         """Start a new order session."""
@@ -31,9 +46,17 @@ class LilacApiClient:
             "input": message,
             "location": self.location
         }
-        resp = requests.post(url, json=data, headers=headers)
-        resp.raise_for_status()
-        return resp.json()
+        
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                resp = self.session.post(url, json=data, headers=headers)
+                resp.raise_for_status()
+                return resp.json()
+            except requests.exceptions.ConnectionError as e:
+                if attempt == max_retries - 1:
+                    raise
+                time.sleep(2 ** attempt)  # exponential backoff
 
     def retrieve_order(self, order_id):
         """Retrieve the current order state."""

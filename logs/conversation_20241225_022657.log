@@ -1,0 +1,129 @@
+2024-12-25 02:26:57,589 - INFO - ConversationOrchestrator initialized
+2024-12-25 02:26:57,589 - INFO - NEW CHAT
+
+
+2024-12-25 02:26:57,589 - INFO - Starting conversation with order_id: 676bddf1a26f49c79e378175
+2024-12-25 02:26:57,589 - DEBUG - Initial conversation context: {'ordered_items': [], 'current_item': None, 'pending_questions': [], 'last_agent_message': None, 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['extra onions'], ['meal'], ['chili fries'], ['cherry coke']]}], 'conversation_style': {'emotion': 'grumpy', 'tone': 'rushed', 'brevity': 'chatty'}}
+2024-12-25 02:26:57,589 - INFO - 
+
+NEW CHAT
+2024-12-25 02:26:58,594 - DEBUG - Current state: GREET
+2024-12-25 02:26:58,595 - DEBUG - Using conversation style: {'emotion': 'grumpy', 'tone': 'rushed', 'brevity': 'chatty'}
+2024-12-25 02:26:58,595 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant. You are NOT the restaurant staff.
+        Current conversation state: GREET
+        Emotion: grumpy
+        Tone: rushed
+        Brevity: chatty
+        
+        Conversation Context:
+        - Items you still need to order: [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['extra onions'], ['meal'], ['chili fries'], ['cherry coke']]}]
+        - Current item to order: None
+        - Items already ordered: []
+        - Pending questions from staff: []
+        - Last staff message: None
+        
+        IMPORTANT: You are the CUSTOMER. Respond as a customer would to the restaurant staff.
+        You are trying to order specific items but should act natural and spontaneous.
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        Don't mention customizations until asked
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        Never pretend to be the restaurant staff.
+        
+Generate a natural greeting.
+2024-12-25 02:26:58,595 - DEBUG - User prompt: Continue the conversation naturally
+2024-12-25 02:26:58,595 - DEBUG - Sending request to GPT-4
+2024-12-25 02:27:00,825 - INFO - GPT-4 response: Hey there, I'm in a bit of a hurry. Can we make this quick? I've got a pretty straightforward order. Let's start with a Plain Classic Hot Dog, please.
+2024-12-25 02:27:00,826 - INFO - Generated customer message: Hey there, I'm in a bit of a hurry. Can we make this quick? I've got a pretty straightforward order. Let's start with a Plain Classic Hot Dog, please.
+2024-12-25 02:27:02,837 - DEBUG - Received response: {'orderId': '676bddf1a26f49c79e378175', 'order': [], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': "Hey there, I'm in a bit of a hurry. Can we make this quick? I've got a pretty straightforward order. Let's start with a Plain Classic Hot Dog, please."}, {'role': 'assistant', 'content': 'As a meal?'}]}
+2024-12-25 02:27:02,837 - DEBUG - Updating context with agent message: As a meal?
+2024-12-25 02:27:02,838 - DEBUG - Added pending question
+2024-12-25 02:27:03,584 - DEBUG - GPT order confirmation analysis: false
+2024-12-25 02:27:03,585 - DEBUG - New Context: {'ordered_items': [], 'current_item': None, 'pending_questions': ['As a meal?'], 'last_agent_message': 'As a meal?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['extra onions'], ['meal'], ['chili fries'], ['cherry coke']]}], 'conversation_style': {'emotion': 'grumpy', 'tone': 'rushed', 'brevity': 'chatty'}}
+2024-12-25 02:27:04,197 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 02:27:04,197 - DEBUG - Updated conversation context: {'ordered_items': [], 'current_item': None, 'pending_questions': ['As a meal?'], 'last_agent_message': 'As a meal?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['extra onions'], ['meal'], ['chili fries'], ['cherry coke']]}], 'conversation_style': {'emotion': 'grumpy', 'tone': 'rushed', 'brevity': 'chatty'}}
+2024-12-25 02:27:04,198 - DEBUG - Next state: ANSWER
+2024-12-25 02:27:04,198 - INFO - 
+
+NEW CHAT
+2024-12-25 02:27:05,199 - DEBUG - Current state: ANSWER
+2024-12-25 02:27:05,199 - DEBUG - Using conversation style: {'emotion': 'grumpy', 'tone': 'rushed', 'brevity': 'chatty'}
+2024-12-25 02:27:05,199 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant. You are NOT the restaurant staff.
+        Current conversation state: ANSWER
+        Emotion: grumpy
+        Tone: rushed
+        Brevity: chatty
+        
+        Conversation Context:
+        - Items you still need to order: [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['extra onions'], ['meal'], ['chili fries'], ['cherry coke']]}]
+        - Current item to order: None
+        - Items already ordered: []
+        - Pending questions from staff: ['As a meal?']
+        - Last staff message: As a meal?
+        
+        IMPORTANT: You are the CUSTOMER. Respond as a customer would to the restaurant staff.
+        You are trying to order specific items but should act natural and spontaneous.
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        Don't mention customizations until asked
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        Never pretend to be the restaurant staff.
+        
+
+2024-12-25 02:27:05,199 - DEBUG - User prompt: Continue the conversation naturally
+2024-12-25 02:27:05,199 - DEBUG - Sending request to GPT-4
+2024-12-25 02:27:07,063 - INFO - GPT-4 response: Yes, as a meal. Also, I'd like those chili fries on the side. And I'm hoping you guys have cherry coke, I could really use some right now.
+2024-12-25 02:27:07,064 - INFO - Generated customer message: Yes, as a meal. Also, I'd like those chili fries on the side. And I'm hoping you guys have cherry coke, I could really use some right now.
+2024-12-25 02:27:07,833 - DEBUG - GPT question-answer analysis: True
+2024-12-25 02:27:07,833 - DEBUG - Removed answered question: As a meal?
+2024-12-25 02:27:10,852 - DEBUG - Received response: {'orderId': '676bddf1a26f49c79e378175', 'order': [{'itemName': 'Plain Classic Hot Dog', 'price': 15.110000000000001, 'optionKeys': ['meal option', 'side options', 'drink options'], 'optionValues': [['meal'], ['chili fries'], ['cherry coke']], 'id': '6HRF'}], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': "Hey there, I'm in a bit of a hurry. Can we make this quick? I've got a pretty straightforward order. Let's start with a Plain Classic Hot Dog, please."}, {'role': 'assistant', 'content': 'As a meal?'}, {'role': 'user', 'content': "Yes, as a meal. Also, I'd like those chili fries on the side. And I'm hoping you guys have cherry coke, I could really use some right now."}, {'role': 'assistant', 'content': 'Added your Plain Classic Hot Dog meal with chili fries and cherry coke. Anything else?'}]}
+2024-12-25 02:27:10,852 - DEBUG - Updating context with agent message: Added your Plain Classic Hot Dog meal with chili fries and cherry coke. Anything else?
+2024-12-25 02:27:10,852 - DEBUG - Added pending question
+2024-12-25 02:27:11,365 - DEBUG - GPT order confirmation analysis: true
+2024-12-25 02:27:11,365 - DEBUG - Updated current item to: {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['extra onions'], ['meal'], ['chili fries'], ['cherry coke']]}
+2024-12-25 02:27:11,365 - DEBUG - New Context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['extra onions'], ['meal'], ['chili fries'], ['cherry coke']]}, 'pending_questions': ['Added your Plain Classic Hot Dog meal with chili fries and cherry coke. Anything else?'], 'last_agent_message': 'Added your Plain Classic Hot Dog meal with chili fries and cherry coke. Anything else?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['extra onions'], ['meal'], ['chili fries'], ['cherry coke']]}], 'conversation_style': {'emotion': 'grumpy', 'tone': 'rushed', 'brevity': 'chatty'}}
+2024-12-25 02:27:12,290 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 02:27:12,290 - DEBUG - Updated conversation context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['extra onions'], ['meal'], ['chili fries'], ['cherry coke']]}, 'pending_questions': ['Added your Plain Classic Hot Dog meal with chili fries and cherry coke. Anything else?'], 'last_agent_message': 'Added your Plain Classic Hot Dog meal with chili fries and cherry coke. Anything else?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['extra onions'], ['meal'], ['chili fries'], ['cherry coke']]}], 'conversation_style': {'emotion': 'grumpy', 'tone': 'rushed', 'brevity': 'chatty'}}
+2024-12-25 02:27:12,290 - DEBUG - Next state: ANSWER
+2024-12-25 02:27:12,290 - INFO - 
+
+NEW CHAT
+2024-12-25 02:27:13,294 - DEBUG - Current state: ANSWER
+2024-12-25 02:27:13,294 - DEBUG - Using conversation style: {'emotion': 'grumpy', 'tone': 'rushed', 'brevity': 'chatty'}
+2024-12-25 02:27:13,294 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant. You are NOT the restaurant staff.
+        Current conversation state: ANSWER
+        Emotion: grumpy
+        Tone: rushed
+        Brevity: chatty
+        
+        Conversation Context:
+        - Items you still need to order: [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['extra onions'], ['meal'], ['chili fries'], ['cherry coke']]}]
+        - Current item to order: {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['extra onions'], ['meal'], ['chili fries'], ['cherry coke']]}
+        - Items already ordered: []
+        - Pending questions from staff: ['Added your Plain Classic Hot Dog meal with chili fries and cherry coke. Anything else?']
+        - Last staff message: Added your Plain Classic Hot Dog meal with chili fries and cherry coke. Anything else?
+        
+        IMPORTANT: You are the CUSTOMER. Respond as a customer would to the restaurant staff.
+        You are trying to order specific items but should act natural and spontaneous.
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        Don't mention customizations until asked
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        Never pretend to be the restaurant staff.
+        
+
+2024-12-25 02:27:13,294 - DEBUG - User prompt: Continue the conversation naturally
+2024-12-25 02:27:13,295 - DEBUG - Sending request to GPT-4
+2024-12-25 02:27:15,870 - INFO - GPT-4 response: No, that's all. Just make sure there's extra onions on that hot dog, okay? And I'd appreciate it if my chili fries were hot and crispy. Can't stand soggy fries. And don't forget the cherry coke. Boy, I haven't had one of those in a long time. Brings back memories. So, to sum it up: one Plain Classic Hot Dog meal with extra onions, some decent chili fries, and a cherry coke. That better be right.
+2024-12-25 02:27:15,870 - INFO - Generated customer message: No, that's all. Just make sure there's extra onions on that hot dog, okay? And I'd appreciate it if my chili fries were hot and crispy. Can't stand soggy fries. And don't forget the cherry coke. Boy, I haven't had one of those in a long time. Brings back memories. So, to sum it up: one Plain Classic Hot Dog meal with extra onions, some decent chili fries, and a cherry coke. That better be right.
+2024-12-25 02:27:16,354 - DEBUG - GPT question-answer analysis: True
+2024-12-25 02:27:16,354 - DEBUG - Removed answered question: Added your Plain Classic Hot Dog meal with chili fries and cherry coke. Anything else?
+2024-12-25 02:27:20,580 - DEBUG - Received response: {'orderId': '676bddf1a26f49c79e378175', 'order': [{'itemName': 'Plain Classic Hot Dog', 'price': 15.110000000000001, 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['extra onions'], ['meal'], ['chili fries'], ['cherry coke']], 'id': 'S7KE'}], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': "Hey there, I'm in a bit of a hurry. Can we make this quick? I've got a pretty straightforward order. Let's start with a Plain Classic Hot Dog, please."}, {'role': 'assistant', 'content': 'As a meal?'}, {'role': 'user', 'content': "Yes, as a meal. Also, I'd like those chili fries on the side. And I'm hoping you guys have cherry coke, I could really use some right now."}, {'role': 'assistant', 'content': 'Added your Plain Classic Hot Dog meal with chili fries and cherry coke. Anything else?'}, {'role': 'user', 'content': "No, that's all. Just make sure there's extra onions on that hot dog, okay? And I'd appreciate it if my chili fries were hot and crispy. Can't stand soggy fries. And don't forget the cherry coke. Boy, I haven't had one of those in a long time. Brings back memories. So, to sum it up: one Plain Classic Hot Dog meal with extra onions, some decent chili fries, and a cherry coke. That better be right."}, {'role': 'assistant', 'content': 'All set! Your total is sixteen dollars and sixty cents. Please pull forward. Enjoy your meal!'}]}
+2024-12-25 02:27:20,580 - DEBUG - Updating context with agent message: All set! Your total is sixteen dollars and sixty cents. Please pull forward. Enjoy your meal!
+2024-12-25 02:27:21,198 - DEBUG - GPT order confirmation analysis: true
+2024-12-25 02:27:21,198 - DEBUG - Removed ordered item from goal and cleared current item
+2024-12-25 02:27:21,198 - DEBUG - New Context: {'ordered_items': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['extra onions'], ['meal'], ['chili fries'], ['cherry coke']]}], 'current_item': None, 'pending_questions': [], 'last_agent_message': 'All set! Your total is sixteen dollars and sixty cents. Please pull forward. Enjoy your meal!', 'order_goal': [], 'conversation_style': {'emotion': 'grumpy', 'tone': 'rushed', 'brevity': 'chatty'}}
+2024-12-25 02:27:21,809 - DEBUG - GPT conversation ending analysis: true
+2024-12-25 02:27:21,810 - DEBUG - Updated conversation context: {'ordered_items': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['extra onions'], ['meal'], ['chili fries'], ['cherry coke']]}], 'current_item': None, 'pending_questions': [], 'last_agent_message': 'All set! Your total is sixteen dollars and sixty cents. Please pull forward. Enjoy your meal!', 'order_goal': [], 'conversation_style': {'emotion': 'grumpy', 'tone': 'rushed', 'brevity': 'chatty'}}
+2024-12-25 02:27:21,810 - DEBUG - Next state: DONE
+2024-12-25 02:27:21,810 - INFO - Conversation completed

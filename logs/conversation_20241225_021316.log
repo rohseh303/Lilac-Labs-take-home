@@ -1,0 +1,127 @@
+2024-12-25 02:13:16,053 - INFO - ConversationOrchestrator initialized
+2024-12-25 02:13:16,053 - INFO - NEW CHAT
+
+
+2024-12-25 02:13:16,053 - INFO - Starting conversation with order_id: 676bdabba26f49c79e37816e
+2024-12-25 02:13:16,053 - DEBUG - Initial conversation context: {'ordered_items': [], 'current_item': None, 'pending_questions': [], 'last_agent_message': None, 'order_goal': [{'itemName': 'Red Bull', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Rootbeer Freeze Shake', 'optionKeys': ['size', 'add ons'], 'optionValues': [['medium'], ['malt']]}, {'itemName': 'Bowl of Chili', 'optionKeys': ['customizations'], 'optionValues': [[' no cheese', ' no onion']]}], 'conversation_style': {'emotion': 'annoyed', 'tone': 'casual', 'brevity': 'mumbled'}}
+2024-12-25 02:13:16,053 - INFO - 
+
+NEW CHAT
+2024-12-25 02:13:17,058 - DEBUG - Current state: GREET
+2024-12-25 02:13:17,059 - DEBUG - Using conversation style: {'emotion': 'annoyed', 'tone': 'casual', 'brevity': 'mumbled'}
+2024-12-25 02:13:17,059 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant. You are NOT the restaurant staff.
+        Current conversation state: GREET
+        Emotion: annoyed
+        Tone: casual
+        Brevity: mumbled
+        
+        Conversation Context:
+        - Items you still need to order: [{'itemName': 'Red Bull', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Rootbeer Freeze Shake', 'optionKeys': ['size', 'add ons'], 'optionValues': [['medium'], ['malt']]}, {'itemName': 'Bowl of Chili', 'optionKeys': ['customizations'], 'optionValues': [[' no cheese', ' no onion']]}]
+        - Current item to order: None
+        - Items already ordered: []
+        - Pending questions from staff: []
+        - Last staff message: None
+        
+        IMPORTANT: You are the CUSTOMER. Respond as a customer would to the restaurant staff.
+        You are trying to order specific items but should act natural and spontaneous.
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        Never pretend to be the restaurant staff.
+        
+Generate a natural greeting.
+2024-12-25 02:13:17,059 - DEBUG - User prompt: Continue the conversation naturally
+2024-12-25 02:13:17,059 - DEBUG - Sending request to GPT-4
+2024-12-25 02:13:17,981 - INFO - GPT-4 response: Yeah, hey there. Let's just get this over with.
+2024-12-25 02:13:17,982 - INFO - Generated customer message: Yeah, hey there. Let's just get this over with.
+2024-12-25 02:13:19,467 - DEBUG - Received response: {'orderId': '676bdabba26f49c79e37816e', 'order': [], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': "Yeah, hey there. Let's just get this over with."}, {'role': 'assistant', 'content': 'Sure thing! What would you like to order?'}]}
+2024-12-25 02:13:19,467 - DEBUG - Updating context with agent message: Sure thing! What would you like to order?
+2024-12-25 02:13:19,467 - DEBUG - Added pending question
+2024-12-25 02:13:20,494 - DEBUG - GPT order confirmation analysis: false
+2024-12-25 02:13:20,494 - DEBUG - New Context: {'ordered_items': [], 'current_item': None, 'pending_questions': ['Sure thing! What would you like to order?'], 'last_agent_message': 'Sure thing! What would you like to order?', 'order_goal': [{'itemName': 'Red Bull', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Rootbeer Freeze Shake', 'optionKeys': ['size', 'add ons'], 'optionValues': [['medium'], ['malt']]}, {'itemName': 'Bowl of Chili', 'optionKeys': ['customizations'], 'optionValues': [[' no cheese', ' no onion']]}], 'conversation_style': {'emotion': 'annoyed', 'tone': 'casual', 'brevity': 'mumbled'}}
+2024-12-25 02:13:22,565 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 02:13:22,566 - DEBUG - Updated conversation context: {'ordered_items': [], 'current_item': None, 'pending_questions': ['Sure thing! What would you like to order?'], 'last_agent_message': 'Sure thing! What would you like to order?', 'order_goal': [{'itemName': 'Red Bull', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Rootbeer Freeze Shake', 'optionKeys': ['size', 'add ons'], 'optionValues': [['medium'], ['malt']]}, {'itemName': 'Bowl of Chili', 'optionKeys': ['customizations'], 'optionValues': [[' no cheese', ' no onion']]}], 'conversation_style': {'emotion': 'annoyed', 'tone': 'casual', 'brevity': 'mumbled'}}
+2024-12-25 02:13:22,566 - DEBUG - Next state: ANSWER
+2024-12-25 02:13:22,566 - INFO - 
+
+NEW CHAT
+2024-12-25 02:13:23,571 - DEBUG - Current state: ANSWER
+2024-12-25 02:13:23,571 - DEBUG - Using conversation style: {'emotion': 'annoyed', 'tone': 'casual', 'brevity': 'mumbled'}
+2024-12-25 02:13:23,571 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant. You are NOT the restaurant staff.
+        Current conversation state: ANSWER
+        Emotion: annoyed
+        Tone: casual
+        Brevity: mumbled
+        
+        Conversation Context:
+        - Items you still need to order: [{'itemName': 'Red Bull', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Rootbeer Freeze Shake', 'optionKeys': ['size', 'add ons'], 'optionValues': [['medium'], ['malt']]}, {'itemName': 'Bowl of Chili', 'optionKeys': ['customizations'], 'optionValues': [[' no cheese', ' no onion']]}]
+        - Current item to order: None
+        - Items already ordered: []
+        - Pending questions from staff: ['Sure thing! What would you like to order?']
+        - Last staff message: Sure thing! What would you like to order?
+        
+        IMPORTANT: You are the CUSTOMER. Respond as a customer would to the restaurant staff.
+        You are trying to order specific items but should act natural and spontaneous.
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        Never pretend to be the restaurant staff.
+        
+
+2024-12-25 02:13:23,571 - DEBUG - User prompt: Continue the conversation naturally
+2024-12-25 02:13:23,571 - DEBUG - Sending request to GPT-4
+2024-12-25 02:13:25,716 - INFO - GPT-4 response: Yeah, gimme a Red Bull, a medium Rootbeer Freeze Shake with malt, and a Bowl of Chili but hold the cheese and onion, alright?
+2024-12-25 02:13:25,716 - INFO - Generated customer message: Yeah, gimme a Red Bull, a medium Rootbeer Freeze Shake with malt, and a Bowl of Chili but hold the cheese and onion, alright?
+2024-12-25 02:13:26,330 - DEBUG - GPT question-answer analysis: True
+2024-12-25 02:13:26,331 - DEBUG - Removed answered question: Sure thing! What would you like to order?
+2024-12-25 02:13:31,654 - DEBUG - Received response: {'orderId': '676bdabba26f49c79e37816e', 'order': [{'itemName': 'Red Bull', 'price': 3.82, 'optionKeys': [], 'optionValues': [], 'id': 'D26F'}, {'itemName': 'Rootbeer Freeze Shake', 'price': 7.609999999999999, 'optionKeys': ['size', 'add ons'], 'optionValues': [['medium'], ['malt']], 'id': 'XWK2'}, {'itemName': 'Bowl of Chili', 'price': 4.78, 'optionKeys': ['customizations'], 'optionValues': [['no cheese', 'no onion']], 'id': 'KSAU'}], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': "Yeah, hey there. Let's just get this over with."}, {'role': 'assistant', 'content': 'Sure thing! What would you like to order?'}, {'role': 'user', 'content': 'Yeah, gimme a Red Bull, a medium Rootbeer Freeze Shake with malt, and a Bowl of Chili but hold the cheese and onion, alright?'}, {'role': 'assistant', 'content': 'Added your Red Bull, medium Rootbeer Freeze Shake with malt, and Bowl of Chili without cheese and onion. Anything else?'}]}
+2024-12-25 02:13:31,654 - DEBUG - Updating context with agent message: Added your Red Bull, medium Rootbeer Freeze Shake with malt, and Bowl of Chili without cheese and onion. Anything else?
+2024-12-25 02:13:31,654 - DEBUG - Added pending question
+2024-12-25 02:13:32,270 - DEBUG - GPT order confirmation analysis: true
+2024-12-25 02:13:32,270 - DEBUG - Updated current item to: {'itemName': 'Red Bull', 'optionKeys': [], 'optionValues': []}
+2024-12-25 02:13:32,270 - DEBUG - New Context: {'ordered_items': [], 'current_item': {'itemName': 'Red Bull', 'optionKeys': [], 'optionValues': []}, 'pending_questions': ['Added your Red Bull, medium Rootbeer Freeze Shake with malt, and Bowl of Chili without cheese and onion. Anything else?'], 'last_agent_message': 'Added your Red Bull, medium Rootbeer Freeze Shake with malt, and Bowl of Chili without cheese and onion. Anything else?', 'order_goal': [{'itemName': 'Red Bull', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Rootbeer Freeze Shake', 'optionKeys': ['size', 'add ons'], 'optionValues': [['medium'], ['malt']]}, {'itemName': 'Bowl of Chili', 'optionKeys': ['customizations'], 'optionValues': [[' no cheese', ' no onion']]}], 'conversation_style': {'emotion': 'annoyed', 'tone': 'casual', 'brevity': 'mumbled'}}
+2024-12-25 02:13:32,886 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 02:13:32,886 - DEBUG - Updated conversation context: {'ordered_items': [], 'current_item': {'itemName': 'Red Bull', 'optionKeys': [], 'optionValues': []}, 'pending_questions': ['Added your Red Bull, medium Rootbeer Freeze Shake with malt, and Bowl of Chili without cheese and onion. Anything else?'], 'last_agent_message': 'Added your Red Bull, medium Rootbeer Freeze Shake with malt, and Bowl of Chili without cheese and onion. Anything else?', 'order_goal': [{'itemName': 'Red Bull', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Rootbeer Freeze Shake', 'optionKeys': ['size', 'add ons'], 'optionValues': [['medium'], ['malt']]}, {'itemName': 'Bowl of Chili', 'optionKeys': ['customizations'], 'optionValues': [[' no cheese', ' no onion']]}], 'conversation_style': {'emotion': 'annoyed', 'tone': 'casual', 'brevity': 'mumbled'}}
+2024-12-25 02:13:32,886 - DEBUG - Next state: ANSWER
+2024-12-25 02:13:32,887 - INFO - 
+
+NEW CHAT
+2024-12-25 02:13:33,892 - DEBUG - Current state: ANSWER
+2024-12-25 02:13:33,892 - DEBUG - Using conversation style: {'emotion': 'annoyed', 'tone': 'casual', 'brevity': 'mumbled'}
+2024-12-25 02:13:33,892 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant. You are NOT the restaurant staff.
+        Current conversation state: ANSWER
+        Emotion: annoyed
+        Tone: casual
+        Brevity: mumbled
+        
+        Conversation Context:
+        - Items you still need to order: [{'itemName': 'Red Bull', 'optionKeys': [], 'optionValues': []}, {'itemName': 'Rootbeer Freeze Shake', 'optionKeys': ['size', 'add ons'], 'optionValues': [['medium'], ['malt']]}, {'itemName': 'Bowl of Chili', 'optionKeys': ['customizations'], 'optionValues': [[' no cheese', ' no onion']]}]
+        - Current item to order: {'itemName': 'Red Bull', 'optionKeys': [], 'optionValues': []}
+        - Items already ordered: []
+        - Pending questions from staff: ['Added your Red Bull, medium Rootbeer Freeze Shake with malt, and Bowl of Chili without cheese and onion. Anything else?']
+        - Last staff message: Added your Red Bull, medium Rootbeer Freeze Shake with malt, and Bowl of Chili without cheese and onion. Anything else?
+        
+        IMPORTANT: You are the CUSTOMER. Respond as a customer would to the restaurant staff.
+        You are trying to order specific items but should act natural and spontaneous.
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        Never pretend to be the restaurant staff.
+        
+
+2024-12-25 02:13:33,892 - DEBUG - User prompt: Continue the conversation naturally
+2024-12-25 02:13:33,893 - DEBUG - Sending request to GPT-4
+2024-12-25 02:13:34,931 - INFO - GPT-4 response: Nah, that'll do it. Thanks.
+2024-12-25 02:13:34,932 - INFO - Generated customer message: Nah, that'll do it. Thanks.
+2024-12-25 02:13:35,650 - DEBUG - GPT question-answer analysis: True
+2024-12-25 02:13:35,650 - DEBUG - Removed answered question: Added your Red Bull, medium Rootbeer Freeze Shake with malt, and Bowl of Chili without cheese and onion. Anything else?
+2024-12-25 02:13:37,932 - DEBUG - Received response: {'orderId': '676bdabba26f49c79e37816e', 'order': [{'itemName': 'Red Bull', 'price': 3.82, 'optionKeys': [], 'optionValues': [], 'id': 'D26F'}, {'itemName': 'Rootbeer Freeze Shake', 'price': 7.609999999999999, 'optionKeys': ['size', 'add ons'], 'optionValues': [['medium'], ['malt']], 'id': 'XWK2'}, {'itemName': 'Bowl of Chili', 'price': 4.78, 'optionKeys': ['customizations'], 'optionValues': [['no cheese', 'no onion']], 'id': 'KSAU'}], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': "Yeah, hey there. Let's just get this over with."}, {'role': 'assistant', 'content': 'Sure thing! What would you like to order?'}, {'role': 'user', 'content': 'Yeah, gimme a Red Bull, a medium Rootbeer Freeze Shake with malt, and a Bowl of Chili but hold the cheese and onion, alright?'}, {'role': 'assistant', 'content': 'Added your Red Bull, medium Rootbeer Freeze Shake with malt, and Bowl of Chili without cheese and onion. Anything else?'}, {'role': 'user', 'content': "Nah, that'll do it. Thanks."}, {'role': 'assistant', 'content': 'Great! Your total is seventeen dollars and eighty-one cents. Please pull forward. Have a great day!'}]}
+2024-12-25 02:13:37,933 - DEBUG - Updating context with agent message: Great! Your total is seventeen dollars and eighty-one cents. Please pull forward. Have a great day!
+2024-12-25 02:13:38,514 - DEBUG - GPT order confirmation analysis: true
+2024-12-25 02:13:38,515 - DEBUG - Removed ordered item from goal and cleared current item
+2024-12-25 02:13:38,515 - DEBUG - Updated current item to: {'itemName': 'Rootbeer Freeze Shake', 'optionKeys': ['size', 'add ons'], 'optionValues': [['medium'], ['malt']]}
+2024-12-25 02:13:38,515 - DEBUG - New Context: {'ordered_items': [{'itemName': 'Red Bull', 'optionKeys': [], 'optionValues': []}], 'current_item': {'itemName': 'Rootbeer Freeze Shake', 'optionKeys': ['size', 'add ons'], 'optionValues': [['medium'], ['malt']]}, 'pending_questions': [], 'last_agent_message': 'Great! Your total is seventeen dollars and eighty-one cents. Please pull forward. Have a great day!', 'order_goal': [{'itemName': 'Rootbeer Freeze Shake', 'optionKeys': ['size', 'add ons'], 'optionValues': [['medium'], ['malt']]}, {'itemName': 'Bowl of Chili', 'optionKeys': ['customizations'], 'optionValues': [[' no cheese', ' no onion']]}], 'conversation_style': {'emotion': 'annoyed', 'tone': 'casual', 'brevity': 'mumbled'}}
+2024-12-25 02:13:39,028 - DEBUG - GPT conversation ending analysis: true
+2024-12-25 02:13:39,028 - DEBUG - Updated conversation context: {'ordered_items': [{'itemName': 'Red Bull', 'optionKeys': [], 'optionValues': []}], 'current_item': {'itemName': 'Rootbeer Freeze Shake', 'optionKeys': ['size', 'add ons'], 'optionValues': [['medium'], ['malt']]}, 'pending_questions': [], 'last_agent_message': 'Great! Your total is seventeen dollars and eighty-one cents. Please pull forward. Have a great day!', 'order_goal': [{'itemName': 'Rootbeer Freeze Shake', 'optionKeys': ['size', 'add ons'], 'optionValues': [['medium'], ['malt']]}, {'itemName': 'Bowl of Chili', 'optionKeys': ['customizations'], 'optionValues': [[' no cheese', ' no onion']]}], 'conversation_style': {'emotion': 'annoyed', 'tone': 'casual', 'brevity': 'mumbled'}}
+2024-12-25 02:13:39,028 - DEBUG - Next state: DONE
+2024-12-25 02:13:39,028 - INFO - Conversation completed

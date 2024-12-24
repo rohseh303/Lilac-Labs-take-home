@@ -8,13 +8,10 @@ class OrderGoalGenerator:
     def generate_simple_order(self):
         """Generate a simple order with minimal customization."""
         items = self.menu_manager.get_all_items()
-        # item_def = random.choice(items)
-        item_def = next(item for item in items if item["itemName"] == "Classic Hot Dog")
+        item_def = random.choice(items)
+        # item_def = next(item for item in items if item["itemName"] == "Polish Sausage Dog")
 
-        # Always fill required options
-        required_keys, required_values = self._pick_required_options(item_def)
-
-        # Possibly skip optional
+        required_keys, required_values = self._pick_required_options(item_def, simple_mode=True)
         optional_keys, optional_values = [], []
 
         return [{
@@ -24,107 +21,118 @@ class OrderGoalGenerator:
         }]
 
     def generate_medium_order(self):
-        """Generate a medium complexity order with 2–3 items."""
-        all_items = self.menu_manager.get_all_items()
+        """Generate a medium complexity order with an item with a lot of options."""
+        print("Generating medium order")
+        items = self.menu_manager.get_all_items()
+
+        # item_def = random.choice(items)
+        item_def = next(item for item in items if item["itemName"] == "Plain Classic Hot Dog")
+
+        required_keys, required_values = self._pick_required_options(item_def, simple_mode=False)
+
+        return [{
+            "itemName": item_def["itemName"],
+            "optionKeys": required_keys,
+            "optionValues": required_values
+        }]
+
+    def generate_complex_order(self):
+        """Generate a complex order with multiple items & customizations."""
+        items = self.menu_manager.get_all_items()
         num_items = random.randint(2, 3)
 
         order_items = []
         for _ in range(num_items):
-            item_def = random.choice(all_items)
+            item_def = random.choice(items)
             required_keys, required_values = self._pick_required_options(item_def)
-            # randomly pick optional options
-            opt_keys, opt_values = self._pick_optional_options(item_def)
             order_items.append({
                 "itemName": item_def["itemName"],
-                "optionKeys": required_keys + opt_keys,
-                "optionValues": required_values + opt_values
+                "optionKeys": required_keys,
+                "optionValues": required_values
             })
 
         return order_items
 
-    def generate_complex_order(self):
-        """Generate a complex order with multiple items & customizations."""
-        all_items = self.menu_manager.get_all_items()
-        num_items = random.randint(3, 5)
-
-        order_items = []
-        for _ in range(num_items):
-            item_def = random.choice(all_items)
-            required_keys, required_values = self._pick_required_options(item_def)
-            opt_keys, opt_values = self._pick_optional_options(item_def)
-            order_items.append({
-                "itemName": item_def["itemName"],
-                "optionKeys": required_keys + opt_keys,
-                "optionValues": required_values + opt_values
-            })
-
-        return order_items
-
-    def _pick_required_options(self, item_def):
+    def _pick_required_options(self, item_def, simple_mode=False):
         """Pick required options based on the menu item definition."""
         keys = []
         values = []
+        selected_values = {} 
         
         # Get all options from the item definition
         options = item_def.get("options", {})
-        
-        # Iterate through each option category
+
+        # First pass: handle unconditionally required options
         for opt_name, opt_def in options.items():
-            # Check if option is required
             is_required = opt_def.get("required", False)
             
-            # Handle both boolean and conditional requirements
+            # Skip conditional requirements in first pass
             if isinstance(is_required, dict):
-                # This is a conditional requirement (e.g., side options for meals)
-                # We'd need to check against previously selected values
-                continue  # For now, skip conditional requirements
-                
-            elif is_required:
+                continue
+            
+            if is_required:
                 keys.append(opt_name)
-                
-                # Get the choices available
-                choices = opt_def.get("choices", {})
-                
-                # Check if there's a default choice specified
-                default = opt_def.get("defaultChoice")
-                
-                # Special handling for customizations
-                if opt_name == "customizations":
-                    modifiers = opt_def.get("modifiers", [""])
-                    min_selections = opt_def.get("minimum", 1)
-                    max_selections = opt_def.get("maximum", 1)
-                    num_selections = random.randint(min_selections, max_selections)
-                    
-                    selected_items = random.sample(list(choices.keys()), num_selections)
-                    # Add random modifier to each selected item
-                    selected_with_modifiers = [f"{random.choice(modifiers)} {item}" for item in selected_items]
-                    values.append(selected_with_modifiers)
+                # In simple mode, always choose 'a la carte' for meal options
+                if simple_mode and opt_name == "meal option":
+                    values.append(["a la carte"])
+                    selected_values[opt_name] = "a la carte"
                 else:
-                    if default and default in choices:
-                        values.append([default])
-                    else:
-                        # Pick a random choice respecting minimum/maximum constraints
-                        min_selections = opt_def.get("minimum", 1)
-                        max_selections = opt_def.get("maximum", 1)
-                        num_selections = random.randint(min_selections, max_selections)
-                        
-                        selected = random.sample(list(choices.keys()), num_selections)
-                        values.append(selected)
+                    selected_value = self._pick_option_value(opt_name, opt_def, simple_mode)
+                    values.append(selected_value)
+                    if selected_value:
+                        selected_values[opt_name] = selected_value[0]   
+            # do optional values here
+            elif not simple_mode and not is_required:
+                keys.append(opt_name)
+                selected_value = self._pick_option_value(opt_name, opt_def, simple_mode)
+                values.append(selected_value)
+                if selected_value:
+                    selected_values[opt_name] = selected_value[0]
+        
+        # Skip conditional requirements in simple mode
+        if not simple_mode:
+            # Second pass: handle conditional requirements
+            for opt_name, opt_def in options.items():
+                is_required = opt_def.get("required", False)
+                
+                if isinstance(is_required, dict):
+                    # Check if condition is met
+                    condition_option = is_required.get("option")
+                    condition_value = is_required.get("value")
+                    
+                    if (condition_option in selected_values and 
+                        selected_values[condition_option] == condition_value):
+                        keys.append(opt_name)
+                        selected_value = self._pick_option_value(opt_name, opt_def, simple_mode)
+                        values.append(selected_value)
         
         return keys, values
 
-    def _pick_optional_options(self, item_def):
-        """Randomly pick zero or more optional option values."""
-        keys = []
-        values = []
-        for o_opt in item_def.get("optionalOptions", []):
-            # 50% chance to add an optional option
-            if random.random() < 0.5:
-                keys.append(o_opt["key"])
-                # 1-2 random picks from possibleValues
-                possible_vals = random.sample(
-                    o_opt["possibleValues"],
-                    k=random.randint(1, min(2, len(o_opt["possibleValues"])))
-                )
-                values.append(possible_vals)
-        return keys, values
+    def _pick_option_value(self, opt_name, opt_def, simple_mode=False):
+        """Helper method to pick appropriate values for an option."""
+        choices = opt_def.get("choices", {})
+        default = opt_def.get("defaultChoice")
+        min_selections = opt_def.get("minimum", 1)
+        
+        # In simple mode, return empty list if minimum selections can be 0
+        if simple_mode and min_selections == 0:
+            return []
+        
+        # Special handling for customizations
+        if opt_name == "customizations":
+            modifiers = opt_def.get("modifiers", [""])
+            max_selections = opt_def.get("maximum", 1)
+            num_selections = random.randint(min_selections, max_selections)
+            
+            selected_items = random.sample(list(choices.keys()), num_selections)
+            selected_with_modifiers = [f"{random.choice(modifiers)} {item}" for item in selected_items]
+            return selected_with_modifiers
+        
+        # Handle regular options
+        if simple_mode and default and default in choices:
+            return [default]
+        else:
+            max_selections = opt_def.get("maximum", 1)
+            num_selections = random.randint(min_selections, max_selections)
+            
+            return random.sample(list(choices.keys()), num_selections)

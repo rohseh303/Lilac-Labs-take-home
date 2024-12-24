@@ -1,6 +1,11 @@
 from lilac_api_client import LilacApiClient
 from order_goal_generator import OrderGoalGenerator
 from conversation_orchestrator import ConversationOrchestrator
+import threading
+import time
+from queue import Queue
+import concurrent.futures
+import copy
 
 def run_simulation(order_complexity="simple"):
     """
@@ -19,13 +24,15 @@ def run_simulation(order_complexity="simple"):
     else:
         goal = generator.generate_complex_order()
 
+    print(goal)
     # Step 2: Start a new order
     lilac_client = LilacApiClient()
     order_id = lilac_client.start_order()
 
     # Step 3: Simulate conversation
     orchestrator = ConversationOrchestrator(lilac_client)
-    conversation_log = orchestrator.run_conversation(order_id, goal)
+    goal_copy = copy.deepcopy(goal)
+    conversation_log = orchestrator.run_conversation(order_id, goal_copy)
 
     # Retrieve final order
     final_state = lilac_client.retrieve_order(order_id)
@@ -53,29 +60,89 @@ def run_simulation(order_complexity="simple"):
     print(" Order Verification ")
     print("==========================\n")
     
-    def compare_orders(goal_order, final_order):
-        if len(goal_order) != len(final_order):
-            print(f"❌ Order length mismatch: Goal has {len(goal_order)} items, Final has {len(final_order)} items")
-            return False
-        
-        for i, (goal_item, final_item) in enumerate(zip(goal_order, final_order)):
-            if goal_item != final_item:
-                print(f"\nDifference in item {i + 1}:")
-                for key in ['itemName', 'optionKeys', 'optionValues']:
-                    if goal_item.get(key) != final_item.get(key):
-                        print(f"❌ {key}:")
-                        print(f"  Goal:  {goal_item.get(key)}")
-                        print(f"  Final: {final_item.get(key)}")
-                        return False
-        
-        return True
-
     orders_match = compare_orders(goal, final_order)
     if orders_match:
         print("✅ Goal order matches final order exactly!")
 
+    print("\nExpected Goal Order:")
+    for item in goal:
+        print({
+            "itemName": item["itemName"],
+            "optionKeys": item["optionKeys"],
+            "optionValues": item["optionValues"],
+        })
+    
+    return orders_match
+
+def compare_orders(goal_order, final_order):
+    if len(goal_order) != len(final_order):
+        print(f"❌ Order length mismatch: Goal has {len(goal_order)} items, Final has {len(final_order)} items")
+        return False
+    
+    for i, (goal_item, final_item) in enumerate(zip(goal_order, final_order)):
+        # Compare itemName directly
+        if goal_item['itemName'] != final_item['itemName']:
+            print(f"\nDifference in item {i + 1}:")
+            print(f"❌ itemName:")
+            print(f"  Goal:  {goal_item['itemName']}")
+            print(f"  Final: {final_item['itemName']}")
+            return False
+        
+        # Filter out keys with empty values from both items
+        goal_keys_values = [(k, v) for k, v in zip(goal_item['optionKeys'], goal_item['optionValues']) if v]
+        final_keys_values = [(k, v) for k, v in zip(final_item['optionKeys'], final_item['optionValues']) if v]
+        
+        # Sort both lists for comparison
+        goal_keys_values.sort()
+        final_keys_values.sort()
+        
+        if goal_keys_values != final_keys_values:
+            print(f"\nDifference in item {i + 1}:")
+            print(f"❌ Options mismatch:")
+            print(f"  Goal:  {goal_keys_values}")
+            print(f"  Final: {final_keys_values}")
+            return False
+    
+    return True
+
+def run_parallel_simulations(num_simulations=10, max_workers=5):
+    """Run multiple simulations in parallel using ThreadPoolExecutor"""
+    results = []
+    start_time = time.time()
+    
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+        # Submit all simulations
+        future_to_sim = {
+            executor.submit(run_simulation, "simple"): i 
+            for i in range(num_simulations)
+        }
+        
+        # Process completed simulations
+        for future in concurrent.futures.as_completed(future_to_sim):
+            sim_num = future_to_sim[future]
+            try:
+                success = future.result()
+                results.append(success)
+                print(f"\nSimulation {sim_num} completed successfully: {success}")
+            except Exception as e:
+                print(f"\nSimulation {sim_num} generated an exception: {e}")
+                results.append(False)
+    
+    end_time = time.time()
+    duration = end_time - start_time
+    
+    # Print summary
+    successful = sum(results)
+    print(f"\n=== Final Summary ===")
+    print(f"Total simulations: {num_simulations}")
+    print(f"Successful: {successful}")
+    print(f"Failed: {num_simulations - successful}")
+    print(f"Total time: {duration:.2f} seconds")
+    print(f"Average time per simulation: {duration/num_simulations:.2f} seconds")
+
 if __name__ == "__main__":
-    # Example usage
-    run_simulation(order_complexity="simple")
-    # run_simulation(order_complexity="medium")
+    # Run parallel simulations with 10 simulations and 5 concurrent threads
+    # run_parallel_simulations(num_simulations=10, max_workers=5)
+    # run_simulation(order_complexity="simple")
+    run_simulation(order_complexity="medium")
     # run_simulation(order_complexity="complex")
