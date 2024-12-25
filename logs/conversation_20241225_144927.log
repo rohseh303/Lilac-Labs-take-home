@@ -1,0 +1,607 @@
+2024-12-25 14:49:27,161 - INFO - ConversationOrchestrator initialized
+2024-12-25 14:49:27,161 - INFO - NEW CHAT
+
+
+2024-12-25 14:49:27,161 - INFO - Starting conversation with order_id: 676c8bf6a26f49c79e3781dc
+2024-12-25 14:49:27,161 - DEBUG - Initial conversation context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': [], 'last_agent_message': None, 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [], 'chat_history': []}
+2024-12-25 14:49:27,161 - INFO - 
+
+NEW CHAT
+2024-12-25 14:49:28,166 - DEBUG - Current state: GREET
+2024-12-25 14:49:28,167 - DEBUG - Using conversation style: {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}
+2024-12-25 14:49:28,167 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant.
+        Current conversation state: GREET
+        Emotion: high
+        Tone: rude
+        Brevity: short
+        
+        Conversation Context:
+        - ORDER LIST: [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}]
+        - Current item to order: {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}
+        - Building item: []
+        - Items already ordered: []
+        - Pending questions from staff: []
+        - Last staff message: None
+
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        ALWAYS USE THE PROPER NAMES FOR ITEMS AND OPTIONS.
+
+        IMPORTANT:
+        You are trying to order specific items but should act natural and spontaneous.
+        Even though we have a list of items to order, act as if you don't know the menu.
+        Mention customizations but if there's a lot. Do them incrementally.
+
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        If there's a mixup, ask the staff to clarify.
+        
+Generate a natural greeting.
+2024-12-25 14:49:28,167 - DEBUG - User prompt: Generate a natural greeting.
+2024-12-25 14:49:28,167 - DEBUG - Sending request to GPT-4
+2024-12-25 14:49:29,277 - INFO - GPT-4 response: Hey, listen up! I want to order.
+2024-12-25 14:49:29,277 - INFO - Generated customer message: Hey, listen up! I want to order.
+2024-12-25 14:49:30,697 - DEBUG - Received response: {'orderId': '676c8bf6a26f49c79e3781dc', 'order': [], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': 'Hey, listen up! I want to order.'}, {'role': 'assistant', 'content': 'Sure thing! What would you like to order?'}]}
+2024-12-25 14:49:30,698 - DEBUG - Updating context with agent message: Sure thing! What would you like to order?
+2024-12-25 14:49:31,269 - INFO - TRACK ITEM CONSTRUCTION: ['none']
+2024-12-25 14:49:31,779 - DEBUG - GPT response analysis: True
+2024-12-25 14:49:31,779 - DEBUG - Added pending question
+2024-12-25 14:49:31,779 - DEBUG - Item Completed Check: missing current_item
+2024-12-25 14:49:31,779 - DEBUG - New Context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': ['Sure thing! What would you like to order?'], 'last_agent_message': 'Sure thing! What would you like to order?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [], 'chat_history': []}
+2024-12-25 14:49:32,439 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 14:49:33,008 - DEBUG - GPT response analysis: True
+2024-12-25 14:49:33,009 - DEBUG - Updated conversation context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': ['Sure thing! What would you like to order?'], 'last_agent_message': 'Sure thing! What would you like to order?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [], 'chat_history': []}
+2024-12-25 14:49:33,009 - DEBUG - Next state: CLARIFY
+2024-12-25 14:49:33,009 - INFO - 
+
+NEW CHAT
+2024-12-25 14:49:34,012 - DEBUG - Current state: CLARIFY
+2024-12-25 14:49:34,013 - DEBUG - Using conversation style: {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}
+2024-12-25 14:49:34,013 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant.
+        Current conversation state: CLARIFY
+        Emotion: high
+        Tone: rude
+        Brevity: short
+        
+        Conversation Context:
+        - ORDER LIST: [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}]
+        - Current item to order: {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}
+        - Building item: []
+        - Items already ordered: []
+        - Pending questions from staff: ['Sure thing! What would you like to order?']
+        - Last staff message: Sure thing! What would you like to order?
+
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        ALWAYS USE THE PROPER NAMES FOR ITEMS AND OPTIONS.
+
+        IMPORTANT:
+        You are trying to order specific items but should act natural and spontaneous.
+        Even though we have a list of items to order, act as if you don't know the menu.
+        Mention customizations but if there's a lot. Do them incrementally.
+
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        If there's a mixup, ask the staff to clarify.
+        
+Respond to or ask for clarification about something.
+2024-12-25 14:49:34,013 - DEBUG - User prompt: Respond to: Sure thing! What would you like to order?
+2024-12-25 14:49:34,013 - DEBUG - Sending request to GPT-4
+2024-12-25 14:49:35,103 - INFO - GPT-4 response: I want a Plain Classic Hot Dog. But change some things. Add bell peppers on it. And no barbecue sauce. Got that?
+2024-12-25 14:49:35,104 - INFO - Generated customer message: I want a Plain Classic Hot Dog. But change some things. Add bell peppers on it. And no barbecue sauce. Got that?
+2024-12-25 14:49:35,718 - DEBUG - GPT question-answer analysis: True
+2024-12-25 14:49:35,718 - DEBUG - Removed answered question: Sure thing! What would you like to order?
+2024-12-25 14:49:37,967 - DEBUG - Received response: {'orderId': '676c8bf6a26f49c79e3781dc', 'order': [], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': 'Hey, listen up! I want to order.'}, {'role': 'assistant', 'content': 'Sure thing! What would you like to order?'}, {'role': 'user', 'content': 'I want a Plain Classic Hot Dog. But change some things. Add bell peppers on it. And no barbecue sauce. Got that?'}, {'role': 'assistant', 'content': 'As a meal?'}]}
+2024-12-25 14:49:37,968 - DEBUG - Updating context with agent message: As a meal?
+2024-12-25 14:49:39,096 - INFO - TRACK ITEM CONSTRUCTION: ['new_item: Plain Classic Hot Dog', 'option: add bell peppers for toppings', 'option: no barbecue sauce for sauce']
+2024-12-25 14:49:39,628 - INFO - ✨ Started new item construction (matched): Plain Classic Hot Dog
+2024-12-25 14:49:39,628 - INFO - ➕ Added option: add bell peppers
+2024-12-25 14:49:39,628 - INFO - ➕ Added option: no barbecue sauce
+2024-12-25 14:49:40,324 - DEBUG - GPT response analysis: True
+2024-12-25 14:49:40,325 - DEBUG - Added pending question
+2024-12-25 14:49:40,793 - INFO - Is Item Completed result: false
+2024-12-25 14:49:40,793 - DEBUG - New Context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': ['As a meal?'], 'last_agent_message': 'As a meal?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [{'name': 'Plain Classic Hot Dog', 'options': ['add bell peppers', 'no barbecue sauce'], 'meal_type': None}], 'chat_history': []}
+2024-12-25 14:49:41,451 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 14:49:42,066 - DEBUG - GPT response analysis: True
+2024-12-25 14:49:42,066 - DEBUG - Updated conversation context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': ['As a meal?'], 'last_agent_message': 'As a meal?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [{'name': 'Plain Classic Hot Dog', 'options': ['add bell peppers', 'no barbecue sauce'], 'meal_type': None}], 'chat_history': []}
+2024-12-25 14:49:42,066 - DEBUG - Next state: CLARIFY
+2024-12-25 14:49:42,066 - INFO - 
+
+NEW CHAT
+2024-12-25 14:49:43,067 - DEBUG - Current state: CLARIFY
+2024-12-25 14:49:43,068 - DEBUG - Using conversation style: {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}
+2024-12-25 14:49:43,068 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant.
+        Current conversation state: CLARIFY
+        Emotion: high
+        Tone: rude
+        Brevity: short
+        
+        Conversation Context:
+        - ORDER LIST: [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}]
+        - Current item to order: {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}
+        - Building item: [{'name': 'Plain Classic Hot Dog', 'options': ['add bell peppers', 'no barbecue sauce'], 'meal_type': None}]
+        - Items already ordered: []
+        - Pending questions from staff: ['As a meal?']
+        - Last staff message: As a meal?
+
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        ALWAYS USE THE PROPER NAMES FOR ITEMS AND OPTIONS.
+
+        IMPORTANT:
+        You are trying to order specific items but should act natural and spontaneous.
+        Even though we have a list of items to order, act as if you don't know the menu.
+        Mention customizations but if there's a lot. Do them incrementally.
+
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        If there's a mixup, ask the staff to clarify.
+        
+Respond to or ask for clarification about something.
+2024-12-25 14:49:43,068 - DEBUG - User prompt: Respond to: As a meal?
+2024-12-25 14:49:43,068 - DEBUG - Sending request to GPT-4
+2024-12-25 14:49:44,318 - INFO - GPT-4 response: Yes, as a meal, are you deaf?!
+2024-12-25 14:49:44,318 - INFO - Generated customer message: Yes, as a meal, are you deaf?!
+2024-12-25 14:49:44,932 - DEBUG - GPT question-answer analysis: True
+2024-12-25 14:49:44,932 - DEBUG - Removed answered question: As a meal?
+2024-12-25 14:49:46,128 - DEBUG - Received response: {'orderId': '676c8bf6a26f49c79e3781dc', 'order': [], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': 'Hey, listen up! I want to order.'}, {'role': 'assistant', 'content': 'Sure thing! What would you like to order?'}, {'role': 'user', 'content': 'I want a Plain Classic Hot Dog. But change some things. Add bell peppers on it. And no barbecue sauce. Got that?'}, {'role': 'assistant', 'content': 'As a meal?'}, {'role': 'user', 'content': 'Yes, as a meal, are you deaf?!'}, {'role': 'assistant', 'content': 'Which drink would you like?'}]}
+2024-12-25 14:49:46,129 - DEBUG - Updating context with agent message: Which drink would you like?
+2024-12-25 14:49:46,878 - INFO - TRACK ITEM CONSTRUCTION: ['meal_type: meal', 'none']
+2024-12-25 14:49:46,878 - INFO - 🍽️ Set meal type: meal
+2024-12-25 14:49:47,384 - DEBUG - GPT response analysis: True
+2024-12-25 14:49:47,384 - DEBUG - Added pending question
+2024-12-25 14:49:47,866 - INFO - Is Item Completed result: false
+2024-12-25 14:49:47,867 - DEBUG - New Context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': ['Which drink would you like?'], 'last_agent_message': 'Which drink would you like?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [{'name': 'Plain Classic Hot Dog', 'options': ['add bell peppers', 'no barbecue sauce'], 'meal_type': 'meal'}], 'chat_history': []}
+2024-12-25 14:49:48,412 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 14:49:49,030 - DEBUG - GPT response analysis: True
+2024-12-25 14:49:49,031 - DEBUG - Updated conversation context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': ['Which drink would you like?'], 'last_agent_message': 'Which drink would you like?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [{'name': 'Plain Classic Hot Dog', 'options': ['add bell peppers', 'no barbecue sauce'], 'meal_type': 'meal'}], 'chat_history': []}
+2024-12-25 14:49:49,031 - DEBUG - Next state: CLARIFY
+2024-12-25 14:49:49,031 - INFO - 
+
+NEW CHAT
+2024-12-25 14:49:50,036 - DEBUG - Current state: CLARIFY
+2024-12-25 14:49:50,036 - DEBUG - Using conversation style: {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}
+2024-12-25 14:49:50,036 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant.
+        Current conversation state: CLARIFY
+        Emotion: high
+        Tone: rude
+        Brevity: short
+        
+        Conversation Context:
+        - ORDER LIST: [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}]
+        - Current item to order: {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}
+        - Building item: [{'name': 'Plain Classic Hot Dog', 'options': ['add bell peppers', 'no barbecue sauce'], 'meal_type': 'meal'}]
+        - Items already ordered: []
+        - Pending questions from staff: ['Which drink would you like?']
+        - Last staff message: Which drink would you like?
+
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        ALWAYS USE THE PROPER NAMES FOR ITEMS AND OPTIONS.
+
+        IMPORTANT:
+        You are trying to order specific items but should act natural and spontaneous.
+        Even though we have a list of items to order, act as if you don't know the menu.
+        Mention customizations but if there's a lot. Do them incrementally.
+
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        If there's a mixup, ask the staff to clarify.
+        
+Respond to or ask for clarification about something.
+2024-12-25 14:49:50,037 - DEBUG - User prompt: Respond to: Which drink would you like?
+2024-12-25 14:49:50,037 - DEBUG - Sending request to GPT-4
+2024-12-25 14:49:50,873 - INFO - GPT-4 response: Redbull, duh!
+2024-12-25 14:49:50,873 - INFO - Generated customer message: Redbull, duh!
+2024-12-25 14:49:51,895 - DEBUG - GPT question-answer analysis: True
+2024-12-25 14:49:51,896 - DEBUG - Removed answered question: Which drink would you like?
+2024-12-25 14:49:54,352 - DEBUG - Received response: {'orderId': '676c8bf6a26f49c79e3781dc', 'order': [{'itemName': 'Plain Classic Hot Dog', 'price': 14.090000000000002, 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['regular fries'], ['redbull']], 'id': 'DIFJ'}], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': 'Hey, listen up! I want to order.'}, {'role': 'assistant', 'content': 'Sure thing! What would you like to order?'}, {'role': 'user', 'content': 'I want a Plain Classic Hot Dog. But change some things. Add bell peppers on it. And no barbecue sauce. Got that?'}, {'role': 'assistant', 'content': 'As a meal?'}, {'role': 'user', 'content': 'Yes, as a meal, are you deaf?!'}, {'role': 'assistant', 'content': 'Which drink would you like?'}, {'role': 'user', 'content': 'Redbull, duh!'}, {'role': 'assistant', 'content': 'Added your Plain Classic Hot Dog meal with Redbull. Anything else?'}]}
+2024-12-25 14:49:54,352 - DEBUG - Updating context with agent message: Added your Plain Classic Hot Dog meal with Redbull. Anything else?
+2024-12-25 14:49:55,598 - INFO - TRACK ITEM CONSTRUCTION: ['new_item: Redbull', 'new_item: Plain Classic Hot Dog', 'meal_type: meal']
+2024-12-25 14:49:56,604 - INFO - ✨ Started new item construction (matched): The customer's order does not match any of the menu items.
+2024-12-25 14:49:57,322 - INFO - ✨ Started new item construction (matched): Plain Classic Hot Dog
+2024-12-25 14:49:57,323 - INFO - 🍽️ Set meal type: meal
+2024-12-25 14:49:58,041 - DEBUG - GPT response analysis: False
+2024-12-25 14:49:59,369 - INFO - Is Item Completed result: false
+2024-12-25 14:49:59,370 - DEBUG - New Context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': [], 'last_agent_message': 'Added your Plain Classic Hot Dog meal with Redbull. Anything else?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [{'name': 'Plain Classic Hot Dog', 'options': [], 'meal_type': 'meal'}], 'chat_history': []}
+2024-12-25 14:49:59,986 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 14:50:01,206 - DEBUG - GPT response analysis: False
+2024-12-25 14:50:01,829 - DEBUG - GPT suggested next state: ORDER
+2024-12-25 14:50:01,829 - DEBUG - Updated conversation context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': [], 'last_agent_message': 'Added your Plain Classic Hot Dog meal with Redbull. Anything else?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [{'name': 'Plain Classic Hot Dog', 'options': [], 'meal_type': 'meal'}], 'chat_history': []}
+2024-12-25 14:50:01,829 - DEBUG - Next state: ORDER
+2024-12-25 14:50:01,829 - INFO - 
+
+NEW CHAT
+2024-12-25 14:50:02,834 - DEBUG - Current state: ORDER
+2024-12-25 14:50:02,834 - DEBUG - Using conversation style: {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}
+2024-12-25 14:50:02,835 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant.
+        Current conversation state: ORDER
+        Emotion: high
+        Tone: rude
+        Brevity: short
+        
+        Conversation Context:
+        - ORDER LIST: [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}]
+        - Current item to order: {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}
+        - Building item: [{'name': 'Plain Classic Hot Dog', 'options': [], 'meal_type': 'meal'}]
+        - Items already ordered: []
+        - Pending questions from staff: []
+        - Last staff message: Added your Plain Classic Hot Dog meal with Redbull. Anything else?
+
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        ALWAYS USE THE PROPER NAMES FOR ITEMS AND OPTIONS.
+
+        IMPORTANT:
+        You are trying to order specific items but should act natural and spontaneous.
+        Even though we have a list of items to order, act as if you don't know the menu.
+        Mention customizations but if there's a lot. Do them incrementally.
+
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        If there's a mixup, ask the staff to clarify.
+        
+Place or modify an order in a natural way.
+2024-12-25 14:50:02,835 - DEBUG - User prompt: Continue the conversation naturally. Make progress in getting to this final order: Plain Classic Hot Dog with options: [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]
+2024-12-25 14:50:02,835 - DEBUG - Sending request to GPT-4
+2024-12-25 14:50:06,331 - INFO - GPT-4 response: My hot dog ain't right! Add bell peppers and hold the barbecue sauce. Now!
+2024-12-25 14:50:06,331 - INFO - Generated customer message: My hot dog ain't right! Add bell peppers and hold the barbecue sauce. Now!
+2024-12-25 14:50:10,015 - DEBUG - Received response: {'orderId': '676c8bf6a26f49c79e3781dc', 'order': [{'itemName': 'Plain Classic Hot Dog', 'price': 14.090000000000002, 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['regular fries'], ['redbull']], 'id': '3ITX'}], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': 'Hey, listen up! I want to order.'}, {'role': 'assistant', 'content': 'Sure thing! What would you like to order?'}, {'role': 'user', 'content': 'I want a Plain Classic Hot Dog. But change some things. Add bell peppers on it. And no barbecue sauce. Got that?'}, {'role': 'assistant', 'content': 'As a meal?'}, {'role': 'user', 'content': 'Yes, as a meal, are you deaf?!'}, {'role': 'assistant', 'content': 'Which drink would you like?'}, {'role': 'user', 'content': 'Redbull, duh!'}, {'role': 'assistant', 'content': 'Added your Plain Classic Hot Dog meal with Redbull. Anything else?'}, {'role': 'user', 'content': "My hot dog ain't right! Add bell peppers and hold the barbecue sauce. Now!"}, {'role': 'assistant', 'content': 'Fixed your hot dog with bell peppers and no barbecue sauce. Anything else?'}]}
+2024-12-25 14:50:10,015 - DEBUG - Updating context with agent message: Fixed your hot dog with bell peppers and no barbecue sauce. Anything else?
+2024-12-25 14:50:11,396 - INFO - TRACK ITEM CONSTRUCTION: ['option: add bell peppers for customizations', 'option: no barbecue sauce for customizations']
+2024-12-25 14:50:11,396 - INFO - ➕ Added option: add bell peppers
+2024-12-25 14:50:11,396 - INFO - ➕ Added option: no barbecue sauce
+2024-12-25 14:50:11,835 - DEBUG - GPT response analysis: False
+2024-12-25 14:50:12,265 - INFO - Is Item Completed result: false
+2024-12-25 14:50:12,265 - DEBUG - New Context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': [], 'last_agent_message': 'Fixed your hot dog with bell peppers and no barbecue sauce. Anything else?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [{'name': 'Plain Classic Hot Dog', 'options': ['add bell peppers', 'no barbecue sauce'], 'meal_type': 'meal'}], 'chat_history': []}
+2024-12-25 14:50:12,746 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 14:50:13,606 - DEBUG - GPT response analysis: False
+2024-12-25 14:50:14,122 - DEBUG - GPT suggested next state: ORDER
+2024-12-25 14:50:14,123 - DEBUG - Updated conversation context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': [], 'last_agent_message': 'Fixed your hot dog with bell peppers and no barbecue sauce. Anything else?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [{'name': 'Plain Classic Hot Dog', 'options': ['add bell peppers', 'no barbecue sauce'], 'meal_type': 'meal'}], 'chat_history': []}
+2024-12-25 14:50:14,123 - DEBUG - Next state: ORDER
+2024-12-25 14:50:14,123 - INFO - 
+
+NEW CHAT
+2024-12-25 14:50:15,128 - DEBUG - Current state: ORDER
+2024-12-25 14:50:15,129 - DEBUG - Using conversation style: {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}
+2024-12-25 14:50:15,129 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant.
+        Current conversation state: ORDER
+        Emotion: high
+        Tone: rude
+        Brevity: short
+        
+        Conversation Context:
+        - ORDER LIST: [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}]
+        - Current item to order: {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}
+        - Building item: [{'name': 'Plain Classic Hot Dog', 'options': ['add bell peppers', 'no barbecue sauce'], 'meal_type': 'meal'}]
+        - Items already ordered: []
+        - Pending questions from staff: []
+        - Last staff message: Fixed your hot dog with bell peppers and no barbecue sauce. Anything else?
+
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        ALWAYS USE THE PROPER NAMES FOR ITEMS AND OPTIONS.
+
+        IMPORTANT:
+        You are trying to order specific items but should act natural and spontaneous.
+        Even though we have a list of items to order, act as if you don't know the menu.
+        Mention customizations but if there's a lot. Do them incrementally.
+
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        If there's a mixup, ask the staff to clarify.
+        
+Place or modify an order in a natural way.
+2024-12-25 14:50:15,129 - DEBUG - User prompt: Continue the conversation naturally. Make progress in getting to this final order: Plain Classic Hot Dog with options: [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]
+2024-12-25 14:50:15,129 - DEBUG - Sending request to GPT-4
+2024-12-25 14:50:16,479 - INFO - GPT-4 response: Yeah, make it a meal. And give me chili cheese fries with it.
+2024-12-25 14:50:16,479 - INFO - Generated customer message: Yeah, make it a meal. And give me chili cheese fries with it.
+2024-12-25 14:50:19,447 - DEBUG - Received response: {'orderId': '676c8bf6a26f49c79e3781dc', 'order': [{'itemName': 'Plain Classic Hot Dog', 'price': 16.73, 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']], 'id': 'EMAK'}], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': 'Hey, listen up! I want to order.'}, {'role': 'assistant', 'content': 'Sure thing! What would you like to order?'}, {'role': 'user', 'content': 'I want a Plain Classic Hot Dog. But change some things. Add bell peppers on it. And no barbecue sauce. Got that?'}, {'role': 'assistant', 'content': 'As a meal?'}, {'role': 'user', 'content': 'Yes, as a meal, are you deaf?!'}, {'role': 'assistant', 'content': 'Which drink would you like?'}, {'role': 'user', 'content': 'Redbull, duh!'}, {'role': 'assistant', 'content': 'Added your Plain Classic Hot Dog meal with Redbull. Anything else?'}, {'role': 'user', 'content': "My hot dog ain't right! Add bell peppers and hold the barbecue sauce. Now!"}, {'role': 'assistant', 'content': 'Fixed your hot dog with bell peppers and no barbecue sauce. Anything else?'}, {'role': 'user', 'content': 'Yeah, make it a meal. And give me chili cheese fries with it.'}, {'role': 'assistant', 'content': 'Updated to a meal with chili cheese fries. Anything else?'}]}
+2024-12-25 14:50:19,447 - DEBUG - Updating context with agent message: Updated to a meal with chili cheese fries. Anything else?
+2024-12-25 14:50:20,568 - INFO - TRACK ITEM CONSTRUCTION: ['meal_type: meal', 'new_item: chili cheese fries']
+2024-12-25 14:50:20,569 - INFO - 🍽️ Set meal type: meal
+2024-12-25 14:50:21,490 - INFO - ✨ Started new item construction (matched): The customer's order does not match any of the menu items provided.
+2024-12-25 14:50:21,994 - DEBUG - GPT response analysis: False
+2024-12-25 14:50:22,618 - INFO - Is Item Completed result: false
+2024-12-25 14:50:22,618 - DEBUG - New Context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': [], 'last_agent_message': 'Updated to a meal with chili cheese fries. Anything else?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [{'name': "The customer's order does not match any of the menu items provided.", 'options': [], 'meal_type': None}], 'chat_history': []}
+2024-12-25 14:50:23,333 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 14:50:24,051 - DEBUG - GPT response analysis: False
+2024-12-25 14:50:24,656 - DEBUG - GPT suggested next state: ORDER
+2024-12-25 14:50:24,656 - DEBUG - Updated conversation context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': [], 'last_agent_message': 'Updated to a meal with chili cheese fries. Anything else?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [{'name': "The customer's order does not match any of the menu items provided.", 'options': [], 'meal_type': None}], 'chat_history': []}
+2024-12-25 14:50:24,657 - DEBUG - Next state: ORDER
+2024-12-25 14:50:24,657 - INFO - 
+
+NEW CHAT
+2024-12-25 14:50:25,658 - DEBUG - Current state: ORDER
+2024-12-25 14:50:25,658 - DEBUG - Using conversation style: {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}
+2024-12-25 14:50:25,658 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant.
+        Current conversation state: ORDER
+        Emotion: high
+        Tone: rude
+        Brevity: short
+        
+        Conversation Context:
+        - ORDER LIST: [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}]
+        - Current item to order: {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}
+        - Building item: [{'name': "The customer's order does not match any of the menu items provided.", 'options': [], 'meal_type': None}]
+        - Items already ordered: []
+        - Pending questions from staff: []
+        - Last staff message: Updated to a meal with chili cheese fries. Anything else?
+
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        ALWAYS USE THE PROPER NAMES FOR ITEMS AND OPTIONS.
+
+        IMPORTANT:
+        You are trying to order specific items but should act natural and spontaneous.
+        Even though we have a list of items to order, act as if you don't know the menu.
+        Mention customizations but if there's a lot. Do them incrementally.
+
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        If there's a mixup, ask the staff to clarify.
+        
+Place or modify an order in a natural way.
+2024-12-25 14:50:25,658 - DEBUG - User prompt: Continue the conversation naturally. Make progress in getting to this final order: Plain Classic Hot Dog with options: [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]
+2024-12-25 14:50:25,658 - DEBUG - Sending request to GPT-4
+2024-12-25 14:50:26,816 - INFO - GPT-4 response: Yeah, and change the drink to a Redbull.
+2024-12-25 14:50:26,816 - INFO - Generated customer message: Yeah, and change the drink to a Redbull.
+2024-12-25 14:50:28,250 - DEBUG - Received response: {'orderId': '676c8bf6a26f49c79e3781dc', 'order': [{'itemName': 'Plain Classic Hot Dog', 'price': 16.73, 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']], 'id': 'EMAK'}], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': 'Hey, listen up! I want to order.'}, {'role': 'assistant', 'content': 'Sure thing! What would you like to order?'}, {'role': 'user', 'content': 'I want a Plain Classic Hot Dog. But change some things. Add bell peppers on it. And no barbecue sauce. Got that?'}, {'role': 'assistant', 'content': 'As a meal?'}, {'role': 'user', 'content': 'Yes, as a meal, are you deaf?!'}, {'role': 'assistant', 'content': 'Which drink would you like?'}, {'role': 'user', 'content': 'Redbull, duh!'}, {'role': 'assistant', 'content': 'Added your Plain Classic Hot Dog meal with Redbull. Anything else?'}, {'role': 'user', 'content': "My hot dog ain't right! Add bell peppers and hold the barbecue sauce. Now!"}, {'role': 'assistant', 'content': 'Fixed your hot dog with bell peppers and no barbecue sauce. Anything else?'}, {'role': 'user', 'content': 'Yeah, make it a meal. And give me chili cheese fries with it.'}, {'role': 'assistant', 'content': 'Updated to a meal with chili cheese fries. Anything else?'}, {'role': 'user', 'content': 'Yeah, and change the drink to a Redbull.'}, {'role': 'assistant', 'content': 'The drink is already set to Redbull. Anything else?'}]}
+2024-12-25 14:50:28,250 - DEBUG - Updating context with agent message: The drink is already set to Redbull. Anything else?
+2024-12-25 14:50:29,069 - INFO - TRACK ITEM CONSTRUCTION: ['option: Redbull for drink']
+2024-12-25 14:50:29,069 - INFO - ➕ Added option: Redbull
+2024-12-25 14:50:29,493 - DEBUG - GPT response analysis: False
+2024-12-25 14:50:29,896 - INFO - Is Item Completed result: false
+2024-12-25 14:50:29,896 - DEBUG - New Context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': [], 'last_agent_message': 'The drink is already set to Redbull. Anything else?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [{'name': "The customer's order does not match any of the menu items provided.", 'options': ['Redbull'], 'meal_type': None}], 'chat_history': []}
+2024-12-25 14:50:30,363 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 14:50:31,124 - DEBUG - GPT response analysis: False
+2024-12-25 14:50:31,579 - DEBUG - GPT suggested next state: ORDER
+2024-12-25 14:50:31,579 - DEBUG - Updated conversation context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': [], 'last_agent_message': 'The drink is already set to Redbull. Anything else?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [{'name': "The customer's order does not match any of the menu items provided.", 'options': ['Redbull'], 'meal_type': None}], 'chat_history': []}
+2024-12-25 14:50:31,579 - DEBUG - Next state: ORDER
+2024-12-25 14:50:31,579 - INFO - 
+
+NEW CHAT
+2024-12-25 14:50:32,585 - DEBUG - Current state: ORDER
+2024-12-25 14:50:32,585 - DEBUG - Using conversation style: {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}
+2024-12-25 14:50:32,585 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant.
+        Current conversation state: ORDER
+        Emotion: high
+        Tone: rude
+        Brevity: short
+        
+        Conversation Context:
+        - ORDER LIST: [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}]
+        - Current item to order: {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}
+        - Building item: [{'name': "The customer's order does not match any of the menu items provided.", 'options': ['Redbull'], 'meal_type': None}]
+        - Items already ordered: []
+        - Pending questions from staff: []
+        - Last staff message: The drink is already set to Redbull. Anything else?
+
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        ALWAYS USE THE PROPER NAMES FOR ITEMS AND OPTIONS.
+
+        IMPORTANT:
+        You are trying to order specific items but should act natural and spontaneous.
+        Even though we have a list of items to order, act as if you don't know the menu.
+        Mention customizations but if there's a lot. Do them incrementally.
+
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        If there's a mixup, ask the staff to clarify.
+        
+Place or modify an order in a natural way.
+2024-12-25 14:50:32,585 - DEBUG - User prompt: Continue the conversation naturally. Make progress in getting to this final order: Plain Classic Hot Dog with options: [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]
+2024-12-25 14:50:32,586 - DEBUG - Sending request to GPT-4
+2024-12-25 14:50:33,926 - INFO - GPT-4 response: I want a Plain Classic Hot Dog. Throw on some bell peppers but hold the barbecue sauce. Got it?
+2024-12-25 14:50:33,926 - INFO - Generated customer message: I want a Plain Classic Hot Dog. Throw on some bell peppers but hold the barbecue sauce. Got it?
+2024-12-25 14:50:36,056 - DEBUG - Received response: {'orderId': '676c8bf6a26f49c79e3781dc', 'order': [{'itemName': 'Plain Classic Hot Dog', 'price': 16.73, 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']], 'id': 'EMAK'}, {'itemName': 'Plain Classic Hot Dog', 'price': 7.46, 'optionKeys': ['customizations', 'meal option'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['a la carte']], 'id': 'YKMQ'}], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': 'Hey, listen up! I want to order.'}, {'role': 'assistant', 'content': 'Sure thing! What would you like to order?'}, {'role': 'user', 'content': 'I want a Plain Classic Hot Dog. But change some things. Add bell peppers on it. And no barbecue sauce. Got that?'}, {'role': 'assistant', 'content': 'As a meal?'}, {'role': 'user', 'content': 'Yes, as a meal, are you deaf?!'}, {'role': 'assistant', 'content': 'Which drink would you like?'}, {'role': 'user', 'content': 'Redbull, duh!'}, {'role': 'assistant', 'content': 'Added your Plain Classic Hot Dog meal with Redbull. Anything else?'}, {'role': 'user', 'content': "My hot dog ain't right! Add bell peppers and hold the barbecue sauce. Now!"}, {'role': 'assistant', 'content': 'Fixed your hot dog with bell peppers and no barbecue sauce. Anything else?'}, {'role': 'user', 'content': 'Yeah, make it a meal. And give me chili cheese fries with it.'}, {'role': 'assistant', 'content': 'Updated to a meal with chili cheese fries. Anything else?'}, {'role': 'user', 'content': 'Yeah, and change the drink to a Redbull.'}, {'role': 'assistant', 'content': 'The drink is already set to Redbull. Anything else?'}, {'role': 'user', 'content': 'I want a Plain Classic Hot Dog. Throw on some bell peppers but hold the barbecue sauce. Got it?'}, {'role': 'assistant', 'content': 'Added another Plain Classic Hot Dog with bell peppers and no barbecue sauce. Anything else?'}]}
+2024-12-25 14:50:36,056 - DEBUG - Updating context with agent message: Added another Plain Classic Hot Dog with bell peppers and no barbecue sauce. Anything else?
+2024-12-25 14:50:37,423 - INFO - TRACK ITEM CONSTRUCTION: ['new_item: Plain Classic Hot Dog', 'option: bell peppers for toppings', 'option: no barbecue sauce for sauce']
+2024-12-25 14:50:37,978 - INFO - ✨ Started new item construction (matched): Plain Classic Hot Dog
+2024-12-25 14:50:37,978 - INFO - ➕ Added option: bell peppers
+2024-12-25 14:50:37,979 - INFO - ➕ Added option: no barbecue sauce
+2024-12-25 14:50:38,823 - DEBUG - GPT response analysis: False
+2024-12-25 14:50:39,335 - INFO - Is Item Completed result: false
+2024-12-25 14:50:39,335 - DEBUG - New Context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': [], 'last_agent_message': 'Added another Plain Classic Hot Dog with bell peppers and no barbecue sauce. Anything else?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [{'name': 'Plain Classic Hot Dog', 'options': ['bell peppers', 'no barbecue sauce'], 'meal_type': None}], 'chat_history': []}
+2024-12-25 14:50:39,709 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 14:50:40,333 - DEBUG - GPT response analysis: False
+2024-12-25 14:50:40,934 - DEBUG - GPT suggested next state: ORDER
+2024-12-25 14:50:40,934 - DEBUG - Updated conversation context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': [], 'last_agent_message': 'Added another Plain Classic Hot Dog with bell peppers and no barbecue sauce. Anything else?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [{'name': 'Plain Classic Hot Dog', 'options': ['bell peppers', 'no barbecue sauce'], 'meal_type': None}], 'chat_history': []}
+2024-12-25 14:50:40,934 - DEBUG - Next state: ORDER
+2024-12-25 14:50:40,934 - INFO - 
+
+NEW CHAT
+2024-12-25 14:50:41,939 - DEBUG - Current state: ORDER
+2024-12-25 14:50:41,940 - DEBUG - Using conversation style: {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}
+2024-12-25 14:50:41,940 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant.
+        Current conversation state: ORDER
+        Emotion: high
+        Tone: rude
+        Brevity: short
+        
+        Conversation Context:
+        - ORDER LIST: [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}]
+        - Current item to order: {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}
+        - Building item: [{'name': 'Plain Classic Hot Dog', 'options': ['bell peppers', 'no barbecue sauce'], 'meal_type': None}]
+        - Items already ordered: []
+        - Pending questions from staff: []
+        - Last staff message: Added another Plain Classic Hot Dog with bell peppers and no barbecue sauce. Anything else?
+
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        ALWAYS USE THE PROPER NAMES FOR ITEMS AND OPTIONS.
+
+        IMPORTANT:
+        You are trying to order specific items but should act natural and spontaneous.
+        Even though we have a list of items to order, act as if you don't know the menu.
+        Mention customizations but if there's a lot. Do them incrementally.
+
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        If there's a mixup, ask the staff to clarify.
+        
+Place or modify an order in a natural way.
+2024-12-25 14:50:41,940 - DEBUG - User prompt: Continue the conversation naturally. Make progress in getting to this final order: Plain Classic Hot Dog with options: [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]
+2024-12-25 14:50:41,940 - DEBUG - Sending request to GPT-4
+2024-12-25 14:50:43,606 - INFO - GPT-4 response: Make it a meal, and for the side, I want chili cheese fries. And quit fooling around, I'm in a hurry.
+2024-12-25 14:50:43,606 - INFO - Generated customer message: Make it a meal, and for the side, I want chili cheese fries. And quit fooling around, I'm in a hurry.
+2024-12-25 14:50:47,003 - DEBUG - Received response: {'orderId': '676c8bf6a26f49c79e3781dc', 'order': [{'itemName': 'Plain Classic Hot Dog', 'price': 16.73, 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']], 'id': 'EMAK'}, {'itemName': 'Plain Classic Hot Dog', 'price': 16.73, 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']], 'id': '4VMY'}], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': 'Hey, listen up! I want to order.'}, {'role': 'assistant', 'content': 'Sure thing! What would you like to order?'}, {'role': 'user', 'content': 'I want a Plain Classic Hot Dog. But change some things. Add bell peppers on it. And no barbecue sauce. Got that?'}, {'role': 'assistant', 'content': 'As a meal?'}, {'role': 'user', 'content': 'Yes, as a meal, are you deaf?!'}, {'role': 'assistant', 'content': 'Which drink would you like?'}, {'role': 'user', 'content': 'Redbull, duh!'}, {'role': 'assistant', 'content': 'Added your Plain Classic Hot Dog meal with Redbull. Anything else?'}, {'role': 'user', 'content': "My hot dog ain't right! Add bell peppers and hold the barbecue sauce. Now!"}, {'role': 'assistant', 'content': 'Fixed your hot dog with bell peppers and no barbecue sauce. Anything else?'}, {'role': 'user', 'content': 'Yeah, make it a meal. And give me chili cheese fries with it.'}, {'role': 'assistant', 'content': 'Updated to a meal with chili cheese fries. Anything else?'}, {'role': 'user', 'content': 'Yeah, and change the drink to a Redbull.'}, {'role': 'assistant', 'content': 'The drink is already set to Redbull. Anything else?'}, {'role': 'user', 'content': 'I want a Plain Classic Hot Dog. Throw on some bell peppers but hold the barbecue sauce. Got it?'}, {'role': 'assistant', 'content': 'Added another Plain Classic Hot Dog with bell peppers and no barbecue sauce. Anything else?'}, {'role': 'user', 'content': "Make it a meal, and for the side, I want chili cheese fries. And quit fooling around, I'm in a hurry."}, {'role': 'assistant', 'content': 'Updated to a meal with chili cheese fries and Redbull. Anything else?'}]}
+2024-12-25 14:50:47,003 - DEBUG - Updating context with agent message: Updated to a meal with chili cheese fries and Redbull. Anything else?
+2024-12-25 14:50:48,419 - INFO - TRACK ITEM CONSTRUCTION: ['meal_type: meal', 'option: chili cheese fries for side', 'option: Redbull for drink']
+2024-12-25 14:50:48,419 - INFO - 🍽️ Set meal type: meal
+2024-12-25 14:50:48,420 - INFO - ➕ Added option: chili cheese fries
+2024-12-25 14:50:48,420 - INFO - ➕ Added option: Redbull
+2024-12-25 14:50:49,032 - DEBUG - GPT response analysis: False
+2024-12-25 14:50:49,547 - INFO - Is Item Completed result: false
+2024-12-25 14:50:49,547 - DEBUG - New Context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': [], 'last_agent_message': 'Updated to a meal with chili cheese fries and Redbull. Anything else?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [{'name': 'Plain Classic Hot Dog', 'options': ['bell peppers', 'no barbecue sauce', 'chili cheese fries', 'Redbull'], 'meal_type': 'meal'}], 'chat_history': []}
+2024-12-25 14:50:50,161 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 14:50:50,776 - DEBUG - GPT response analysis: False
+2024-12-25 14:50:51,640 - DEBUG - GPT suggested next state: ORDER
+2024-12-25 14:50:51,640 - DEBUG - Updated conversation context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': [], 'last_agent_message': 'Updated to a meal with chili cheese fries and Redbull. Anything else?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [{'name': 'Plain Classic Hot Dog', 'options': ['bell peppers', 'no barbecue sauce', 'chili cheese fries', 'Redbull'], 'meal_type': 'meal'}], 'chat_history': []}
+2024-12-25 14:50:51,640 - DEBUG - Next state: ORDER
+2024-12-25 14:50:51,640 - INFO - 
+
+NEW CHAT
+2024-12-25 14:50:52,641 - DEBUG - Current state: ORDER
+2024-12-25 14:50:52,641 - DEBUG - Using conversation style: {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}
+2024-12-25 14:50:52,641 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant.
+        Current conversation state: ORDER
+        Emotion: high
+        Tone: rude
+        Brevity: short
+        
+        Conversation Context:
+        - ORDER LIST: [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}]
+        - Current item to order: {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}
+        - Building item: [{'name': 'Plain Classic Hot Dog', 'options': ['bell peppers', 'no barbecue sauce', 'chili cheese fries', 'Redbull'], 'meal_type': 'meal'}]
+        - Items already ordered: []
+        - Pending questions from staff: []
+        - Last staff message: Updated to a meal with chili cheese fries and Redbull. Anything else?
+
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        ALWAYS USE THE PROPER NAMES FOR ITEMS AND OPTIONS.
+
+        IMPORTANT:
+        You are trying to order specific items but should act natural and spontaneous.
+        Even though we have a list of items to order, act as if you don't know the menu.
+        Mention customizations but if there's a lot. Do them incrementally.
+
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        If there's a mixup, ask the staff to clarify.
+        
+Place or modify an order in a natural way.
+2024-12-25 14:50:52,641 - DEBUG - User prompt: Continue the conversation naturally. Make progress in getting to this final order: Plain Classic Hot Dog with options: [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]
+2024-12-25 14:50:52,641 - DEBUG - Sending request to GPT-4
+2024-12-25 14:50:54,870 - INFO - GPT-4 response: Yeah, and add some bell peppers to that hot dog. But hold the barbecue sauce, I don't want any of that.
+2024-12-25 14:50:54,870 - INFO - Generated customer message: Yeah, and add some bell peppers to that hot dog. But hold the barbecue sauce, I don't want any of that.
+2024-12-25 14:50:57,024 - DEBUG - Received response: {'orderId': '676c8bf6a26f49c79e3781dc', 'order': [{'itemName': 'Plain Classic Hot Dog', 'price': 16.73, 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']], 'id': 'EMAK'}, {'itemName': 'Plain Classic Hot Dog', 'price': 16.73, 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']], 'id': '4VMY'}], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': 'Hey, listen up! I want to order.'}, {'role': 'assistant', 'content': 'Sure thing! What would you like to order?'}, {'role': 'user', 'content': 'I want a Plain Classic Hot Dog. But change some things. Add bell peppers on it. And no barbecue sauce. Got that?'}, {'role': 'assistant', 'content': 'As a meal?'}, {'role': 'user', 'content': 'Yes, as a meal, are you deaf?!'}, {'role': 'assistant', 'content': 'Which drink would you like?'}, {'role': 'user', 'content': 'Redbull, duh!'}, {'role': 'assistant', 'content': 'Added your Plain Classic Hot Dog meal with Redbull. Anything else?'}, {'role': 'user', 'content': "My hot dog ain't right! Add bell peppers and hold the barbecue sauce. Now!"}, {'role': 'assistant', 'content': 'Fixed your hot dog with bell peppers and no barbecue sauce. Anything else?'}, {'role': 'user', 'content': 'Yeah, make it a meal. And give me chili cheese fries with it.'}, {'role': 'assistant', 'content': 'Updated to a meal with chili cheese fries. Anything else?'}, {'role': 'user', 'content': 'Yeah, and change the drink to a Redbull.'}, {'role': 'assistant', 'content': 'The drink is already set to Redbull. Anything else?'}, {'role': 'user', 'content': 'I want a Plain Classic Hot Dog. Throw on some bell peppers but hold the barbecue sauce. Got it?'}, {'role': 'assistant', 'content': 'Added another Plain Classic Hot Dog with bell peppers and no barbecue sauce. Anything else?'}, {'role': 'user', 'content': "Make it a meal, and for the side, I want chili cheese fries. And quit fooling around, I'm in a hurry."}, {'role': 'assistant', 'content': 'Updated to a meal with chili cheese fries and Redbull. Anything else?'}, {'role': 'user', 'content': "Yeah, and add some bell peppers to that hot dog. But hold the barbecue sauce, I don't want any of that."}, {'role': 'assistant', 'content': 'The hot dog already has bell peppers and no barbecue sauce. Anything else?'}]}
+2024-12-25 14:50:57,025 - DEBUG - Updating context with agent message: The hot dog already has bell peppers and no barbecue sauce. Anything else?
+2024-12-25 14:50:58,198 - INFO - TRACK ITEM CONSTRUCTION: ['option: bell peppers for toppings', 'option: no barbecue sauce for sauce']
+2024-12-25 14:50:58,198 - INFO - ➕ Added option: bell peppers
+2024-12-25 14:50:58,198 - INFO - ➕ Added option: no barbecue sauce
+2024-12-25 14:50:59,035 - DEBUG - GPT response analysis: False
+2024-12-25 14:50:59,552 - INFO - Is Item Completed result: false
+2024-12-25 14:50:59,552 - DEBUG - New Context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': [], 'last_agent_message': 'The hot dog already has bell peppers and no barbecue sauce. Anything else?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [{'name': 'Plain Classic Hot Dog', 'options': ['bell peppers', 'no barbecue sauce', 'chili cheese fries', 'Redbull', 'bell peppers', 'no barbecue sauce'], 'meal_type': 'meal'}], 'chat_history': []}
+2024-12-25 14:51:00,196 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 14:51:00,910 - DEBUG - GPT response analysis: False
+2024-12-25 14:51:01,361 - DEBUG - GPT suggested next state: ORDER
+2024-12-25 14:51:01,361 - DEBUG - Updated conversation context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': [], 'last_agent_message': 'The hot dog already has bell peppers and no barbecue sauce. Anything else?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [{'name': 'Plain Classic Hot Dog', 'options': ['bell peppers', 'no barbecue sauce', 'chili cheese fries', 'Redbull', 'bell peppers', 'no barbecue sauce'], 'meal_type': 'meal'}], 'chat_history': []}
+2024-12-25 14:51:01,361 - DEBUG - Next state: ORDER
+2024-12-25 14:51:01,361 - INFO - 
+
+NEW CHAT
+2024-12-25 14:51:02,366 - DEBUG - Current state: ORDER
+2024-12-25 14:51:02,366 - DEBUG - Using conversation style: {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}
+2024-12-25 14:51:02,367 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant.
+        Current conversation state: ORDER
+        Emotion: high
+        Tone: rude
+        Brevity: short
+        
+        Conversation Context:
+        - ORDER LIST: [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}]
+        - Current item to order: {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}
+        - Building item: [{'name': 'Plain Classic Hot Dog', 'options': ['bell peppers', 'no barbecue sauce', 'chili cheese fries', 'Redbull', 'bell peppers', 'no barbecue sauce'], 'meal_type': 'meal'}]
+        - Items already ordered: []
+        - Pending questions from staff: []
+        - Last staff message: The hot dog already has bell peppers and no barbecue sauce. Anything else?
+
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        ALWAYS USE THE PROPER NAMES FOR ITEMS AND OPTIONS.
+
+        IMPORTANT:
+        You are trying to order specific items but should act natural and spontaneous.
+        Even though we have a list of items to order, act as if you don't know the menu.
+        Mention customizations but if there's a lot. Do them incrementally.
+
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        If there's a mixup, ask the staff to clarify.
+        
+Place or modify an order in a natural way.
+2024-12-25 14:51:02,367 - DEBUG - User prompt: Continue the conversation naturally. Make progress in getting to this final order: Plain Classic Hot Dog with options: [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]
+2024-12-25 14:51:02,367 - DEBUG - Sending request to GPT-4
+2024-12-25 14:51:03,884 - INFO - GPT-4 response: Make it a meal. For the side, I want chili cheese fries. Also, give me a Redbull for the drink. Got it?
+2024-12-25 14:51:03,884 - INFO - Generated customer message: Make it a meal. For the side, I want chili cheese fries. Also, give me a Redbull for the drink. Got it?
+2024-12-25 14:51:05,418 - DEBUG - Received response: {'orderId': '676c8bf6a26f49c79e3781dc', 'order': [{'itemName': 'Plain Classic Hot Dog', 'price': 16.73, 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']], 'id': 'EMAK'}, {'itemName': 'Plain Classic Hot Dog', 'price': 16.73, 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']], 'id': '4VMY'}], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': 'Hey, listen up! I want to order.'}, {'role': 'assistant', 'content': 'Sure thing! What would you like to order?'}, {'role': 'user', 'content': 'I want a Plain Classic Hot Dog. But change some things. Add bell peppers on it. And no barbecue sauce. Got that?'}, {'role': 'assistant', 'content': 'As a meal?'}, {'role': 'user', 'content': 'Yes, as a meal, are you deaf?!'}, {'role': 'assistant', 'content': 'Which drink would you like?'}, {'role': 'user', 'content': 'Redbull, duh!'}, {'role': 'assistant', 'content': 'Added your Plain Classic Hot Dog meal with Redbull. Anything else?'}, {'role': 'user', 'content': "My hot dog ain't right! Add bell peppers and hold the barbecue sauce. Now!"}, {'role': 'assistant', 'content': 'Fixed your hot dog with bell peppers and no barbecue sauce. Anything else?'}, {'role': 'user', 'content': 'Yeah, make it a meal. And give me chili cheese fries with it.'}, {'role': 'assistant', 'content': 'Updated to a meal with chili cheese fries. Anything else?'}, {'role': 'user', 'content': 'Yeah, and change the drink to a Redbull.'}, {'role': 'assistant', 'content': 'The drink is already set to Redbull. Anything else?'}, {'role': 'user', 'content': 'I want a Plain Classic Hot Dog. Throw on some bell peppers but hold the barbecue sauce. Got it?'}, {'role': 'assistant', 'content': 'Added another Plain Classic Hot Dog with bell peppers and no barbecue sauce. Anything else?'}, {'role': 'user', 'content': "Make it a meal, and for the side, I want chili cheese fries. And quit fooling around, I'm in a hurry."}, {'role': 'assistant', 'content': 'Updated to a meal with chili cheese fries and Redbull. Anything else?'}, {'role': 'user', 'content': "Yeah, and add some bell peppers to that hot dog. But hold the barbecue sauce, I don't want any of that."}, {'role': 'assistant', 'content': 'The hot dog already has bell peppers and no barbecue sauce. Anything else?'}, {'role': 'user', 'content': 'Make it a meal. For the side, I want chili cheese fries. Also, give me a Redbull for the drink. Got it?'}, {'role': 'assistant', 'content': 'Your order already includes a meal with chili cheese fries and Redbull. Anything else?'}]}
+2024-12-25 14:51:05,419 - DEBUG - Updating context with agent message: Your order already includes a meal with chili cheese fries and Redbull. Anything else?
+2024-12-25 14:51:06,158 - INFO - TRACK ITEM CONSTRUCTION: ['meal_type: meal', 'new_item: chili cheese fries', 'new_item: Redbull']
+2024-12-25 14:51:06,158 - INFO - 🍽️ Set meal type: meal
+2024-12-25 14:51:07,139 - INFO - ✨ Started new item construction (matched): The customer's order does not match any of the menu items provided.
+2024-12-25 14:51:08,179 - INFO - ✨ Started new item construction (matched): The customer's order does not match any of the menu items.
+2024-12-25 14:51:08,624 - DEBUG - GPT response analysis: False
+2024-12-25 14:51:10,504 - INFO - Is Item Completed result: false
+2024-12-25 14:51:10,504 - DEBUG - New Context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': [], 'last_agent_message': 'Your order already includes a meal with chili cheese fries and Redbull. Anything else?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [{'name': "The customer's order does not match any of the menu items.", 'options': [], 'meal_type': None}], 'chat_history': []}
+2024-12-25 14:51:11,221 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 14:51:11,791 - DEBUG - GPT response analysis: False
+2024-12-25 14:51:12,287 - DEBUG - GPT suggested next state: ORDER
+2024-12-25 14:51:12,287 - DEBUG - Updated conversation context: {'ordered_items': [], 'current_item': {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}, 'pending_questions': [], 'last_agent_message': 'Your order already includes a meal with chili cheese fries and Redbull. Anything else?', 'order_goal': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [{'name': "The customer's order does not match any of the menu items.", 'options': [], 'meal_type': None}], 'chat_history': []}
+2024-12-25 14:51:12,287 - DEBUG - Next state: ORDER
+2024-12-25 14:51:12,287 - INFO - 
+
+NEW CHAT
+2024-12-25 14:51:13,292 - DEBUG - Current state: ORDER
+2024-12-25 14:51:13,292 - DEBUG - Using conversation style: {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}
+2024-12-25 14:51:13,292 - DEBUG - System prompt: 
+        You are a CUSTOMER ordering food at a drive-through restaurant.
+        Current conversation state: ORDER
+        Emotion: high
+        Tone: rude
+        Brevity: short
+        
+        Conversation Context:
+        - ORDER LIST: [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}]
+        - Current item to order: {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}
+        - Building item: [{'name': "The customer's order does not match any of the menu items.", 'options': [], 'meal_type': None}]
+        - Items already ordered: []
+        - Pending questions from staff: []
+        - Last staff message: Your order already includes a meal with chili cheese fries and Redbull. Anything else?
+
+        NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        ALWAYS USE THE PROPER NAMES FOR ITEMS AND OPTIONS.
+
+        IMPORTANT:
+        You are trying to order specific items but should act natural and spontaneous.
+        Even though we have a list of items to order, act as if you don't know the menu.
+        Mention customizations but if there's a lot. Do them incrementally.
+
+        Only respond with the exact words a customer would say - no explanations or meta commentary.
+        If there's a mixup, ask the staff to clarify.
+        
+Place or modify an order in a natural way.
+2024-12-25 14:51:13,292 - DEBUG - User prompt: Continue the conversation naturally. Make progress in getting to this final order: Plain Classic Hot Dog with options: [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]
+2024-12-25 14:51:13,292 - DEBUG - Sending request to GPT-4
+2024-12-25 14:51:15,549 - INFO - GPT-4 response: No, no, no! You got it all wrong! I want a Plain Classic Hot Dog with bell peppers. Hold the barbecue sauce! And it's a meal with chili cheese fries, got it? And for the drink, a Redbull. Get it right this time!
+2024-12-25 14:51:15,550 - INFO - Generated customer message: No, no, no! You got it all wrong! I want a Plain Classic Hot Dog with bell peppers. Hold the barbecue sauce! And it's a meal with chili cheese fries, got it? And for the drink, a Redbull. Get it right this time!
+2024-12-25 14:51:21,189 - DEBUG - Received response: {'orderId': '676c8bf6a26f49c79e3781dc', 'order': [{'itemName': 'Plain Classic Hot Dog', 'price': 16.73, 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']], 'id': 'XR4Y'}], 'messages': [{'role': 'assistant', 'content': "Welcome to Ben Frank's! How may I help you today?"}, {'role': 'user', 'content': 'Hey, listen up! I want to order.'}, {'role': 'assistant', 'content': 'Sure thing! What would you like to order?'}, {'role': 'user', 'content': 'I want a Plain Classic Hot Dog. But change some things. Add bell peppers on it. And no barbecue sauce. Got that?'}, {'role': 'assistant', 'content': 'As a meal?'}, {'role': 'user', 'content': 'Yes, as a meal, are you deaf?!'}, {'role': 'assistant', 'content': 'Which drink would you like?'}, {'role': 'user', 'content': 'Redbull, duh!'}, {'role': 'assistant', 'content': 'Added your Plain Classic Hot Dog meal with Redbull. Anything else?'}, {'role': 'user', 'content': "My hot dog ain't right! Add bell peppers and hold the barbecue sauce. Now!"}, {'role': 'assistant', 'content': 'Fixed your hot dog with bell peppers and no barbecue sauce. Anything else?'}, {'role': 'user', 'content': 'Yeah, make it a meal. And give me chili cheese fries with it.'}, {'role': 'assistant', 'content': 'Updated to a meal with chili cheese fries. Anything else?'}, {'role': 'user', 'content': 'Yeah, and change the drink to a Redbull.'}, {'role': 'assistant', 'content': 'The drink is already set to Redbull. Anything else?'}, {'role': 'user', 'content': 'I want a Plain Classic Hot Dog. Throw on some bell peppers but hold the barbecue sauce. Got it?'}, {'role': 'assistant', 'content': 'Added another Plain Classic Hot Dog with bell peppers and no barbecue sauce. Anything else?'}, {'role': 'user', 'content': "Make it a meal, and for the side, I want chili cheese fries. And quit fooling around, I'm in a hurry."}, {'role': 'assistant', 'content': 'Updated to a meal with chili cheese fries and Redbull. Anything else?'}, {'role': 'user', 'content': "Yeah, and add some bell peppers to that hot dog. But hold the barbecue sauce, I don't want any of that."}, {'role': 'assistant', 'content': 'The hot dog already has bell peppers and no barbecue sauce. Anything else?'}, {'role': 'user', 'content': 'Make it a meal. For the side, I want chili cheese fries. Also, give me a Redbull for the drink. Got it?'}, {'role': 'assistant', 'content': 'Your order already includes a meal with chili cheese fries and Redbull. Anything else?'}, {'role': 'user', 'content': "No, no, no! You got it all wrong! I want a Plain Classic Hot Dog with bell peppers. Hold the barbecue sauce! And it's a meal with chili cheese fries, got it? And for the drink, a Redbull. Get it right this time!"}, {'role': 'assistant', 'content': 'Your Plain Classic Hot Dog meal with bell peppers, no barbecue sauce, chili cheese fries, and Redbull is ready. Anything else?'}]}
+2024-12-25 14:51:21,189 - DEBUG - Updating context with agent message: Your Plain Classic Hot Dog meal with bell peppers, no barbecue sauce, chili cheese fries, and Redbull is ready. Anything else?
+2024-12-25 14:51:23,436 - INFO - TRACK ITEM CONSTRUCTION: ['new_item: Plain Classic Hot Dog', 'option: bell peppers for toppings', 'option: no barbecue sauce for sauce', 'meal_type: meal', 'option: chili cheese fries for side', 'new_item: Redbull']
+2024-12-25 14:51:24,160 - INFO - ✨ Started new item construction (matched): Plain Classic Hot Dog
+2024-12-25 14:51:24,160 - INFO - ➕ Added option: bell peppers
+2024-12-25 14:51:24,160 - INFO - ➕ Added option: no barbecue sauce
+2024-12-25 14:51:24,160 - INFO - 🍽️ Set meal type: meal
+2024-12-25 14:51:24,160 - INFO - ➕ Added option: chili cheese fries
+2024-12-25 14:51:25,289 - INFO - ✨ Started new item construction (matched): The customer's order does not match any of the menu items.
+2024-12-25 14:51:25,747 - DEBUG - GPT response analysis: False
+2024-12-25 14:51:26,234 - INFO - Is Item Completed result: true
+2024-12-25 14:51:26,235 - DEBUG - Removed ordered item from goal and cleared current item
+2024-12-25 14:51:26,235 - DEBUG - New Context: {'ordered_items': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'current_item': None, 'pending_questions': [], 'last_agent_message': 'Your Plain Classic Hot Dog meal with bell peppers, no barbecue sauce, chili cheese fries, and Redbull is ready. Anything else?', 'order_goal': [], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [], 'chat_history': []}
+2024-12-25 14:51:26,928 - DEBUG - GPT conversation ending analysis: false
+2024-12-25 14:51:27,540 - DEBUG - GPT response analysis: False
+2024-12-25 14:51:28,155 - DEBUG - GPT suggested next state: DONE
+2024-12-25 14:51:28,155 - DEBUG - Updated conversation context: {'ordered_items': [{'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['add bell peppers', 'no barbecue sauce'], ['meal'], ['chili cheese fries'], ['redbull']]}], 'current_item': None, 'pending_questions': [], 'last_agent_message': 'Your Plain Classic Hot Dog meal with bell peppers, no barbecue sauce, chili cheese fries, and Redbull is ready. Anything else?', 'order_goal': [], 'conversation_style': {'emotion': 'high', 'tone': 'rude', 'brevity': 'short'}, 'items_in_progress': [], 'chat_history': []}
+2024-12-25 14:51:28,155 - DEBUG - Next state: DONE
+2024-12-25 14:51:28,155 - INFO - Conversation completed

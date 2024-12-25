@@ -89,10 +89,24 @@ def compare_orders(goal_order, final_order):
             return False
         
         # Filter out keys with empty values from both items
-        goal_keys_values = [(k, v) for k, v in zip(goal_item['optionKeys'], goal_item['optionValues']) if v]
-        final_keys_values = [(k, v) for k, v in zip(final_item['optionKeys'], final_item['optionValues']) if v]
+        goal_keys_values = []
+        final_keys_values = []
         
-        # Sort both lists for comparison
+        for k, v in zip(goal_item['optionKeys'], goal_item['optionValues']):
+            if v:
+                # If v is a list, sort it before adding
+                if isinstance(v, list):
+                    v = sorted(v)
+                goal_keys_values.append((k, v))
+                
+        for k, v in zip(final_item['optionKeys'], final_item['optionValues']):
+            if v:
+                # If v is a list, sort it before adding
+                if isinstance(v, list):
+                    v = sorted(v)
+                final_keys_values.append((k, v))
+        
+        # Sort the key-value pairs
         goal_keys_values.sort()
         final_keys_values.sort()
         

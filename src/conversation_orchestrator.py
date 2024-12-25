@@ -21,30 +21,6 @@ class ConversationOrchestrator:
         "short", "normal", "long", "minimal",
         "chatty", "mumbled", "clear", "rushed"
     ]
-    
-    TRANSITIONS = {
-        "GREET": [
-            ("QUESTION", 0.6),
-            ("ORDER", 0.3),
-        ],
-        "QUESTION": [
-            ("ORDER", 0.5),
-            ("CLARIFY", 0.2),
-            ("DONE", 0.2),
-        ],
-        "ORDER": [
-            ("QUESTION", 0.3),
-            ("DONE", 0.5),
-        ],
-        "CLARIFY": [
-            ("QUESTION", 0.7),
-        ],
-        "ANSWER": [
-            ("ORDER", 0.6),
-            ("DONE", 0.4),
-        ],
-        "DONE": []
-    }
 
     def __init__(self, lilac_client):
         # Set up logging
@@ -81,7 +57,8 @@ class ConversationOrchestrator:
             "last_agent_message": None,
             "order_goal": [],
             "conversation_style": None,
-            "items_in_progress": []
+            "items_in_progress": [],
+            "chat_history": []
         }
         
         self.logger.info("ConversationOrchestrator initialized")
@@ -89,6 +66,7 @@ class ConversationOrchestrator:
     def run_conversation(self, order_id: str, order_goal: List[Dict]) -> List[Dict]:
         """Simulate a natural customer conversation flow"""
         self.logger.info(f"NEW CHAT\n\n")
+        self.conversation_context["chat_history"] = []  # Reset chat history at start
         messages_log = []
         self.conversation_context["order_goal"] = order_goal
         self.conversation_context["current_item"] = order_goal[0] if order_goal else None
@@ -97,8 +75,8 @@ class ConversationOrchestrator:
         
         self.logger.info(f"Starting conversation with order_id: {order_id}")
         self.logger.debug(f"Initial conversation context: {self.conversation_context}")
-
-        while state != "DONE":
+        i = 0
+        while state != "DONE" and i < 20:
             self.logger.info(f"\n\nNEW CHAT")
             try:
                 time.sleep(1)
@@ -121,10 +99,11 @@ class ConversationOrchestrator:
                     {"role": "assistant", "content": response["messages"][-1]["content"]}
                 ])
 
-                self._update_conversation_context(response["messages"][-1]["content"])
+                self._update_conversation_context(response["messages"][-1]["content"], customer_message)
                 state = self._get_next_state(state)
                 self.logger.debug(f"Updated conversation context: {self.conversation_context}")
                 self.logger.debug(f"Next state: {state}")
+                i += 1
 
             except Exception as e:
                 self.logger.error(f"Error in conversation loop: {e}", exc_info=True)
@@ -149,9 +128,9 @@ class ConversationOrchestrator:
         self.logger.info(f"GPT-4 response: {response}")
         return response
 
-    def _build_system_prompt(self, state: str, style: Dict) -> str:
+    def _build_system_prompt(self, state: str, style: Dict) -> str: # clarify the structure of the order, an order will look like...
         base_prompt = f"""
-        You are a CUSTOMER ordering food at a drive-through restaurant. You are NOT the restaurant staff.
+        You are a CUSTOMER ordering food at a drive-through restaurant.
         Current conversation state: {state}
         Emotion: {style['emotion']}
         Tone: {style['tone']}
@@ -166,14 +145,15 @@ class ConversationOrchestrator:
         - Last staff message: {self.conversation_context["last_agent_message"]}
 
         NEVER ORDER SOMETHING NOT PROVIDED IN THE ORDER LIST. NEVER ADD EVEN TOPPINGS OR CUSTOMIZATIONS THAT ARE NOT PROVIDED IN THE ORDER LIST.
+        ALWAYS USE THE PROPER NAMES FOR ITEMS AND OPTIONS.
 
-        IMPORTANT: You are the CUSTOMER. Respond as a customer would to the restaurant staff.
+        IMPORTANT:
         You are trying to order specific items but should act natural and spontaneous.
         Even though we have a list of items to order, act as if you don't know the menu.
-        Don't mention customizations until asked if we want to make changes.
+        Mention customizations but if there's a lot. Do them incrementally.
 
         Only respond with the exact words a customer would say - no explanations or meta commentary.
-        Never pretend to be the restaurant staff.
+        If there's a mixup, ask the staff to clarify.
         """
 
         # Add context-specific instructions based on state
@@ -191,26 +171,34 @@ class ConversationOrchestrator:
         context = self.conversation_context
         
         if state == "ORDER" and context["current_item"]:
-            return f"Order {context['current_item']['itemName']} with options: {context['current_item'].get('optionValues', [])}"
+            return f"See what is missing in 'Building item' to complete final order: {context['current_item']['itemName']} with options: {context['current_item'].get('optionValues', [])}"
         elif state == "CLARIFY" and context["last_agent_message"]:
             return f"Respond to: {context['last_agent_message']}"
         elif state == "QUESTION":
             # Pick something relevant to ask about
             topics = ["menu items", "prices", "customization options", "specials"]
             return f"Ask about: {random.choice(topics)}"
+        elif state == "GREET":
+            return "Generate a natural greeting."
         
         if len(self.conversation_context["order_goal"]) == 0:
             return "End the conversation naturally"
         else:
             return "Continue the conversation naturally"
 
-    def _update_conversation_context(self, agent_message: str):
+    def _update_conversation_context(self, agent_message: str, user_message: str):
         """Update conversation context based on agent's response"""
         self.logger.debug(f"Updating context with agent message: {agent_message}")
         
+        # Update chat history
+        self.conversation_context["chat_history"].extend([
+            {"role": "user", "content": user_message},
+            {"role": "assistant", "content": agent_message}
+        ])
+        
         self.conversation_context["last_agent_message"] = agent_message
 
-        self._track_item_construction(agent_message)
+        self._track_item_construction(agent_message, user_message)
         
         if self._needs_response(agent_message):
             self.conversation_context["pending_questions"].append(agent_message)
@@ -252,7 +240,7 @@ class ConversationOrchestrator:
             current_item: The item currently being discussed
         """
         if not goal_item or not current_item:
-            self.logger.debug("Item Completed Check: missing goal_item or current_item")
+            self.logger.debug("Item Completed Check: missing current_item")
             return False
             
         try:
@@ -276,7 +264,7 @@ class ConversationOrchestrator:
             user_prompt = f"""
             Intended order: {goal_item['itemName']} with options: {goal_item.get('optionValues', [])}
             Staff message: {agent_message}
-            Does this confirm the exact item was successfully ordered?
+            Does this confirm the item was successfully ordered?
             """
             
             response = self.openai_client.chat.completions.create(
@@ -299,45 +287,6 @@ class ConversationOrchestrator:
             # Default to False on error to avoid accidentally removing items
             return False
 
-    # def _is_order_confirmation(self, agent_message: str, goal_item: str, current_item: str) -> bool:
-    #     """Use GPT to determine if the message confirms an item was successfully ordered"""
-    #     try:
-    #         system_prompt = """
-    #         You are analyzing a restaurant staff's response to determine if it confirms an item was successfully ordered.
-    #         Respond with only "true" or "false".
-            
-    #         Examples of confirmations:
-    #         - "I've added that to your order"
-    #         - "Your burger meal has been added"
-    #         - "Got it, one coffee coming right up"
-    #         - "Alright, that's been added to your total"
-            
-    #         Examples of non-confirmations:
-    #         - "Would you like anything else?"
-    #         - "What size would you like?"
-    #         - "I'm sorry, could you repeat that?"
-    #         - "We're out of that item"
-    #         """
-            
-    #         response = self.openai_client.chat.completions.create(
-    #             model="gpt-4",
-    #             messages=[
-    #                 {"role": "system", "content": system_prompt},
-    #                 {"role": "user", "content": f"Message: {agent_message}\nDoes this confirm an item was successfully ordered?"}
-    #             ],
-    #             temperature=0,
-    #             max_tokens=10
-    #         )
-            
-    #         result = response.choices[0].message.content.strip().lower()
-    #         self.logger.debug(f"GPT order confirmation analysis: {result}")
-    #         return result == "true"
-            
-    #     except Exception as e:
-    #         self.logger.error(f"Error in GPT order confirmation check: {e}", exc_info=True)
-    #         # Default to False on error to avoid accidentally removing items
-    #         return False
-
     def _get_next_state(self, current_state: str) -> str:
         """Determine next state based on context and GPT-4 analysis"""
         try:
@@ -347,7 +296,7 @@ class ConversationOrchestrator:
             
             # Always check if we need to answer a question
             if self._needs_response(self.conversation_context["last_agent_message"]):
-                return "ANSWER"
+                return "CLARIFY"
             
             # If we're in DONE state and no questions to answer, stay in DONE
             if current_state == "DONE":
@@ -392,7 +341,7 @@ class ConversationOrchestrator:
             self.logger.debug(f"GPT suggested next state: {next_state}")
             
             # Validate the state is valid, default to DONE if not
-            valid_states = {"GREET", "QUESTION", "ORDER", "CLARIFY", "DONE", "ANSWER"}
+            valid_states = {"GREET", "QUESTION", "ORDER", "CLARIFY", "DONE"}
             return next_state if next_state in valid_states else "DONE"
             
         except Exception as e:
@@ -565,52 +514,140 @@ class ConversationOrchestrator:
             self.logger.error(f"Error in GPT question-answer check: {e}", exc_info=True)
             return False
         
-    def _track_item_construction(self, agent_message: str):
+    def _track_item_construction(self, agent_message: str, user_message: str):
         """
-        Track what's being constructed based on the agent's message.
-        This tracks both the base item and any options/modifications being specified.
+        Track what's being constructed based on the entire conversation context.
+        Uses chat history to understand if items are part of a meal or standalone.
         """
         try:
             system_prompt = """
-            Analyze this restaurant staff message and determine:
-            1. If it's starting a new item order (respond with "new_item: [item name]")
-            2. If it's discussing a specific option/modification (respond with "option: [option type]")
-            3. If neither, respond with "none"
+                Analyze both customer and staff messages to determine:
+                1. If a new item is being ordered (respond with "new_item: [item name]")
+                2. If options/modifications are being specified (respond with one or more lines of "option: [option value] for [option type]")
+                3. If a meal choice is specified (respond with "meal_type: meal" or "meal_type: a la carte")
+                4. If neither, respond with "none"
+                
+                CONTEXT:
+                - When items are ordered as part of a meal, the sides and drinks are options of the main item
+                - When items are ordered separately (not as part of a meal), they are new items
+                - Each main item can have customizations, sides, and drinks as options
+                
+                EXAMPLES:
+                Conversation 1 (Meal):
+                Customer: "I want a burger"
+                Staff: "Would you like that as a meal?"
+                Customer: "Yes, with fries and a coke"
+                Staff: "Added burger meal with fries and coke."
+
+                Analysis:
+                - meal_type: meal
+                - option: fries for side
+                - option: coke for drink
+
+                Note: The item would have already been added in the previous call to this function.
+                
+                Conversation 2 (Separate Items):
+                Customer: "I want some fries"
+                Staff: "What size?"
+                Customer: "Large fries"
+                Analysis:
+                - new_item: fries
+                - option: large for size
+                
+                Analyze the latest agent and user messages to determine what should be added to the the order.
+                """
             
-            Examples:
-            "Would you like to order a burger?" -> "new_item: burger"
-            "What size drink would you like?" -> "option: size"
-            "Would you like any toppings?" -> "option: toppings"
-            "How would you like that cooked?" -> "option: cooking preference"
-            "Would you like to make that a meal?" -> "option: meal upgrade"
-            "Your total is $10.99" -> "none"
-            "Anything else?" -> "none"
+            # Format the entire chat history
+            chat_context = "\n".join([
+                f"{'Customer' if msg['role'] == 'user' else 'Staff'}: {msg['content']}"
+                for msg in self.conversation_context["chat_history"]
+            ])
+            
+            user_prompt = f"""
+            FULL CONVERSATION:
+            {chat_context}
+            
+            LATEST EXCHANGE:
+            Customer: {user_message}
+            Staff: {agent_message}
+
+            What items or modifications are being specified in this conversation?
+            Consider the entire context to determine if items are part of a meal or separate orders.
             """
             
             response = self.openai_client.chat.completions.create(
                 model="gpt-4",
                 messages=[
                     {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": agent_message}
+                    {"role": "user", "content": user_prompt}
                 ],
                 temperature=0,
-                max_tokens=20
+                max_tokens=150
             )
             
-            result = response.choices[0].message.content.strip().lower()
-            
-            if result.startswith("new_item:"):
-                item = result.split("new_item:")[1].strip()
-                self.conversation_context["items_in_progress"] = [item]  # Start fresh with new item
-                self.logger.info(f"✨ Started new item construction: {item}")
-            elif result.startswith("option:"):
-                option = result.split("option:")[1].strip()
-                if self.conversation_context["items_in_progress"]:  # Only append if we have an item
-                    self.conversation_context["items_in_progress"].append(option)
-                    self.logger.info(f"➕ Added option: {option}")
-                else:
-                    self.logger.warning("⚠️ Attempted to add option with no active item")
+            results = response.choices[0].message.content.strip().split('\n')
+            self.logger.info(f"TRACK ITEM CONSTRUCTION: {results}")
+            print(results)
+            for line in results:
+                line = line.strip()
+                if line.startswith("new_item:"):
+                    detected_item = line.split("new_item:")[1].strip()
+                    
+                    # Find the best matching item from order_goal
+                    if self.conversation_context["order_goal"]:
+                        matching_prompt = f"""
+                        Given the customer's order "{detected_item}", which of these menu items is the best match:
+                        {[item['itemName'] for item in self.conversation_context['order_goal']]}
                         
+                        Respond only with the exact matching item name from the list.
+                        """
+                        
+                        match_response = self.openai_client.chat.completions.create(
+                            model="gpt-4",
+                            messages=[
+                                {"role": "system", "content": "You are a precise item matcher. Match the ordered item to the exact menu item name."},
+                                {"role": "user", "content": matching_prompt}
+                            ],
+                            temperature=0,
+                            max_tokens=30
+                        )
+                        
+                        matched_item = match_response.choices[0].message.content.strip()
+                        self.conversation_context["items_in_progress"] = [{
+                            "name": matched_item,
+                            "options": [],
+                            "meal_type": None
+                        }]
+                        self.logger.info(f"✨ Started new item construction (matched): {matched_item}")
+                        print("found item: ",self.conversation_context["items_in_progress"])
+                        
+                elif line.startswith("meal_type:"):
+                    meal_type = line.split("meal_type:")[1].strip()
+                    if self.conversation_context["items_in_progress"]:
+                        current_item = self.conversation_context["items_in_progress"][0]
+                        current_item["meal_type"] = meal_type
+                        self.logger.info(f"🍽️ Set meal type: {meal_type}")
+                        
+                elif line.startswith("option:"):
+                    option_parts = line.split("option:")[1].strip().split(" for ")
+                    if len(option_parts) == 2:
+                        value, option_type = option_parts
+                        if self.conversation_context["items_in_progress"]:
+                            current_item = self.conversation_context["items_in_progress"][0]
+                            if current_item["meal_type"] == "meal" or option_type not in ["side", "drink"]:
+                                current_item["options"].append(value.strip())
+                                self.logger.info(f"➕ Added {option_type} option: {value}")
+                            else:
+                                # If not part of a meal, create new items for sides and drinks
+                                self.conversation_context["items_in_progress"].append({
+                                    "name": value.strip(),
+                                    "options": [],
+                                    "meal_type": None
+                                })
+                                self.logger.info(f"✨ Created new standalone item: {value}")
+                        else:
+                            self.logger.warning("⚠️ Attempted to add option with no active item")
+
         except Exception as e:
             self.logger.error(f"Error tracking item construction: {e}", exc_info=True)
         

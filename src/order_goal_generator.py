@@ -121,7 +121,7 @@ class OrderGoalGenerator:
         # Special handling for customizations
         if opt_name == "customizations":
             modifiers = opt_def.get("modifiers", [""])
-            max_selections = opt_def.get("maximum", 1)
+            max_selections = min(opt_def.get("maximum", 1), 4)  # Limit to 3 selections
             num_selections = random.randint(min_selections, max_selections)
             
             selected_items = random.sample(list(choices.keys()), num_selections)
@@ -132,7 +132,7 @@ class OrderGoalGenerator:
         if simple_mode and default and default in choices:
             return [default]
         else:
-            max_selections = opt_def.get("maximum", 1)
+            max_selections = min(opt_def.get("maximum", 1), 4)  # Limit to 4 selections
             num_selections = random.randint(min_selections, max_selections)
             
             return random.sample(list(choices.keys()), num_selections)
