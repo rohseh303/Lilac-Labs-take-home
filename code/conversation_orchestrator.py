@@ -80,7 +80,8 @@ class ConversationOrchestrator:
             "pending_questions": [],
             "last_agent_message": None,
             "order_goal": [],
-            "conversation_style": None
+            "conversation_style": None,
+            "items_in_progress": []
         }
         
         self.logger.info("ConversationOrchestrator initialized")
@@ -90,6 +91,7 @@ class ConversationOrchestrator:
         self.logger.info(f"NEW CHAT\n\n")
         messages_log = []
         self.conversation_context["order_goal"] = order_goal
+        self.conversation_context["current_item"] = order_goal[0] if order_goal else None
         self.conversation_context["conversation_style"] = self._pick_random_style()
         state = "GREET"
         
@@ -158,6 +160,7 @@ class ConversationOrchestrator:
         Conversation Context:
         - ORDER LIST: {self.conversation_context["order_goal"]}
         - Current item to order: {self.conversation_context["current_item"]}
+        - Building item: {self.conversation_context["items_in_progress"]}
         - Items already ordered: {self.conversation_context["ordered_items"]}
         - Pending questions from staff: {self.conversation_context["pending_questions"]}
         - Last staff message: {self.conversation_context["last_agent_message"]}
@@ -206,20 +209,23 @@ class ConversationOrchestrator:
         self.logger.debug(f"Updating context with agent message: {agent_message}")
         
         self.conversation_context["last_agent_message"] = agent_message
+
+        self._track_item_construction(agent_message)
         
         if self._needs_response(agent_message):
             self.conversation_context["pending_questions"].append(agent_message)
             self.logger.debug("Added pending question")
         
         # Use GPT to determine if the item was successfully ordered
-        if self._is_order_confirmation(agent_message, self.conversation_context["current_item"]):
+        if self._is_item_completed(agent_message, self.conversation_context["current_item"], self.conversation_context["items_in_progress"]):
             # If we have a current item, it means it was just ordered
             if self.conversation_context["current_item"]:
                 current_item = self.conversation_context["current_item"]
                 # Add to ordered_items
                 self.conversation_context["ordered_items"].append(current_item)
+                self.conversation_context["items_in_progress"] = []
                 
-                # Remove from order_goal - using list comprehension for exact match
+                # Remove from order_goal
                 self.conversation_context["order_goal"] = [
                     item for item in self.conversation_context["order_goal"]
                     if not (item["itemName"] == current_item["itemName"] and 
@@ -237,7 +243,7 @@ class ConversationOrchestrator:
         
         self.logger.debug(f"New Context: {self.conversation_context}")
 
-    def _is_order_confirmation(self, agent_message: str, goal_item: Optional[Dict], current_item: Optional[Dict]) -> bool:
+    def _is_item_completed(self, agent_message: str, goal_item: Optional[Dict], current_item: Optional[Dict]) -> bool:
         """
         Use GPT to determine if the message confirms an item was successfully ordered and matches our goal
         Args:
@@ -246,6 +252,7 @@ class ConversationOrchestrator:
             current_item: The item currently being discussed
         """
         if not goal_item or not current_item:
+            self.logger.debug("Item Completed Check: missing goal_item or current_item")
             return False
             
         try:
@@ -283,13 +290,14 @@ class ConversationOrchestrator:
             )
             
             result = response.choices[0].message.content.strip().lower()
-            self.logger.debug(f"GPT order confirmation analysis: {result}")
+            self.logger.info(f"Is Item Completed result: {result}")
             return result == "true"
             
         except Exception as e:
-                self.logger.error(f"Error in GPT order confirmation check: {e}", exc_info=True)
-                # Default to False on error to avoid accidentally removing items
-                return False
+            self.logger.error(f"Error in GPT is item completed check: {e}", exc_info=True)
+            self.logger.error(f"Failed message: '{agent_message}'")
+            # Default to False on error to avoid accidentally removing items
+            return False
 
     # def _is_order_confirmation(self, agent_message: str, goal_item: str, current_item: str) -> bool:
     #     """Use GPT to determine if the message confirms an item was successfully ordered"""
@@ -430,23 +438,6 @@ class ConversationOrchestrator:
             # Default to False on error to avoid prematurely ending conversations
             return False
 
-    # def _adjust_transition_probabilities(self, transitions: List[Tuple[str, float]]) -> List[Tuple[str, float]]:
-    #     """Adjust transition probabilities based on conversation context"""
-    #     context = self.conversation_context
-    #     adjusted = transitions.copy()
-        
-    #     # Increase probability of ORDER if we have pending items
-    #     if context["order_goal"] and ("ORDER", 0.3) in adjusted:
-    #         idx = adjusted.index(("ORDER", 0.3))
-    #         adjusted[idx] = ("ORDER", 0.6)
-            
-    #     # Increase probability of CLARIFY if we have pending questions
-    #     if context["pending_questions"] and ("CLARIFY", 0.2) in adjusted:
-    #         idx = adjusted.index(("CLARIFY", 0.2))
-    #         adjusted[idx] = ("CLARIFY", 0.4)
-            
-    #     return adjusted
-
     def _pick_random_style(self) -> Dict[str, str]:
         """Generate a random conversation style once at the start"""
         return {
@@ -573,4 +564,53 @@ class ConversationOrchestrator:
         except Exception as e:
             self.logger.error(f"Error in GPT question-answer check: {e}", exc_info=True)
             return False
+        
+    def _track_item_construction(self, agent_message: str):
+        """
+        Track what's being constructed based on the agent's message.
+        This tracks both the base item and any options/modifications being specified.
+        """
+        try:
+            system_prompt = """
+            Analyze this restaurant staff message and determine:
+            1. If it's starting a new item order (respond with "new_item: [item name]")
+            2. If it's discussing a specific option/modification (respond with "option: [option type]")
+            3. If neither, respond with "none"
+            
+            Examples:
+            "Would you like to order a burger?" -> "new_item: burger"
+            "What size drink would you like?" -> "option: size"
+            "Would you like any toppings?" -> "option: toppings"
+            "How would you like that cooked?" -> "option: cooking preference"
+            "Would you like to make that a meal?" -> "option: meal upgrade"
+            "Your total is $10.99" -> "none"
+            "Anything else?" -> "none"
+            """
+            
+            response = self.openai_client.chat.completions.create(
+                model="gpt-4",
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": agent_message}
+                ],
+                temperature=0,
+                max_tokens=20
+            )
+            
+            result = response.choices[0].message.content.strip().lower()
+            
+            if result.startswith("new_item:"):
+                item = result.split("new_item:")[1].strip()
+                self.conversation_context["items_in_progress"] = [item]  # Start fresh with new item
+                self.logger.info(f"✨ Started new item construction: {item}")
+            elif result.startswith("option:"):
+                option = result.split("option:")[1].strip()
+                if self.conversation_context["items_in_progress"]:  # Only append if we have an item
+                    self.conversation_context["items_in_progress"].append(option)
+                    self.logger.info(f"➕ Added option: {option}")
+                else:
+                    self.logger.warning("⚠️ Attempted to add option with no active item")
+                        
+        except Exception as e:
+            self.logger.error(f"Error tracking item construction: {e}", exc_info=True)
         
