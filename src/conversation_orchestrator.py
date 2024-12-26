@@ -75,8 +75,7 @@ class ConversationOrchestrator:
         
         self.logger.info(f"Starting conversation with order_id: {order_id}")
         self.logger.debug(f"Initial conversation context: {self.conversation_context}")
-        i = 0
-        while state != "DONE" and i < 20:
+        while state != "DONE":
             self.logger.info(f"\n\nNEW CHAT")
             try:
                 time.sleep(1)
@@ -103,7 +102,6 @@ class ConversationOrchestrator:
                 state = self._get_next_state(state)
                 self.logger.debug(f"Updated conversation context: {self.conversation_context}")
                 self.logger.debug(f"Next state: {state}")
-                i += 1
 
             except Exception as e:
                 self.logger.error(f"Error in conversation loop: {e}", exc_info=True)
@@ -150,6 +148,7 @@ class ConversationOrchestrator:
         IMPORTANT:
         You are trying to order specific items but should act natural and spontaneous.
         Even though we have a list of items to order, act as if you don't know the menu.
+        NEVER ORDER THE ENTIRE ITEM IN ONE MESSAGE.
         Customizations are only deviations from the basic item.
         Mention customizations but if there's a lot. Do them incrementally.
 
@@ -183,7 +182,7 @@ class ConversationOrchestrator:
             return "Generate a natural greeting."
         
         if len(self.conversation_context["order_goal"]) == 0:
-            return "End the conversation naturally"
+            return "Verify the chat history matches the ordered items list. If needed, ask for clarification. Otherwise, end the conversation naturally."
         else:
             return "Continue the conversation naturally"
 
@@ -199,22 +198,30 @@ class ConversationOrchestrator:
         
         self.conversation_context["last_agent_message"] = agent_message
 
-        self._track_item_construction(agent_message, user_message)
+        # check if the item is complete, if so, then don't update just yet, do the item is complete shit by setting a flag to skip over
+        #  if not, we need to update item with data and then check again becasue it might've just been completed
+        complete = self._is_item_completed(agent_message, self.conversation_context["current_item"], self.conversation_context["items_in_progress"])
+        completed_before_update = complete
+        if not complete:
+            self._track_item_construction(agent_message, user_message)
+            complete = self._is_item_completed(agent_message, self.conversation_context["current_item"], self.conversation_context["items_in_progress"])
         
         if self._needs_response(agent_message):
             self.conversation_context["pending_questions"].append(agent_message)
             self.logger.debug("Added pending question")
         
-        # Use GPT to determine if the item was successfully ordered
-        if self._is_item_completed(agent_message, self.conversation_context["current_item"], self.conversation_context["items_in_progress"]):
+        # If current item was completed
+        if complete:
             # If we have a current item, it means it was just ordered
             if self.conversation_context["current_item"]:
+                # Handle completed item
                 current_item = self.conversation_context["current_item"]
-                # Add to ordered_items
                 self.conversation_context["ordered_items"].append(current_item)
+                
+                # Clear progress for completed item
                 self.conversation_context["items_in_progress"] = []
                 
-                # Remove from order_goal
+                # Remove from order goal
                 self.conversation_context["order_goal"] = [
                     item for item in self.conversation_context["order_goal"]
                     if not (item["itemName"] == current_item["itemName"] and 
@@ -223,12 +230,15 @@ class ConversationOrchestrator:
                 
                 # Clear current item
                 self.conversation_context["current_item"] = None
-                self.logger.debug(f"Removed ordered item from goal and cleared current item")
+                self.logger.debug("Removed ordered item from goal and cleared current item")
                 
             # Set new current_item if there are more items to order
             if self.conversation_context["order_goal"]:
                 self.conversation_context["current_item"] = self.conversation_context["order_goal"][0]
                 self.logger.debug(f"Updated current item to: {self.conversation_context['current_item']}")
+
+            if not completed_before_update:
+                self._track_item_construction(agent_message, user_message)
         
         self.logger.debug(f"New Context: {self.conversation_context}")
 
