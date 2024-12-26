@@ -162,7 +162,8 @@ class ConversationOrchestrator:
             "QUESTION": "Ask a relevant question about the menu or your order.",
             "ORDER": "Place or modify an order in a natural way.",
             "CLARIFY": "Respond to or ask for clarification about something.",
-            "DONE": "Indicate you're finished ordering."
+            "PRE-DONE": "Indicate you're finished ordering.",
+            "DONE": "Assistant or you has ended the conversation"
         }
         
         return f"{base_prompt}\n{state_contexts.get(state, '')}"
@@ -306,13 +307,14 @@ class ConversationOrchestrator:
             # Use GPT-4 to determine the next most appropriate state
             system_prompt = """
             You are analyzing a drive-through conversation to determine the most appropriate next state.
-            Available states: GREET, QUESTION, ORDER, CLARIFY, DONE
+            Available states: GREET, QUESTION, ORDER, CLARIFY, PRE-DONE, DONE
             
             Consider:
             1. If items remain to be ordered, ORDER should be prioritized
             2. If confusion exists or a question is pending, CLARIFY should be chosen
             3. If information is needed, QUESTION is appropriate
-            4. If all items are ordered and all questions answered, DONE is appropriate
+            4. If all items are ordered, PRE-DONE is appropriate
+            5. If you or the assistant has ended the conversation, DONE is appropriate
             
             Respond with only one word: the next state.
             """
@@ -342,7 +344,7 @@ class ConversationOrchestrator:
             self.logger.debug(f"GPT suggested next state: {next_state}")
             
             # Validate the state is valid, default to DONE if not
-            valid_states = {"GREET", "QUESTION", "ORDER", "CLARIFY", "DONE"}
+            valid_states = {"GREET", "QUESTION", "ORDER", "CLARIFY", "PRE-DONE", "DONE"}
             return next_state if next_state in valid_states else "DONE"
             
         except Exception as e:

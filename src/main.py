@@ -157,11 +157,11 @@ def run_parallel_simulations(num_simulations=10, max_workers=5, level="simple"):
 if __name__ == "__main__":
     """Single Threaded"""
     # run_simulation(order_complexity="simple")
-    # run_simulation(order_complexity="medium")
+    run_simulation(order_complexity="medium")
     # run_simulation(order_complexity="complex")
 
     """Multi Threaded"""
     # Run parallel simulations with x simulations and y concurrent threads with z complexity
-    run_parallel_simulations(num_simulations=10, max_workers=5, level="simple")
-    # run_parallel_simulations(num_simulations=10, max_workers=5, level="medium")
+    # run_parallel_simulations(num_simulations=10, max_workers=5, level="simple")
+    # run_parallel_simulations(num_simulations=5, max_workers=5, level="medium")
     # run_parallel_simulations(num_simulations=10, max_workers=5, level="complex")
