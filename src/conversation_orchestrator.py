@@ -150,6 +150,7 @@ class ConversationOrchestrator:
         IMPORTANT:
         You are trying to order specific items but should act natural and spontaneous.
         Even though we have a list of items to order, act as if you don't know the menu.
+        Customizations are only deviations from the basic item.
         Mention customizations but if there's a lot. Do them incrementally.
 
         Only respond with the exact words a customer would say - no explanations or meta commentary.
@@ -173,7 +174,7 @@ class ConversationOrchestrator:
         if state == "ORDER" and context["current_item"]:
             return f"See what is missing in 'Building item' to complete final order: {context['current_item']['itemName']} with options: {context['current_item'].get('optionValues', [])}"
         elif state == "CLARIFY" and context["last_agent_message"]:
-            return f"Respond to: {context['last_agent_message']}"
+            return f"Respond to: {context['last_agent_message']}. But do not add any new items/customizations that deviate from the order list."
         elif state == "QUESTION":
             # Pick something relevant to ask about
             topics = ["menu items", "prices", "customization options", "specials"]
@@ -232,39 +233,29 @@ class ConversationOrchestrator:
         self.logger.debug(f"New Context: {self.conversation_context}")
 
     def _is_item_completed(self, agent_message: str, goal_item: Optional[Dict], current_item: Optional[Dict]) -> bool:
-        """
-        Use GPT to determine if the message confirms an item was successfully ordered and matches our goal
-        Args:
-            agent_message: The staff's response
-            goal_item: The item we're trying to order (from order_goal)
-            current_item: The item currently being discussed
-        """
         if not goal_item or not current_item:
             self.logger.debug("Item Completed Check: missing current_item")
             return False
             
         try:
             system_prompt = """
-            You are analyzing a restaurant staff's response to determine if it confirms a specific item was successfully ordered.
-            You will be given the intended order and need to verify the staff's response confirms that exact item.
-            Respond with only "true" or "false".
-            
-            Examples:
-            Intended: Cheeseburger with bacon
-            "I've added a cheeseburger with bacon to your order" -> true
-            "I've added a hamburger to your order" -> false
-            "Got it, one cheeseburger coming up" -> false (missing bacon)
-            
-            Intended: Large Coke
-            "One large Coke added" -> true
-            "I've added your drink" -> false (size not confirmed)
-            "Medium Coke has been added" -> false (wrong size)
+            Given the intended order and the current item, confirm if the two are the same more or less (formatting can be different)
+
+            Examples that shoudl return true:
+            intended_item: {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['no mayo'], ['meal'], ['chili cheese fries'], ['rootbeer float']]}
+            current_item: ['- new_item: Plain Classic Hot Dog', '- option: no mayo for sauce', '- meal_type: meal', '- option: chili cheese fries for side', '- option: rootbeer float for drink']
+
+            Examples that should return false:
+            intended_item: {'itemName': 'Plain Classic Hot Dog', 'optionKeys': ['customizations', 'meal option', 'side options', 'drink options'], 'optionValues': [['no mayo', 'add sauerkraut', 'easy mustard'], ['meal'], ['chili cheese fries'], ['rootbeer float']]}
+            current_item: ['- new_item: Plain Classic Hot Dog', '- option: no mayo for sauce', '- option: sauerkraut for topping', '- option: light mustard for sauce', '- meal_type: meal']
+
+            The names of the specific items should be the same. The structure and ordering doesn't matter. But all the actual items should be there.
             """
             
             user_prompt = f"""
-            Intended order: {goal_item['itemName']} with options: {goal_item.get('optionValues', [])}
-            Staff message: {agent_message}
-            Does this confirm the item was successfully ordered?
+            Intended order: {goal_item}
+            Current item: {current_item}
+            Does this confirm the item was successfully ordered? Return only "true" or "false".
             """
             
             response = self.openai_client.chat.completions.create(
@@ -539,22 +530,27 @@ class ConversationOrchestrator:
                 Customer: "Yes, with fries and a coke"
                 Staff: "Added burger meal with fries and coke."
 
-                Analysis:
+                Latest exchange:
+                Customer: "Yes, with fries and a coke"
+                Staff: "Added burger meal with fries and coke."
+
+                New: 
                 - meal_type: meal
                 - option: fries for side
                 - option: coke for drink
 
-                Note: The item would have already been added in the previous call to this function.
+                Already added:
+                - new_item: burger
+
+                Output:
+                - new_item: burger
+                - meal_type: meal
+                - option: fries for side
+                - option: coke for drink
+
+                Note: The burger item would have already been added in the previous call to this function. But it's other modifieres were clarified in the latest exchange.
                 
-                Conversation 2 (Separate Items):
-                Customer: "I want some fries"
-                Staff: "What size?"
-                Customer: "Large fries"
-                Analysis:
-                - new_item: fries
-                - option: large for size
-                
-                Analyze the latest agent and user messages to determine what should be added to the the order.
+                Analyze the latest agent and user messages in the context of the conversation to see how best to modify the existing items list.
                 """
             
             # Format the entire chat history
@@ -571,8 +567,9 @@ class ConversationOrchestrator:
             Customer: {user_message}
             Staff: {agent_message}
 
-            What items or modifications are being specified in this conversation?
-            Consider the entire context to determine if items are part of a meal or separate orders.
+            LATEST ITEM BUILD: {self.conversation_context["items_in_progress"]} 
+            
+            Return the updated items list.
             """
             
             response = self.openai_client.chat.completions.create(
@@ -586,67 +583,8 @@ class ConversationOrchestrator:
             )
             
             results = response.choices[0].message.content.strip().split('\n')
-            self.logger.info(f"TRACK ITEM CONSTRUCTION: {results}")
-            print(results)
-            for line in results:
-                line = line.strip()
-                if line.startswith("new_item:"):
-                    detected_item = line.split("new_item:")[1].strip()
-                    
-                    # Find the best matching item from order_goal
-                    if self.conversation_context["order_goal"]:
-                        matching_prompt = f"""
-                        Given the customer's order "{detected_item}", which of these menu items is the best match:
-                        {[item['itemName'] for item in self.conversation_context['order_goal']]}
-                        
-                        Respond only with the exact matching item name from the list.
-                        """
-                        
-                        match_response = self.openai_client.chat.completions.create(
-                            model="gpt-4",
-                            messages=[
-                                {"role": "system", "content": "You are a precise item matcher. Match the ordered item to the exact menu item name."},
-                                {"role": "user", "content": matching_prompt}
-                            ],
-                            temperature=0,
-                            max_tokens=30
-                        )
-                        
-                        matched_item = match_response.choices[0].message.content.strip()
-                        self.conversation_context["items_in_progress"] = [{
-                            "name": matched_item,
-                            "options": [],
-                            "meal_type": None
-                        }]
-                        self.logger.info(f"✨ Started new item construction (matched): {matched_item}")
-                        print("found item: ",self.conversation_context["items_in_progress"])
-                        
-                elif line.startswith("meal_type:"):
-                    meal_type = line.split("meal_type:")[1].strip()
-                    if self.conversation_context["items_in_progress"]:
-                        current_item = self.conversation_context["items_in_progress"][0]
-                        current_item["meal_type"] = meal_type
-                        self.logger.info(f"🍽️ Set meal type: {meal_type}")
-                        
-                elif line.startswith("option:"):
-                    option_parts = line.split("option:")[1].strip().split(" for ")
-                    if len(option_parts) == 2:
-                        value, option_type = option_parts
-                        if self.conversation_context["items_in_progress"]:
-                            current_item = self.conversation_context["items_in_progress"][0]
-                            if current_item["meal_type"] == "meal" or option_type not in ["side", "drink"]:
-                                current_item["options"].append(value.strip())
-                                self.logger.info(f"➕ Added {option_type} option: {value}")
-                            else:
-                                # If not part of a meal, create new items for sides and drinks
-                                self.conversation_context["items_in_progress"].append({
-                                    "name": value.strip(),
-                                    "options": [],
-                                    "meal_type": None
-                                })
-                                self.logger.info(f"✨ Created new standalone item: {value}")
-                        else:
-                            self.logger.warning("⚠️ Attempted to add option with no active item")
+
+            self.conversation_context["items_in_progress"] = results
 
         except Exception as e:
             self.logger.error(f"Error tracking item construction: {e}", exc_info=True)

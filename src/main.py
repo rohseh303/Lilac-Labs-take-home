@@ -94,16 +94,16 @@ def compare_orders(goal_order, final_order):
         
         for k, v in zip(goal_item['optionKeys'], goal_item['optionValues']):
             if v:
-                # If v is a list, sort it before adding
+                # If v is a list, sort it using custom key function
                 if isinstance(v, list):
-                    v = sorted(v)
+                    v = sorted(v, key=lambda x: x.split()[-1] if len(x.split()) > 1 else x.split()[0])
                 goal_keys_values.append((k, v))
                 
         for k, v in zip(final_item['optionKeys'], final_item['optionValues']):
             if v:
-                # If v is a list, sort it before adding
+                # If v is a list, sort it using custom key function
                 if isinstance(v, list):
-                    v = sorted(v)
+                    v = sorted(v, key=lambda x: x.split()[-1] if len(x.split()) > 1 else x.split()[0])
                 final_keys_values.append((k, v))
         
         # Sort the key-value pairs
@@ -160,3 +160,5 @@ if __name__ == "__main__":
     # run_simulation(order_complexity="simple")
     run_simulation(order_complexity="medium")
     # run_simulation(order_complexity="complex")
+
+    # print(compare_orders(test_cases[0][0], test_cases[0][1]))

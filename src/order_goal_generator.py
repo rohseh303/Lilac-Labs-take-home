@@ -25,8 +25,8 @@ class OrderGoalGenerator:
         print("Generating medium order")
         items = self.menu_manager.get_all_items()
 
-        # item_def = random.choice(items)
-        item_def = next(item for item in items if item["itemName"] == "Plain Classic Hot Dog")
+        item_def = random.choice(items)
+        # item_def = next(item for item in items if item["itemName"] == "Plain Classic Hot Dog")
 
         required_keys, required_values = self._pick_required_options(item_def, simple_mode=False)
 
