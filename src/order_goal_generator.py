@@ -9,8 +9,6 @@ class OrderGoalGenerator:
         """Generate a simple order with minimal customization."""
         items = self.menu_manager.get_all_items()
         item_def = random.choice(items)
-        # item_def = next(item for item in items if item["itemName"] == "Polish Sausage Dog")
-
         required_keys, required_values = self._pick_required_options(item_def, simple_mode=True)
         optional_keys, optional_values = [], []
 
@@ -26,8 +24,6 @@ class OrderGoalGenerator:
         items = self.menu_manager.get_all_items()
 
         item_def = random.choice(items)
-        # item_def = next(item for item in items if item["itemName"] == "Plain Classic Hot Dog")
-
         required_keys, required_values = self._pick_required_options(item_def, simple_mode=False)
 
         return [{

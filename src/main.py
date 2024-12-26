@@ -24,7 +24,7 @@ def run_simulation(order_complexity="simple"):
     else:
         goal = generator.generate_complex_order()
 
-    print(goal)
+    print(f"Running simulation with: {goal}")
     # Step 2: Start a new order
     lilac_client = LilacApiClient()
     order_id = lilac_client.start_order()
@@ -119,7 +119,7 @@ def compare_orders(goal_order, final_order):
     
     return True
 
-def run_parallel_simulations(num_simulations=10, max_workers=5):
+def run_parallel_simulations(num_simulations=10, max_workers=5, level="simple"):
     """Run multiple simulations in parallel using ThreadPoolExecutor"""
     results = []
     start_time = time.time()
@@ -127,7 +127,7 @@ def run_parallel_simulations(num_simulations=10, max_workers=5):
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
         # Submit all simulations
         future_to_sim = {
-            executor.submit(run_simulation, "simple"): i 
+            executor.submit(run_simulation, level): i 
             for i in range(num_simulations)
         }
         
@@ -155,8 +155,13 @@ def run_parallel_simulations(num_simulations=10, max_workers=5):
     print(f"Average time per simulation: {duration/num_simulations:.2f} seconds")
 
 if __name__ == "__main__":
-    # Run parallel simulations with 10 simulations and 5 concurrent threads
-    # run_parallel_simulations(num_simulations=10, max_workers=5)
+    """Single Threaded"""
     # run_simulation(order_complexity="simple")
     # run_simulation(order_complexity="medium")
-    run_simulation(order_complexity="complex")
+    # run_simulation(order_complexity="complex")
+
+    """Multi Threaded"""
+    # Run parallel simulations with x simulations and y concurrent threads with z complexity
+    run_parallel_simulations(num_simulations=10, max_workers=5, level="simple")
+    # run_parallel_simulations(num_simulations=10, max_workers=5, level="medium")
+    # run_parallel_simulations(num_simulations=10, max_workers=5, level="complex")

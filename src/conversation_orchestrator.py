@@ -173,7 +173,7 @@ class ConversationOrchestrator:
         if state == "ORDER" and context["current_item"]:
             return f"See what is missing in 'Building item' to complete final order: {context['current_item']['itemName']} with options: {context['current_item'].get('optionValues', [])}"
         elif state == "CLARIFY" and context["last_agent_message"]:
-            return f"Respond to: {context['last_agent_message']}. But do not add any new items/customizations that deviate from the order list."
+            return f"Respond to: {context['last_agent_message']}. IMPORTANT: DO NOT ORDER ANYTHING NOT IN THE ORDER LIST. IF SO, REMOVE IT"
         elif state == "QUESTION":
             # Pick something relevant to ask about
             topics = ["menu items", "prices", "customization options", "specials"]

@@ -5,6 +5,7 @@ from urllib3.util.retry import Retry
 import time
 
 class LilacApiClient:
+    """Makes API calls to Lilac's API."""
     def __init__(self, location="ben-franks"):
         self.api_token = API_TOKEN
         self.base_url = API_BASE_URL
