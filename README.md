@@ -4,13 +4,13 @@ A sophisticated system that simulates realistic drive-through ordering conversat
 
 ## Features
 
-- 🤖 Natural language conversation simulation using GPT-4
-- 🔄 Multiple conversation styles and customer personalities
-- 📋 Support for simple, medium, and complex order scenarios
-- ⚡ Parallel simulation processing
-- 📝 Comprehensive logging system
-- 🔄 Automatic retry handling for API requests
-- 🎯 Goal-oriented ordering system
+- Natural language conversation simulation using GPT-4
+- Multiple conversation styles and customer personalities
+- Support for simple, medium, and complex order scenarios
+- Parallel simulation processing
+- Comprehensive logging system
+- Automatic retry handling for API requests
+- Goal-oriented ordering system
 
 ## Prerequisites
 
