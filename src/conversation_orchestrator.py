@@ -585,6 +585,7 @@ class ConversationOrchestrator:
             results = response.choices[0].message.content.strip().split('\n')
 
             self.conversation_context["items_in_progress"] = results
+            self.logger.debug(f"CALLED NEW BUILD LIST: {self.conversation_context['items_in_progress']}")
 
         except Exception as e:
             self.logger.error(f"Error tracking item construction: {e}", exc_info=True)

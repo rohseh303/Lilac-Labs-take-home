@@ -158,7 +158,5 @@ if __name__ == "__main__":
     # Run parallel simulations with 10 simulations and 5 concurrent threads
     # run_parallel_simulations(num_simulations=10, max_workers=5)
     # run_simulation(order_complexity="simple")
-    run_simulation(order_complexity="medium")
-    # run_simulation(order_complexity="complex")
-
-    # print(compare_orders(test_cases[0][0], test_cases[0][1]))
+    # run_simulation(order_complexity="medium")
+    run_simulation(order_complexity="complex")
