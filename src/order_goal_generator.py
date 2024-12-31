@@ -21,7 +21,7 @@ class OrderGoalGenerator:
     def generate_medium_order(self):
         """Generate a medium complexity order with an item with a lot of options."""
         print("Generating medium order")
-        items = self.menu_manager.get_all_items()
+        items = self.menu_manager.get_all_items() # ensure meal is chosen here
 
         item_def = random.choice(items)
         required_keys, required_values = self._pick_required_options(item_def, simple_mode=False)
@@ -34,7 +34,7 @@ class OrderGoalGenerator:
 
     def generate_complex_order(self):
         """Generate a complex order with multiple items & customizations."""
-        items = self.menu_manager.get_all_items()
+        items = self.menu_manager.get_all_items() # call variation of get meal and getallitems variation
         num_items = random.randint(2, 3)
 
         order_items = []
@@ -60,8 +60,8 @@ class OrderGoalGenerator:
 
         # First pass: handle unconditionally required options
         for opt_name, opt_def in options.items():
+
             is_required = opt_def.get("required", False)
-            
             # Skip conditional requirements in first pass
             if isinstance(is_required, dict):
                 continue

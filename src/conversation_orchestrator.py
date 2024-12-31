@@ -123,6 +123,14 @@ class ConversationOrchestrator:
         self.logger.debug(f"User prompt: {user_prompt}")
         
         response = self._get_gpt4_response(system_prompt, user_prompt)
+        
+        # Validate the response doesn't try to order unauthorized items
+        if not self._is_response_valid(response):
+            self.logger.warning("Generated response contained unauthorized orders, regenerating...")
+            # Try again with a more explicit warning
+            system_prompt += "\nWARNING: DO NOT ORDER ANY ITEMS. ONLY ASK QUESTIONS OR PROVIDE CLARIFICATION."
+            response = self._get_gpt4_response(system_prompt, user_prompt)
+        
         self.logger.info(f"GPT-4 response: {response}")
         return response
 
@@ -186,6 +194,46 @@ class ConversationOrchestrator:
             return "Verify the chat history matches the ordered items list. If needed, ask for clarification. Otherwise, end the conversation naturally."
         else:
             return "Continue the conversation naturally"
+        
+    def _is_response_valid(self, response: str) -> bool:
+        """Check if the response doesn't try to order unauthorized items"""
+        try:
+            system_prompt = """
+            You are validating if a customer's response follows the rules.
+            
+            Rules:
+            1. If there are no items left to order (order_goal is empty), the customer should NOT try to order any new items
+            2. If there are items to order, the customer should ONLY order items from the order_goal list
+            3. Asking questions, seeking clarification, or responding to staff questions is always allowed
+            
+            Respond with only "true" if the response follows the rules, or "false" if it breaks them.
+            """
+            
+            user_prompt = f"""
+            Order goal (remaining items to order): {self.conversation_context['order_goal']}
+            Customer's response: {response}
+
+            Does this response follow the rules?
+            """
+            
+            validation = self.openai_client.chat.completions.create(
+                model="gpt-4",
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt}
+                ],
+                temperature=0,
+                max_tokens=10
+            )
+            
+            result = validation.choices[0].message.content.strip().lower()
+            self.logger.debug(f"Response validation result: {result}")
+            return result == "true"
+        
+        except Exception as e:
+            self.logger.error(f"Error in response validation: {e}", exc_info=True)
+            # Default to True on error to avoid blocking valid responses
+            return True
 
     def _update_conversation_context(self, agent_message: str, user_message: str):
         """Update conversation context based on agent's response"""
