@@ -10,11 +10,11 @@ class ConversationOrchestrator:
     EMOTIONS = [
         "normal", "tired", "hungry", "rushed", "chill",
         "annoyed", "happy", "grumpy", "high", "drunk",
-        "impatient", "distracted", "hangry", "quiet", "loud"
+        "impatient", "hangry", "quiet", "loud"
     ]
     TONES = [
         "casual", "rude", "polite", "quiet", "loud",
-        "friendly", "short", "confused", "sleepy", "rushed",
+        "friendly", "short", "sleepy", "rushed",
         "mumbling", "clear", "demanding", "chill"
     ]
     BREVITIES = [
@@ -246,48 +246,78 @@ class ConversationOrchestrator:
         ])
         
         self.conversation_context["last_agent_message"] = agent_message
+        self._track_item_construction(agent_message, user_message)
+        current_item = self.conversation_context["current_item"]
 
-        # check if the item is complete, if so, then don't update just yet, do the item is complete shit by setting a flag to skip over
-        #  if not, we need to update item with data and then check again becasue it might've just been completed
-        complete = self._is_item_completed(agent_message, self.conversation_context["current_item"], self.conversation_context["items_in_progress"])
-        completed_before_update = complete
-        if not complete:
-            self._track_item_construction(agent_message, user_message)
-            complete = self._is_item_completed(agent_message, self.conversation_context["current_item"], self.conversation_context["items_in_progress"])
-        
         if self._needs_response(agent_message):
             self.conversation_context["pending_questions"].append(agent_message)
             self.logger.debug("Added pending question")
-        
-        # If current item was completed
-        if complete:
-            # If we have a current item, it means it was just ordered
-            if self.conversation_context["current_item"]:
-                # Handle completed item
-                current_item = self.conversation_context["current_item"]
-                self.conversation_context["ordered_items"].append(current_item)
-                
-                # Clear progress for completed item
-                self.conversation_context["items_in_progress"] = []
-                
-                # Remove from order goal
-                self.conversation_context["order_goal"] = [
-                    item for item in self.conversation_context["order_goal"]
-                    if not (item["itemName"] == current_item["itemName"] and 
-                           item["optionValues"] == current_item["optionValues"])
-                ]
-                
-                # Clear current item
-                self.conversation_context["current_item"] = None
-                self.logger.debug("Removed ordered item from goal and cleared current item")
+
+        complete = self._is_item_completed(agent_message, current_item, self.conversation_context["items_in_progress"])
+        if complete and not self.conversation_context["pending_questions"]: #and no pending question i think
+            # Handle completed item
+            self.conversation_context["ordered_items"].append(current_item)
+            
+            # Clear progress for completed item
+            self.conversation_context["items_in_progress"] = []
+            
+            # Remove from order goal
+            self.conversation_context["order_goal"] = [
+                item for item in self.conversation_context["order_goal"]
+                if not (item["itemName"] == current_item["itemName"] and 
+                        item["optionValues"] == current_item["optionValues"])
+            ]
+            
+            # Clear current item
+            self.conversation_context["current_item"] = None
+            self.logger.debug("Removed ordered item from goal and cleared current item")
                 
             # Set new current_item if there are more items to order
             if self.conversation_context["order_goal"]:
                 self.conversation_context["current_item"] = self.conversation_context["order_goal"][0]
                 self.logger.debug(f"Updated current item to: {self.conversation_context['current_item']}")
 
-            if not completed_before_update:
-                self._track_item_construction(agent_message, user_message)
+        # # check if the item is complete, if so, then don't update just yet, do the item is complete stuff by setting a flag to skip over
+        # #  if not, we need to update item with data and then check again becasue it might've just been completed
+        # complete = self._is_item_completed(agent_message, self.conversation_context["current_item"], self.conversation_context["items_in_progress"])
+        # completed_before_update = complete #false here
+        # if not complete:
+        #     self._track_item_construction(agent_message, user_message)
+        #     complete = self._is_item_completed(agent_message, self.conversation_context["current_item"], self.conversation_context["items_in_progress"])
+        
+        # if self._needs_response(agent_message):
+        #     self.conversation_context["pending_questions"].append(agent_message)
+        #     self.logger.debug("Added pending question")
+        
+        # # If current item was completed
+        # if complete:
+        #     # If we have a current item, it means it was just ordered
+        #     if self.conversation_context["current_item"]:
+        #         # Handle completed item
+        #         current_item = self.conversation_context["current_item"]
+        #         self.conversation_context["ordered_items"].append(current_item)
+                
+        #         # Clear progress for completed item
+        #         self.conversation_context["items_in_progress"] = []
+                
+        #         # Remove from order goal
+        #         self.conversation_context["order_goal"] = [
+        #             item for item in self.conversation_context["order_goal"]
+        #             if not (item["itemName"] == current_item["itemName"] and 
+        #                    item["optionValues"] == current_item["optionValues"])
+        #         ]
+                
+        #         # Clear current item
+        #         self.conversation_context["current_item"] = None
+        #         self.logger.debug("Removed ordered item from goal and cleared current item")
+                
+        #     # Set new current_item if there are more items to order
+        #     if self.conversation_context["order_goal"]:
+        #         self.conversation_context["current_item"] = self.conversation_context["order_goal"][0]
+        #         self.logger.debug(f"Updated current item to: {self.conversation_context['current_item']}")
+
+        #     if not completed_before_update:
+        #         self._track_item_construction(agent_message, user_message)
         
         self.logger.debug(f"New Context: {self.conversation_context}")
 
