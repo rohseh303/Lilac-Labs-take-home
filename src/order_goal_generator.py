@@ -21,10 +21,11 @@ class OrderGoalGenerator:
     def generate_medium_order(self):
         """Generate a medium complexity order with an item with a lot of options."""
         print("Generating medium order")
-        items = self.menu_manager.get_all_items() # ensure meal is chosen here
-
+        # Filter for items that can be meals
+        items = [item for item in self.menu_manager.get_all_items() if item.get("itemType") == "main - meal option"]
+        
         item_def = random.choice(items)
-        required_keys, required_values = self._pick_required_options(item_def, simple_mode=False)
+        required_keys, required_values = self._pick_required_options(item_def, meal_mode=True)
 
         return [{
             "itemName": item_def["itemName"],
@@ -34,12 +35,25 @@ class OrderGoalGenerator:
 
     def generate_complex_order(self):
         """Generate a complex order with multiple items & customizations."""
-        items = self.menu_manager.get_all_items() # call variation of get meal and getallitems variation
+        # Get all items and meal items
+        all_items = self.menu_manager.get_all_items()
+        meal_items = [item for item in all_items if item.get("itemType") == "main - meal option"]
+        
         num_items = random.randint(2, 3)
-
         order_items = []
-        for _ in range(num_items):
-            item_def = random.choice(items)
+
+        # First, add one meal item
+        meal_item = random.choice(meal_items)
+        required_keys, required_values = self._pick_required_options(meal_item, meal_mode=True)
+        order_items.append({
+            "itemName": meal_item["itemName"],
+            "optionKeys": required_keys,
+            "optionValues": required_values
+        })
+
+        # Then add remaining random items
+        for _ in range(num_items - 1):
+            item_def = random.choice(all_items)
             required_keys, required_values = self._pick_required_options(item_def)
             order_items.append({
                 "itemName": item_def["itemName"],
@@ -49,7 +63,7 @@ class OrderGoalGenerator:
 
         return order_items
 
-    def _pick_required_options(self, item_def, simple_mode=False):
+    def _pick_required_options(self, item_def, simple_mode=False, meal_mode=False): #alter the mode to string type
         """Pick required options based on the menu item definition."""
         keys = []
         values = []
@@ -66,12 +80,15 @@ class OrderGoalGenerator:
             if isinstance(is_required, dict):
                 continue
             
-            if is_required:
+            if is_required: # reorder to handle string type for simple type vs medium type
                 keys.append(opt_name)
                 # In simple mode, always choose 'a la carte' for meal options
                 if simple_mode and opt_name == "meal option":
                     values.append(["a la carte"])
                     selected_values[opt_name] = "a la carte"
+                elif meal_mode and opt_name == "meal option":
+                    values.append(["meal"])
+                    selected_values[opt_name] = "meal"
                 else:
                     selected_value = self._pick_option_value(opt_name, opt_def, simple_mode)
                     values.append(selected_value)

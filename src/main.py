@@ -25,54 +25,54 @@ def run_simulation(order_complexity="simple"):
         goal = generator.generate_complex_order()
 
     print(f"Running simulation with: {goal}")
-    # # Step 2: Start a new order
-    # lilac_client = LilacApiClient()
-    # order_id = lilac_client.start_order()
+    # Step 2: Start a new order
+    lilac_client = LilacApiClient()
+    order_id = lilac_client.start_order()
 
-    # # Step 3: Simulate conversation
-    # orchestrator = ConversationOrchestrator(lilac_client)
-    # goal_copy = copy.deepcopy(goal)
-    # conversation_log = orchestrator.run_conversation(order_id, goal_copy)
+    # Step 3: Simulate conversation
+    orchestrator = ConversationOrchestrator(lilac_client)
+    goal_copy = copy.deepcopy(goal)
+    conversation_log = orchestrator.run_conversation(order_id, goal_copy)
 
-    # # Retrieve final order
-    # final_state = lilac_client.retrieve_order(order_id)
-    # final_order = final_state["order"]
+    # Retrieve final order
+    final_state = lilac_client.retrieve_order(order_id)
+    final_order = final_state["order"]
 
-    # # Step 4: Print or log results
-    # print("\n==========================")
-    # print(" Conversation Transcript ")
-    # print("==========================\n")
-    # for msg in conversation_log:
-    #     print(f"{msg['role'].upper()}: {msg['content']}")
+    # Step 4: Print or log results
+    print("\n==========================")
+    print(" Conversation Transcript ")
+    print("==========================\n")
+    for msg in conversation_log:
+        print(f"{msg['role'].upper()}: {msg['content']}")
 
-    # print("\n==========================")
-    # print(" Final Order Returned ")
-    # print("==========================\n")
-    # for item in final_order:
-    #     print({
-    #         "itemName": item["itemName"],
-    #         "optionKeys": item["optionKeys"],
-    #         "optionValues": item["optionValues"],
-    #     })
+    print("\n==========================")
+    print(" Final Order Returned ")
+    print("==========================\n")
+    for item in final_order:
+        print({
+            "itemName": item["itemName"],
+            "optionKeys": item["optionKeys"],
+            "optionValues": item["optionValues"],
+        })
 
-    # # Add order comparison
-    # print("\n==========================")
-    # print(" Order Verification ")
-    # print("==========================\n")
+    # Add order comparison
+    print("\n==========================")
+    print(" Order Verification ")
+    print("==========================\n")
     
-    # orders_match = compare_orders(goal, final_order)
-    # if orders_match:
-    #     print("✅ Goal order matches final order exactly!")
+    orders_match = compare_orders(goal, final_order)
+    if orders_match:
+        print("✅ Goal order matches final order exactly!")
 
-    # print("\nExpected Goal Order:")
-    # for item in goal:
-    #     print({
-    #         "itemName": item["itemName"],
-    #         "optionKeys": item["optionKeys"],
-    #         "optionValues": item["optionValues"],
-    #     })
+    print("\nExpected Goal Order:")
+    for item in goal:
+        print({
+            "itemName": item["itemName"],
+            "optionKeys": item["optionKeys"],
+            "optionValues": item["optionValues"],
+        })
     
-    # return orders_match
+    return orders_match
 
 def compare_orders(goal_order, final_order):
     if len(goal_order) != len(final_order):
@@ -156,9 +156,9 @@ def run_parallel_simulations(num_simulations=10, max_workers=5, level="simple"):
 
 if __name__ == "__main__":
     """Single Threaded"""
-    run_simulation(order_complexity="simple")
+    # run_simulation(order_complexity="simple")
     # run_simulation(order_complexity="medium")
-    # run_simulation(order_complexity="complex")
+    run_simulation(order_complexity="complex")
 
     """Multi Threaded"""
     # Run parallel simulations with x simulations and y concurrent threads with z complexity

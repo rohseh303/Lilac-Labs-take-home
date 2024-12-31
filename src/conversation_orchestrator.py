@@ -464,7 +464,7 @@ class ConversationOrchestrator:
         except Exception as e:
             self.logger.error(f"Error getting GPT-4 response: {e}", exc_info=True)
             if "order" in user_prompt.lower():
-                return "I'd like to order that, please."
+                return "`I'd like `to order that, please."
             return "Yes, please."
 
     def _needs_response(self, agent_message: str) -> bool:
